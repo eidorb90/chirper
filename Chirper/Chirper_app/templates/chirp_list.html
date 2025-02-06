@@ -1,0 +1,17 @@
+{% if chirps %}
+   {% for chirp in chirps %}
+       <div class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+           <div class="flex justify-between items-start">
+               <h2 class="text-xl font-bold text-gray-900 hover:text-blue-600 transition">{{ chirp.title }}</h2>
+               <span class="text-sm text-gray-400 italic">{{ chirp.created_at|timesince }} ago</span>
+           </div>
+           <p class="text-gray-700 mt-3 leading-relaxed">{{ chirp.content }}</p>
+
+       </div>
+   {% endfor %}
+{% else %}
+   <div class="text-center py-10">
+       <p class="text-gray-500 text-lg">No Chirps Yet! 🐦</p>
+       <p class="text-gray-400 mt-2">Be the first to share something!</p>
+   </div>
+{% endif %}

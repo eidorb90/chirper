@@ -1,7 +1,7 @@
 [project]
 name = "chirper"
 version = "0.1.0"
-description = "Add your description here"
+description = "The is a 'Twitter' like app created for my app development class."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
