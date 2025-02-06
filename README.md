@@ -13,3 +13,9 @@
 5. Allow to toggle profile private
 6. Allow user to delete their account but not chirps
 7. Integrate HTMX (going to be doing this along the way) 
+
+
+
+## Tools 
+# Tailwind components
+https://flowbite.com/#components
