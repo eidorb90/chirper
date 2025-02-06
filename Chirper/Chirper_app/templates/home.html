@@ -1,11 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>Home Page</title>
-</head>
-<body>
+
+{% block title %}Home - Chirper{% endblock %}
+
+{% block content %}
     <h1>{{ message }}</h1>
     <p>This is the homepage for your Django app.</p>
 
@@ -23,6 +21,4 @@
             <p>No Chirps Yet! Come back later ...</p>
         {% endif %}
 
-    </div>
-</body>
-</html>
+{% endblock %}

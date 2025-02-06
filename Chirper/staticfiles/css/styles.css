@@ -5,6 +5,15 @@ body {
     padding: 20px;
 }
 
+nav {
+    background: #333;
+    padding: 1rem;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
 .chirp-container {
     margin-top: 20px;
 }
@@ -32,4 +41,4 @@ body {
 .chirp-date {
     font-size: 0.8em;
     color: #777;
-}
+}   

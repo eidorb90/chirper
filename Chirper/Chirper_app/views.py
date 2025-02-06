@@ -9,3 +9,6 @@ def home(request):
         "message" : 'Welcome to the Chirper Home Page!!',
         'chirps' : chirps
     })
+
+def account(request):
+    return render(request, 'account.html')
