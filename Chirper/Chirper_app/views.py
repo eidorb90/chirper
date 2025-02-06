@@ -2,8 +2,6 @@ from django.shortcuts import render, HttpResponseRedirect
 from .models import Chirp
 
 
-
-logging.basicConfig(filename='server.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 # Create your views here.
 def home(request):
     chirps = Chirp.objects.all().order_by('-created_at') 
