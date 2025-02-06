@@ -5,6 +5,7 @@ build/
 dist/
 wheels/
 *.egg-info
+Chirper/db.sqlite3
 
 # Virtual environments
 .venv
