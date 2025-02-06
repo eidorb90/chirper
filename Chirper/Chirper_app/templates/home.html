@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>{{ message }}</h1>
+    <p>This is the homepage for your Django app.</p>
+
+    <div class="chirp-container">
+        {% if chirps %}
+            {% for chirp in chirps %}
+                <div class="chirp">
+                    <div class="chirp-title">{{ chirp.title }}</div>
+                    <div class="chirp-content">{{ chirp.content }}</div>
+                    <div class="chirp-date">{{ chirp.created_at }}</div>
+                </div>
+
+            {% endfor %}
+        {% else %}
+            <p>No Chirps Yet! Come back later ...</p>
+        {% endif %}
+
+    </div>
+</body>
+</html>
