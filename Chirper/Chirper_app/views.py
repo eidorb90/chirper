@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .models import Chirp
-import logging
+
 
 
 logging.basicConfig(filename='server.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
