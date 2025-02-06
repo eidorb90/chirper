@@ -8,8 +8,8 @@
 
 1. Allow users to filter chirps 
 2. Allow users to follow eachother
-3. make it look nice (we will be doing this along the way)
+3. make it look nice (we will be doing this along the way)  (Brodie)
 4. Allow rich text chirps (so allow people to do text formatting such as bold underline possibly add immages and videos)
 5. Allow to toggle profile private
 6. Allow user to delete their account but not chirps
-7. Integrate HTMX (going to be doing this along the way)
+7. Integrate HTMX (going to be doing this along the way) 
