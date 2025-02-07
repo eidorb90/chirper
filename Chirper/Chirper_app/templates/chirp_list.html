@@ -27,7 +27,8 @@
 
             <div id="reply-form-{{ chirp.id }}" class="hidden mt-4">
                 <form hx-post="{% url 'create_reply' chirp.id %}"
-                      hx-target="#replies-{{ chirp.id }}"
+                      hx-target=".replies-{{ chirp.id }}"
+                      hx-swap="beforeend"
                       class="space-y-4">
                     <textarea name="content" 
                               class="w-full p-2 border rounded" 
@@ -38,7 +39,7 @@
                 </form>
             </div>
 
-            <div id="replies-{{ chirp.id }}" class="mt-4 space-y-3">
+            <div class="replies-{{ chirp.id }}" class="mt-4 space-y-3">
                 {% include 'reply_list.html' with replies=chirp.replies.all %}
             </div>
        </div>
