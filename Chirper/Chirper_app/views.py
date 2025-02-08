@@ -23,14 +23,17 @@ def create_chirp(request):
     return HttpResponseRedirect('/')
 
 def create_reply(request, chirp_id):
-   if request.method == "POST":
-       chirp = Chirp.objects.get(id=chirp_id)
-       Reply.objects.create(
-           chirp=chirp,
-           content=request.POST.get('content')
-       )
-       return render(request, 'reply_list.html', {'replies': chirp.replies.all()})
-   return HttpResponseRedirect('/')
+    if request.method == "POST":
+        chirp = Chirp.objects.get(id=chirp_id)
+        reply = Reply.objects.create(
+            chirp=chirp,
+            content=request.POST.get('content')
+        )
+        if chirp.replies.count() > 1:
+            return render(request, 'single_reply.html', {'reply': reply})
+        else:
+            return render(request, 'single_reply.html', {'reply': reply, 'is_first': True})
+    return HttpResponseRedirect('/')
 
 def like_chirp(request, chirp_id):
     chirp = Chirp.objects.get(id=chirp_id)

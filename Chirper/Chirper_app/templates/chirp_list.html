@@ -27,7 +27,7 @@
 
             <div id="reply-form-{{ chirp.id }}" class="hidden mt-4">
                 <form hx-post="{% url 'create_reply' chirp.id %}"
-                      hx-target=".replies-{{ chirp.id }}"
+                      hx-target="#more-replies-{{ chirp.id }}"
                       hx-swap="beforeend"
                       class="space-y-4">
                     <textarea name="content" 
