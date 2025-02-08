@@ -1,5 +1,5 @@
-from django.shortcuts import render, HttpResponseRedirect
-from .models import Chirp
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from .models import Chirp, Reply
 
 
 # Create your views here.
@@ -22,3 +22,21 @@ def create_chirp(request):
         return render(request, 'chirp_list.html', {'chirps': chirps})
     return HttpResponseRedirect('/')
 
+def create_reply(request, chirp_id):
+    if request.method == "POST":
+        chirp = Chirp.objects.get(id=chirp_id)
+        reply = Reply.objects.create(
+            chirp=chirp,
+            content=request.POST.get('content')
+        )
+        if chirp.replies.count() > 1:
+            return render(request, 'single_reply.html', {'reply': reply})
+        else:
+            return render(request, 'single_reply.html', {'reply': reply, 'is_first': True})
+    return HttpResponseRedirect('/')
+
+def like_chirp(request, chirp_id):
+    chirp = Chirp.objects.get(id=chirp_id)
+    chirp.like_count += 1
+    chirp.save()
+    return HttpResponse(chirp.like_count)
