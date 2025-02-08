@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'Chirper_app.User'
 
 # Application definition
 
@@ -37,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'Chirper_app'
 ]
 
@@ -52,6 +55,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',    
 ]
+
+SITE_ID = 1
+
 
 AUTHENTICATION_BACKENDS = [
     

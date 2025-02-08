@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
-from .models import Chirp
+from .models import Chirp, User
 from django.contrib.auth import authenticate, login
 from .forms import CustomUserCreationForm, EmailAuthenticationForm
 
@@ -24,14 +24,12 @@ def create_chirp(request):
     return HttpResponseRedirect('/')
 
 
-
-
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('login_view')
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
