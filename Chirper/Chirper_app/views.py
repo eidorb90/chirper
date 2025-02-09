@@ -29,10 +29,7 @@ def create_reply(request, chirp_id):
             chirp=chirp,
             content=request.POST.get('content')
         )
-        if chirp.replies.count() > 1:
-            return render(request, 'single_reply.html', {'reply': reply})
-        else:
-            return render(request, 'single_reply.html', {'reply': reply, 'is_first': True})
+        return render(request, 'reply_list.html', {'chirp': chirp})
     return HttpResponseRedirect('/')
 
 def like_chirp(request, chirp_id):
