@@ -26,7 +26,7 @@
             </div>
 
             <div id="reply-form-{{ chirp.id }}" class="hidden mt-4">
-                <form hx-post="{% url 'create_reply' chirp.id %}"
+                <form hx-post="{% url 'create_chirp_reply' chirp.id %}"
                       hx-target=".replies-{{ chirp.id }}"
                       hx-swap="innerHTML"
                       class="space-y-4">
