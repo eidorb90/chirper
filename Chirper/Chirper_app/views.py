@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.db.models import Q
 from .models import Chirp, Reply
+
 
 
 # Create your views here.
@@ -61,3 +63,18 @@ def like_reply(request, reply_id):
     reply.like_count += 1
     reply.save()
     return HttpResponse(reply.like_count)
+
+def search(request):
+    q = request.GET.get('q', '')
+    
+    if q:
+        chirp_results = Chirp.objects.filter(Q(title__icontains=q) | Q(content__icontains=q)).order_by('-created_at', '-like_count')[:20]
+        reply_results = Reply.objects.filter(Q(content__icontains=q)).order_by('-created_at', '-like_count')[:10]
+    else:
+        chirp_results = []
+        reply_results = []
+
+    if request.headers.get('HX-Request'):
+        return render(request, 'results_partial.html', {'chirp_results': chirp_results, 'reply_results' : reply_results})
+
+    return render(request, 'results.html', {'chirp_results': chirp_results, 'reply_results' : reply_results})
