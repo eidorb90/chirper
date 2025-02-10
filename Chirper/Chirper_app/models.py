@@ -15,7 +15,7 @@ class Chirp(models.Model):
 
 class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
-    username = models.CharField(max_length=20)
+    username = models.CharField(max_length=50)
 
 
     def __str__(self):
