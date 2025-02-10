@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Chirp, Reply
+from .models import Chirp, User, Reply
 
 @admin.register(Chirp)
 class ChirpAdmin(admin.ModelAdmin):
@@ -12,3 +12,10 @@ class ReplyAdmin(admin.ModelAdmin):
     list_display = ('content', 'created_at')
     search_fields = ('content', 'created_at')
     list_filter = ('content', 'created_at')
+
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'created_at')
+    search_fields = ('username', 'created_at')
+    list_filter = ('username', 'created_at')

@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect, redirect, HttpResponse
 from django.db.models import Q
-from .models import Chirp, Reply
-
-
+from .models import Chirp, Reply, User
+from django.contrib.auth import authenticate, login
+from .forms import CustomUserCreationForm, EmailAuthenticationForm
 
 # Create your views here.
 def home(request):
@@ -13,7 +13,8 @@ def home(request):
     })
 
 def account(request):
-    return render(request, 'account.html')
+    user_account = request.user
+    return render(request, 'account.html', {'user' : user_account   })
 
 def create_chirp(request):
     if request.method == "POST":
@@ -78,3 +79,33 @@ def search(request):
         return render(request, 'results_partial.html', {'chirp_results': chirp_results, 'reply_results' : reply_results})
 
     return render(request, 'results.html', {'chirp_results': chirp_results, 'reply_results' : reply_results})
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login_view')  # Redirect to the login page after successful registration
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+from django.contrib import messages
+
+def login_view(request):
+    if request.method == 'POST':
+        form = EmailAuthenticationForm(request, data=request.POST)
+        print("Form valid:", form.is_valid())
+        if not form.is_valid():
+            print("Form errors:", form.errors)
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=User.objects.get(email=email).username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')  # Redirect to the home page after successful login
+            else:
+                messages.error(request, 'Invalid username or password.')
+    else:
+        form = EmailAuthenticationForm()
+    return render(request, 'login.html', {'form': form})

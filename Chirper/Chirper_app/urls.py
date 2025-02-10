@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('account', views.account, name="account"),
+    path('login/', views.login_view, name='login_view'),
+    path('register/', views.register, name='register')
     path('create_chirp/', views.create_chirp, name="create_chirp"),
     path('chirp/<uuid:chirp_id>/reply/', views.create_chirp_reply, name="create_chirp_reply"),
     path('reply/<uuid:reply_id>/reply/', views.create_reply_reply, name="create_reply_reply"),
