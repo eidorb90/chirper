@@ -58,6 +58,7 @@ MIDDLEWARE = [
 
 SITE_ID = 1
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
 
 AUTHENTICATION_BACKENDS = [
     

@@ -4,7 +4,11 @@
 {% block title %}Home - Chirper{% endblock %}
 
 {% block content %}
-    <p>Account page come back later ...</p>
+    {% if user %}
+        <p>{{ user }}</p>
+    {% else %}
+        <p>Not logged in...</p>
+    {% endif %}
 
 
 

@@ -12,7 +12,8 @@ def home(request):
     })
 
 def account(request):
-    return render(request, 'account.html')
+    user_account = request.user
+    return render(request, 'account.html', {'user' : user_account   })
 
 def create_chirp(request):
     if request.method == "POST":
@@ -29,11 +30,7 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-<<<<<<< HEAD
             return redirect('login_view')  # Redirect to the login page after successful registration
-=======
-            return redirect('login_view')
->>>>>>> d4d824ea83ff57de536e3bd76877b091d4411e90
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -43,10 +40,12 @@ from django.contrib import messages
 def login_view(request):
     if request.method == 'POST':
         form = EmailAuthenticationForm(request, data=request.POST)
-        if form.is_valid():
+        print("Form valid:", form.is_valid())
+        if not form.is_valid():
+            print("Form errors:", form.errors)
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
-            user = authenticate(request, username=email, password=password)
+            user = authenticate(request, username=User.objects.get(email=email).username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('home')  # Redirect to the home page after successful login

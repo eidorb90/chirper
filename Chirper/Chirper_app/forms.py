@@ -17,4 +17,13 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 class EmailAuthenticationForm(AuthenticationForm):
-    username = forms.EmailField(label='Email')
+    # username = forms.EmailField(label='Email')
+
+    username = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
+        label='Email'
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
+        label='Password'
+    )
