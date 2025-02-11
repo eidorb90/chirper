@@ -35,33 +35,32 @@
             <div class="space-y-8 max-w-2xl mx-auto w-full">
                 <!-- Profile Picture Update Section -->
                 <div class="bg-gray-50 rounded-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Profile Picture</h2>
                     <form hx-post="{% url 'change_pfp' %}"
-                          hx-target="#pfp_container"
-                          hx-encoding="multipart/form-data"
-                          class="w-full">
-                        {% csrf_token %}
-                        <div class="flex flex-col gap-6">
-                            <div class="w-full">
-                                <input type="file" 
-                                       name="profile_image" 
-                                       accept="image/*"
-                                       class="block w-full text-sm text-gray-500
-                                              file:mr-4 file:py-2 file:px-4
-                                              file:rounded-full file:border-0
-                                              file:text-sm file:font-semibold
-                                              file:bg-blue-50 file:text-blue-700
-                                              hover:file:bg-blue-100
-                                              cursor-pointer">
-                            </div>
-                            <button type="submit" 
-                                    class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
-                                           hover:bg-blue-600 transition duration-200 shadow-md
-                                           font-semibold">
-                                Update Profile Picture
-                            </button>
-                        </div>
-                    </form>
+                    hx-target="#pfp_container"
+                    hx-encoding="multipart/form-data"
+                    class="w-full">
+                  {% csrf_token %}
+                  <div class="flex flex-col gap-6">
+                      <div class="w-full">
+                          <input type="file" 
+                                 name="profile_image" 
+                                 accept="image/*"
+                                 class="block w-full text-sm text-gray-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-blue-50 file:text-blue-700
+                                        hover:file:bg-blue-100
+                                        cursor-pointer">
+                      </div>
+                      <button type="submit" 
+                              class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
+                                     hover:bg-blue-600 transition duration-200 shadow-md
+                                     font-semibold">
+                          Update Profile Picture
+                      </button>
+                  </div>
+              </form>
                 </div>
 
                 <!-- Username Section -->

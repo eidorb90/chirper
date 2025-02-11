@@ -16,7 +16,7 @@ We are building Chirper on the Django Framwork. Using Tailwind to make the styli
 
 ## TODO main
 
-1. create signup/login page
+1. ~~create signup/login page~~
 2. ~~finish allowing users to create chirps~~
 3. ~~allow users to like and reply to chirps~~
 
@@ -24,11 +24,15 @@ We are building Chirper on the Django Framwork. Using Tailwind to make the styli
 
 1. Allow users to filter chirps 
 2. Allow users to follow each other
-3. make it look nice (we will be doing this along the way)  (Brodie)
+3. ~~make it look nice (we will be doing this along the way)  (Brodie)~~
 4. Allow rich text chirps (so allow people to do text formatting such as bold underline possibly add images and videos)
 5. Allow to toggle profile private
 6. Allow user to delete their account but not chirps
 7. ~~Integrate HTMX (going to be doing this along the way)~~
+
+## TODO self
+
+1. Fix the media pfp so that when a name is changed the old pic is deleted... if these isn't fixed before someone launched the app it would kill the storage of the server overtime.
 
 ---
 
