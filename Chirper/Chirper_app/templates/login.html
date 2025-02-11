@@ -7,8 +7,8 @@
 <div class="container mx-auto px-4 py-8">
     <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
         <h2 class="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
-        
-        <form method="post" class="space-y-4">
+
+        <form hx-post="{% url 'login_view' %}" hx-target="body" class="space-y-4">
             {% csrf_token %}
             
             {% if form.errors %}
