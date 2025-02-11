@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import Chirp, User
 from django.contrib.auth import authenticate, login
 from .forms import CustomUserCreationForm, EmailAuthenticationForm
+from django.contrib import messages
+from .forms import ProfileForm, EditProfileForm
 
 # Create your views here.
 def home(request):
@@ -35,7 +37,7 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
 
-from django.contrib import messages
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -54,3 +56,22 @@ def login_view(request):
     else:
         form = EmailAuthenticationForm()
     return render(request, 'login.html', {'form': form})
+
+
+def profile(request):
+    user = request.user
+    profile = user.profile
+    return render(request, 'profile.html', {'profile': profile})
+
+def edit_profile(request):
+    user = request.user
+    profile = user.profile
+
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = EditProfileForm(instance=profile)
+    return render(request, 'edit_profile.html', {'form': form})
