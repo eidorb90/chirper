@@ -166,12 +166,6 @@ def change_username(request):
         'username' : request.user.username
     })
 
-<<<<<<< HEAD
-def account(request):
-    return render(request, 'account.html')
-
-
-=======
 
 @login_required
 def change_pfp(request):
@@ -201,4 +195,3 @@ def user_replies(request):
 # def user_likes(request):
 #     return render(request, 'user_likes.html', {'likes' : request.user.likes.all()})
 
->>>>>>> f438cb051d1d86db78169246bc5ba684a75323d8
