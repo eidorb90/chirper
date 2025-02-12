@@ -3,14 +3,18 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 
 class CustomUserCreationForm(UserCreationForm):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
 
     def save(self, commit=True):
         user = super().save(commit=False)
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()
@@ -27,3 +31,4 @@ class EmailAuthenticationForm(AuthenticationForm):
         widget=forms.PasswordInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
         label='Password'
     )
+    
