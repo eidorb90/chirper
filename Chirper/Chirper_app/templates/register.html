@@ -18,16 +18,16 @@
             {% csrf_token %}
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label for="{{ form.first_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">First name</label>
+                    <label for="{{ form.first_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900" style="font-size: 1.0rem;">First name</label>
                     {{ form.first_name }}
                 </div>
                 <div>
-                    <label for="{{ form.last_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Last name</label>
+                    <label for="{{ form.last_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900" style="font-size: 1.0rem;">Last name</label>
                     {{ form.last_name }}
                 </div>
             </div>
             <div class="mb-6">
-                <label for="{{ form.email.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Email address</label>
+                <label for="{{ form.email.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900" style="font-size: 1.0rem;">Email address</label>
                 {{ form.email}}
             </div>
             <div class="mb-6">
