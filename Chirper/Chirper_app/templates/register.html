@@ -16,7 +16,7 @@
 
         <form method="post" class="my-10">
             {% csrf_token %}
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-6 mb-6 w-1/2 md:grid-cols-2">
                 <div>
                     <label for="{{ form.first_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900" style="font-size: 1.0rem;">First name</label>
                     {{ form.first_name }}
@@ -26,11 +26,11 @@
                     {{ form.last_name }}
                 </div>
             </div>
-            <div class="mb-6">
+            <div class="mb-6 w-1/2">
                 <label for="{{ form.email.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900" style="font-size: 1.0rem;">Email address</label>
                 {{ form.email}}
             </div>
-            <div class="mb-6">
+            <div class="mb-6 w-1/2">
                 <label for="{{ form.password2.id_for_label }}" class="block mb-2 text-gray-900" style="font-size: 1.0rem;">Password</label>
                 {{ form.password1 }}
             <h2>Password Requirements</h2>
@@ -41,7 +41,7 @@
                 <li>One special character (@$!%*?&)</li>
             </ul>
             </div>
-            <div class="mb-6">
+            <div class="mb-6 w-1/2">
                 <label for="{{ form.confirm_password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900" style="font-size: 1.0rem;">Confirm password</label>
                 {{ form.password2 }}
             </div>
