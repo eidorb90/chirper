@@ -63,3 +63,4 @@ class EmailAuthenticationForm(AuthenticationForm):
         ),
         label="Password",
     )
+    
