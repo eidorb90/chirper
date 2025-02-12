@@ -5,21 +5,21 @@ from .models import User
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(
         required=True,
-        widget=forms.TextInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2'})
+        widget=forms.TextInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2', 'style': 'width: 2.5rem, font-size: 90%;'})
     )
     last_name = forms.CharField(
         required=True,
-        widget=forms.TextInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'})
+        widget=forms.TextInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12', 'style': 'width: 2.5rem, font-size: 90%;'})
     )
     email = forms.EmailField(
         required=True,
-        widget=forms.EmailInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'})
+        widget=forms.EmailInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12', 'style': 'width: 2.5rem, font-size: 90%;'})
     )
     password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'})
-    )
+        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12', 'style': 'width: 2.5rem, font-size: 90%;'})
+    ),
     password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'})
+        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12', 'style': 'width: 2.5rem, font-size: 90%;'})
     )
 
 
