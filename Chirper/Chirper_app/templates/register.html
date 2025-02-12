@@ -35,6 +35,12 @@
                 <label for="{{ form.password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
                 {{ form.password1 }}
             </div>
+            <ul>
+                <li>At least 8 characters</li>
+                <li>One uppercase letter</li>
+                <li>One number</li>
+                <li>One special character (@$!%*?&)</li>
+            </ul>
             <div class="mb-6">
                 <label for="{{ form.confirm_password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
                 {{ form.password2 }}
