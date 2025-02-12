@@ -25,15 +25,15 @@
             </div>
             <div class="mb-6">
                 <label for="{{ form.email.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Email address</label>
-                {{ form.add_class}}
+                {{ form.email}}
             </div>
             <div class="mb-6">
                 <label for="{{ form.password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                {{ form.password }}
+                {{ form.password1 }}
             </div>
             <div class="mb-6">
                 <label for="{{ form.confirm_password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
-                {{ form.confirm_password }}
+                {{ form.password2 }}
             </div>
             <button type="submit" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-600">Submit</button>
         </form>
