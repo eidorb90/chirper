@@ -40,11 +40,11 @@ class EmailAuthenticationForm(AuthenticationForm):
     # username = forms.EmailField(label='Email')
 
     username = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
+        widget=forms.EmailInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'}),
         label='Email'
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
+        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'}),
         label='Password'
     )
     
