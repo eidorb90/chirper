@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search Results - Chirper{% endblock %}
+
+{% block content %}
+    <div class="max-w-3xl mx-auto px-4">
+        <h1 class="text-gray-800 text-2xl text-center mb-8">Search Results</h1>
+
+        <!-- Search Form -->
+        <form class="mb-8">
+            <div class="flex gap-2">
+                <input 
+                    type="text" 
+                    name="q" 
+                    value="{{ request.GET.q }}"
+                    class="flex-1 p-2 border rounded" 
+                    placeholder="Search chirps..." 
+                    hx-get="{% url 'search' %}"
+                    hx-trigger="keyup changed delay:250ms"
+                    hx-target="#search-results"
+                    hx-push-url="true">
+            </div>
+        </form>
+
+        <!-- Results Container -->
+        <div id="search-results" class="space-y-4">
+            {% if results %}
+                {% for chirp in results %}
+                <div class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+                    <div class="flex flex-col">
+                        <div id="tooltip-user-{{ chirp.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                            {{chirp.author}}
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        <div data-tooltip-target="tooltip-user-{{ chirp.id }}" class="relative w-10 h-10 overflow-hidden rounded-full bg-gray-100">
+                            {% if chirp.author.profile_image %}
+                                <img src="{{ chirp.author.profile_image.url }}" alt="{{ chirp.author.username }}'s profile" class="w-full h-full object-cover rounded-full">
+                            {% else %}
+                                <svg class="absolute w-12 h-12 text-gray-400 -left-1 rounded-full" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            {% endif %}
+                        </div>
+                
+                        <!-- Title -->
+                        <h2 class="text-xl font-bold text-gray-900 mb-2">{{ chirp.title }}</h2>
+                        
+                        <!-- Content -->
+                        <p class="text-gray-700 mb-4">{{ chirp.content }}</p>
+                
+                        <!-- Timestamp -->
+                        <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
+                
+                        <!-- Actions -->
+                        <div class="flex space-x-4 border-t pt-4">
+                            <button hx-post="{% url 'like_chirp' chirp.id %}"
+                                    hx-target=".like_count_{{ chirp.id }}"
+                                    hx-swap="innerText"
+                                    class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                                </svg>
+                                <span class="like_count_{{ chirp.id }}">{{ chirp.like_count }}</span>
+                            </button>
+                            <button onclick="document.getElementById('reply-form-{{ chirp.id }}').classList.toggle('hidden')"
+                                    class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                                <span>Reply</span>
+                            </button>
+                        </div>
+                                <!-- Reply Form --> 
+                        <div id="reply-form-{{ chirp.id }}" class="hidden mt-4">
+                            <form hx-post="{% url 'create_chirp_reply' chirp.id %}"
+                                hx-target=".replies-{{ chirp.id }}"
+                                hx-swap="innerHTML"
+                                method="POST"
+                                class="space-y-4">
+                                <textarea name="content"
+                                        class="w-full p-2 border rounded"
+                                        placeholder="Write a reply..."></textarea>
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                    Send Reply
+                                </button>
+                            </form>
+                        </div>
+                
+                         Replies
+                        <div class="replies-{{ chirp.id }} mt-4 space-y-3">
+                            {% include 'reply_list.html' with replies=chirp.replies.all %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                {% if request.GET.q %}
+                    <div class="text-center py-10">
+                        <p class="text-gray-500 text-lg">No results found for "{{ request.GET.q }}" 🔍</p>
+                        <p class="text-gray-400 mt-2">Try different keywords or check your spelling</p>
+                    </div>
+                {% else %}
+                    <div class="text-center py-10">
+                        <p class="text-gray-500 text-lg">Start searching to see results!</p>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
