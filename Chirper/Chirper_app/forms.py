@@ -6,8 +6,8 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
-    password1 = forms.PasswordInput(required=True)
-    password2 = forms.PasswordInput(required=True)
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
