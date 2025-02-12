@@ -3,11 +3,25 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 
 class CustomUserCreationForm(UserCreationForm):
-    first_name = forms.CharField(required=True(widget=forms.TextInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2'})))
-    last_name = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    first_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2'})
+    )
+    last_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2'})
+    )
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2'})
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2'})
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2'})
+    )
+
 
     class Meta:
         model = User
