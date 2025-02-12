@@ -7,33 +7,33 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         widget=forms.TextInput(attrs={
         'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'width: 2.5rem; font-size: 1rem;'
+        'style': 'height: 2.5rem; font-size: 1rem;'
     })
     )
     last_name = forms.CharField(
         required=True,
         widget=forms.TextInput(attrs={
         'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'width: 2.5rem; font-size: 1rem;'
+        'style': 'height: 2.5rem; font-size: 1rem;'
     })
     )
     email = forms.EmailField(
         required=True,
         widget=forms.EmailInput(attrs={
         'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'width: 2.5rem; font-size: 1rem;'
+        'style': 'height: 2.5rem; font-size: 1rem;'
     })
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
         'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'width: 2.5rem; font-size: 1rem;'
+        'style': 'height: 2.5rem; font-size: 1rem;'
     })
     )
     password2 = forms.CharField(
     widget=forms.PasswordInput(attrs={
         'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'width: 2.5rem; font-size: 1rem;'
+        'style': 'height: 2.5rem; font-size: 1rem;'
     })
     )
 
