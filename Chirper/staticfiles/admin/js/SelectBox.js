@@ -1,33 +1,37 @@
 'use strict';
+
+// Define the SelectBox object
 {
     const SelectBox = {
-        cache: {},
+        cache: {}, // Cache object to store options
+
+        // Initialize the SelectBox
         init: function(id) {
             const box = document.getElementById(id);
-            SelectBox.cache[id] = [];
+            SelectBox.cache[id] = []; // Initialize cache for the given id
             const cache = SelectBox.cache[id];
             for (const node of box.options) {
-                cache.push({value: node.value, text: node.text, displayed: 1});
+                cache.push({value: node.value, text: node.text, displayed: 1}); // Add options to the cache
             }
         },
+
+        // Redisplay the select box
         redisplay: function(id) {
-            // Repopulate HTML select box from cache
             const box = document.getElementById(id);
             const scroll_value_from_top = box.scrollTop;
             box.innerHTML = '';
             for (const node of SelectBox.cache[id]) {
                 if (node.displayed) {
                     const new_option = new Option(node.text, node.value, false, false);
-                    // Shows a tooltip when hovering over the option
-                    new_option.title = node.text;
+                    new_option.title = node.text; // Shows a tooltip when hovering over the option
                     box.appendChild(new_option);
                 }
             }
             box.scrollTop = scroll_value_from_top;
         },
+
+        // Filter the select box options
         filter: function(id, text) {
-            // Redisplay the HTML select box, displaying only the choices containing ALL
-            // the words in text. (It's an AND search.)
             const tokens = text.toLowerCase().split(/\s+/);
             for (const node of SelectBox.cache[id]) {
                 node.displayed = 1;
@@ -41,10 +45,14 @@
             }
             SelectBox.redisplay(id);
         },
+
+        // Get the count of hidden nodes in the select box
         get_hidden_node_count(id) {
             const cache = SelectBox.cache[id] || [];
             return cache.filter(node => node.displayed === 0).length;
         },
+
+        // Delete an option from the cache
         delete_from_cache: function(id, value) {
             let delete_index = null;
             const cache = SelectBox.cache[id];
@@ -56,11 +64,14 @@
             }
             cache.splice(delete_index, 1);
         },
+
+        // Add an option to the cache
         add_to_cache: function(id, option) {
             SelectBox.cache[id].push({value: option.value, text: option.text, displayed: 1});
         },
+
+        // Check if an item is contained in the cache
         cache_contains: function(id, value) {
-            // Check if an item is contained in the cache
             for (const node of SelectBox.cache[id]) {
                 if (node.value === value) {
                     return true;
@@ -68,6 +79,8 @@
             }
             return false;
         },
+
+        // Move selected options from one select box to another
         move: function(from, to) {
             const from_box = document.getElementById(from);
             for (const option of from_box.options) {
@@ -80,6 +93,8 @@
             SelectBox.redisplay(from);
             SelectBox.redisplay(to);
         },
+
+        // Move all options from one select box to another
         move_all: function(from, to) {
             const from_box = document.getElementById(from);
             for (const option of from_box.options) {
@@ -92,6 +107,8 @@
             SelectBox.redisplay(from);
             SelectBox.redisplay(to);
         },
+
+        // Sort the options in the select box
         sort: function(id) {
             SelectBox.cache[id].sort(function(a, b) {
                 a = a.text.toLowerCase();
@@ -105,6 +122,8 @@
                 return 0;
             } );
         },
+
+        // Select all options in the select box
         select_all: function(id) {
             const box = document.getElementById(id);
             for (const option of box.options) {
@@ -112,5 +131,6 @@
             }
         }
     };
-    window.SelectBox = SelectBox;
+
+    window.SelectBox = SelectBox; // Expose SelectBox object to the global scope
 }
