@@ -72,4 +72,3 @@ class EmailAuthenticationForm(AuthenticationForm):
             'placeholder': 'Password'
         })
     )
-    

@@ -16,6 +16,20 @@
 
         <form method="post" class="my-10">
             {% csrf_token %}
+            
+            {% if form.errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Please correct the errors below:</strong>
+                <ul class="list-disc list-inside">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label for="{{ form.first_name.id_for_label }}" class= "block mb-2 text-sm font-medium text-white" style="font-size: .95rem;">First name</label>
@@ -45,6 +59,11 @@
             <div class="mb-6">
                 <label for="{{ form.confirm_password.id_for_label }}" class="block mb-2 text-sm font-medium text-white" style="font-size: .95rem;">Confirm password</label>
                 {{ form.password2 }}
+            </div>
+            {{ field }}
+                {% if field.help_text %}
+                <p class="text-sm text-gray-500">{{ field.help_text }}</p>
+                {% endif %}
             </div>
             <button type="submit" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-600">Submit</button>
         </form>
