@@ -11,14 +11,14 @@
 </head>
 <body class="dark:bg-gray-900 antialiased">
     <div class="max-w-lg mx-auto my-10 dark:bg-gray-900 antialiased p-8 rounded-xl shadow shadow-slate-300 border border-gray-800 rounded-xl">
-        <h1 class="text-4xl font-medium">Registration</h1>
+        <h1 class="text-white text-4xl font-medium">Registration</h1>
         <p class="text-slate-500">Fill out the form below to create your account.</p>
 
         <form method="post" class="my-10">
             {% csrf_token %}
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label for="{{ form.first_name.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style="font-size: .95rem;">First name</label>
+                    <label for="{{ form.first_name.id_for_label }}" class= "block mb-2 text-sm font-medium text-gray-900 dark:text-white" style="font-size: .95rem;">First name</label>
                     {{ form.first_name }}
                 </div>
                 <div>
@@ -31,7 +31,7 @@
                 {{ form.email}}
             </div>
             <div class="mb-6">
-                <label for="{{ form.password2.id_for_label }}" class="block mb-2 text-gray-900 dark:text-white" style="font-size: .95rem;">Password</label>
+                <label for="{{ form.password2.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style="font-size: .95rem;">Password</label>
                 {{ form.password1 }}
             <h2>Password Requirements</h2>
             <ul class="list-disc pl-5 "style="font-size: .9rem;">
