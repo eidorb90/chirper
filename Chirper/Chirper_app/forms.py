@@ -6,28 +6,32 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(
         required=True,
         widget=forms.TextInput(attrs={
-            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+            'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'placeholder': 'First Name'
         })
     )
     last_name = forms.CharField(
         required=True,
         widget=forms.TextInput(attrs={
-            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+            'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'placeholder': 'Last Name'
         })
     )
     email = forms.EmailField(
         required=True,
         widget=forms.EmailInput(attrs={
-            'class': 'border-2 border-gray-800 rounded-md p-2 w-full h-12 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+            'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'placeholder': 'Email'
         })
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+            'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'placeholder': 'Password'
         })
     )
     password2 = forms.CharField(
