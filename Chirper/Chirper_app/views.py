@@ -5,7 +5,6 @@ from .models import Chirp, Reply, User
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from .forms import CustomUserCreationForm, EmailAuthenticationForm
 
-
 # Create your views here.
 def home(request):
 
@@ -112,15 +111,17 @@ def search(request):
 
     return render(request, 'results.html', {'chirp_results' : chirp_results, 'reply_results' : reply_results})
 
+
+
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login_view')  
+            return redirect('login_view')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'register.html', {'form' : form})
+    return render(request, 'register.html', {'form': form})
 
 from django.contrib import messages
 
