@@ -131,13 +131,17 @@ def login_view(request):
         if form.is_valid():
             email = form.cleaned_data.get('username') 
             password = form.cleaned_data.get('password')
-            user = authenticate(request, username=User.objects.get(email=email).username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')
+            try:
+                user = User.objects.get(email=email)
+                user = authenticate(request, username=user.username, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')
+            except User.DoesNotExist:
+                form.add_error('username', 'User with this email does not exist.')
     else:
         form = EmailAuthenticationForm()
-    return render(request, 'login.html', {'form' : form})
+    return render(request, 'login.html', {'form': form})
 
 @login_required
 def change_username(request):
