@@ -7,7 +7,7 @@
     <div class="max-w-3xl mx-auto px-4">
         <h1 class="text-white text-2xl text-center mb-8">Welcome to Chirper.</h1>
 
-        <h3 class="text-color: #9ca3af text-xl text-center mb-2">New Chirp</h3>
+        <h3 class="text-xl text-center mb-2" style = "text-color: #9ca3af">New Chirp</h3>
         <section class="bg-gradient-to-r from-gray-100 to-gray-200 shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow">
             <form hx-post="{% url 'create_chirp' %}" 
                   hx-target="#chirp-list"
