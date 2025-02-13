@@ -59,11 +59,17 @@ class CustomUserCreationForm(UserCreationForm):
 class EmailAuthenticationForm(AuthenticationForm):
 
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'}),
-        
+        widget=forms.EmailInput(attrs={
+            'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: #4b5563; color: #FFFFFF;',
+            'placeholder': 'Email'
+        })
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12'}),
-        label='Password'
+        widget=forms.PasswordInput(attrs={
+            'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: #4b5563; color: #FFFFFF;',
+            'placeholder': 'Password'
+        })
     )
     
