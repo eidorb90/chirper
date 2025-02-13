@@ -14,8 +14,15 @@
         <h1 class="text-white text-4xl font-medium">Login</h1>
         <p class="text-gray-300">Fill out the form below to log in to your account.</p>
 
-        <form method="post" class="my-10">
+        <form hx-post="{% url 'login_view' %}" hx-target="body" class="space-y-4">
             {% csrf_token %}
+            
+            {% if form.errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <p class="font-bold">Invalid username or password.</p>
+            </div>
+            {% endif %}
+            
             <div class="mb-6">
                 <label for="{{ form.email.id_for_label }}" class="block mb-2 text-sm font-medium text-white" style="font-size: .95rem;">Email</label>
                 {{ form.email }}
