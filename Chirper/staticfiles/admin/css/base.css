@@ -3,18 +3,18 @@
 */
 
 /* VARIABLE DEFINITIONS */
-html[data-theme="light"],
+html[data-theme="dark"],
 :root {
     --primary: #79aec8;
     --secondary: #417690;
     --accent: #f5dd5d;
     --primary-fg: #fff;
 
-    --body-fg: #333;
-    --body-bg: #fff;
-    --body-quiet-color: #666;
-    --body-medium-color: #444;
-    --body-loud-color: #000;
+    --body-fg: #fff;
+    --body-bg: #333;
+    --body-quiet-color: #ccc;
+    --body-medium-color: #aaa;
+    --body-loud-color: #fff;
 
     --header-color: #ffc;
     --header-branding-color: var(--accent);
@@ -86,7 +86,7 @@ html[data-theme="light"],
         "Segoe UI Symbol",
         "Noto Color Emoji";
 
-    color-scheme: light;
+    color-scheme: dark;
 }
 
 html, body {
