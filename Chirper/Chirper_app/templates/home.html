@@ -8,7 +8,7 @@
         <h1 class="text-white text-2xl text-center mb-8">Welcome to Chirper.</h1>
 
         <h3 class="text-xl text-center mb-2" style = "color: #9ca3af">New Chirp</h3>
-        <section class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style = 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+        <section class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style = 'background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
             <form hx-post="{% url 'create_chirp' %}" 
                   hx-target="#chirp-list"
                   method="POST">
