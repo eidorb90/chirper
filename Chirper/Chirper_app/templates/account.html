@@ -4,6 +4,7 @@
 {% block title %}{{ user.username }}'s Profile - Chirper{% endblock %}
 
 {% block content %}
+<body class="dark:bg-gray-900 antialiased">
 <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
     <!-- Profile Header Section -->
     <div class="bg-white rounded-xl shadow-md p-8 mb-8">
@@ -123,4 +124,5 @@
         {% include 'user_chirps.html' %}
     </div>
 </div>
+</body>
 {% endblock %}
