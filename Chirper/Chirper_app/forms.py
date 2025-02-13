@@ -15,7 +15,7 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         widget=forms.TextInput(attrs={
             'class': 'bg-gray-800 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: #4b5563; color: #4b5563;',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: #4b5563; color: #FFFFFF;',
             'placeholder': 'Last Name'
         })
     )
