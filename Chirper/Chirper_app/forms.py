@@ -6,35 +6,35 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(
         required=True,
         widget=forms.TextInput(attrs={
-        'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'height: 2.5rem; font-size: 90%;'
-    })
+            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+        })
     )
     last_name = forms.CharField(
         required=True,
         widget=forms.TextInput(attrs={
-        'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'height: 2.5rem; font-size: 90%;'
-    })
+            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+        })
     )
     email = forms.EmailField(
         required=True,
         widget=forms.EmailInput(attrs={
-        'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'height: 2.5rem; font-size: 90%;'
-    })
+            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+        })
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-        'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'height: 2.5rem; font-size: 90%;'
-    })
+            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+        })
     )
     password2 = forms.CharField(
-    widget=forms.PasswordInput(attrs={
-        'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
-        'style': 'height: 2.5rem; font-size: 90%;'
-    })
+        widget=forms.PasswordInput(attrs={
+            'class': 'border-2 border-gray-300 rounded-md p-2 w-full h-12',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;'
+        })
     )
 
 
