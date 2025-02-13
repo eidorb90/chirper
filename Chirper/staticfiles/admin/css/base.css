@@ -11,7 +11,7 @@ html[data-theme="dark"],
     --primary-fg: #fff;
 
     --body-fg: #fff;
-    --body-bg: #333;
+    --body-bg: #001f3f; /* Dark navy blue */
     --body-quiet-color: #ccc;
     --body-medium-color: #aaa;
     --body-loud-color: #fff;
