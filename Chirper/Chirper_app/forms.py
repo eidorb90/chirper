@@ -7,7 +7,7 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         widget=forms.TextInput(attrs={
             'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: gray;',
             'placeholder': 'First Name'
         })
     )
@@ -15,7 +15,7 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         widget=forms.TextInput(attrs={
             'class': 'bg-gray-800 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: gray;',
             'placeholder': 'Last Name'
         })
     )
@@ -23,21 +23,21 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         widget=forms.EmailInput(attrs={
             'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: gray;',
             'placeholder': 'Email'
         })
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: gray;',
             'placeholder': 'Password'
         })
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'bg-gray-700 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-white',
-            'style': 'height: 2.5rem; font-size: 90%; background-color: gray; border-color: gray;',
+            'style': 'height: 2.5rem; font-size: 90%; background-color: #374151; border-color: gray;',
             'placeholder': 'Confirm Password'
         })
     )
