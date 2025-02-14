@@ -2,19 +2,19 @@
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             <!-- Show first reply -->
-            <div class="flex items-center">
+            <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
                 <!-- Profile Picture -->
                 <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                    {% if replies.0.author.profile_image %}
-                        <img src="{{ replies.0.author.profile_image.url }}" 
-                             alt="{{ replies.0.author.username }}'s profile" 
-                             class="w-full h-full object-cover rounded-full">
-                    {% else %}
-                        <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                        </svg>
-                    {% endif %}
-                </div>
+            {% if replies.0.author.profile_image %}
+                <img src="{{ replies.0.author.profile_image.url }}" 
+                     alt="{{ replies.0.author.username }}'s profile" 
+                     class="w-full h-full object-cover rounded-full">
+            {% else %}
+                <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                </svg>
+            {% endif %}
+        </div>
         
         <div>
             <br>
