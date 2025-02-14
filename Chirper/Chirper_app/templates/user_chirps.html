@@ -25,7 +25,9 @@
                <h2 class="text-xl font-bold text-white mb-2">{{ chirp.title }}</h2>
                
                <!-- Content -->
-               <p class="text-white mb-4">{{ chirp.content }}</p>
+               <div class="space-y-4">
+                <p class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg p-2.5 text-white mb-2 text-to-grab" id="dynamic-box">{{ chirp.content }}</p>
+            </div>
         
                
         
@@ -86,3 +88,17 @@
        <p class="mt-1 text-sm text-gray-500">Get started with your first chirp!</p>
    </div>
 {% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to update the content of the dynamic box
+        function updateDynamicBox(content) {
+            const dynamicBox = document.getElementById('dynamic-box');
+            dynamicBox.textContent = content;
+        }
+
+        // Example of grabbing text from an element and updating the box
+        const textToGrab = document.querySelector('.text-to-grab').textContent;
+        updateDynamicBox(textToGrab);
+    });
+</script>
