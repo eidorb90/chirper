@@ -3,30 +3,29 @@
         {% if replies %}
             <!-- Show first reply -->
             <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
-                <!-- Profile Picture -->
-                    <div class="flex flex-col">
-                        <!-- Author -->
-                        <div class="flex items-center gap-3 mb-4">
-                            <div data-tooltip-target="tooltip-user-{{ chirp.id }}" class="relative w-10 h-10 overflow-hidden rounded-full bg-gray-100">
-                                {% if replies.0.author.profile_image%}
-                                    <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile" class="w-full h-full object-cover rounded-full">
-                                {% else %}
-                                    <svg class="absolute w-12 h-12 text-gray-400 -left-1 rounded-full" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                                    </svg>
-                                {% endif %}
-                            </div>
-                            <div id="tooltip-user-{{ chirp.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                                {{chirp.author}}
-                                <div class="tooltip-arrow" data-popper-arrow></div>
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-semibold text-sm" >{{ replies.0.author.username}}</span>
-                                <span class="text-gray-500 text-xs" >{{replies.0.created_at|timesince }}</span>
-                            </div>
+                <div class="flex flex-col">
+                    <!-- Author -->
+                    <div class="flex items-center gap-3 mb-4">
+                        <div data-tooltip-target="tooltip-user-{{ chirp.id }}" class="relative w-10 h-10 overflow-hidden rounded-full bg-gray-100">
+                            {% if replies.0.author.profile_image %}
+                                <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile" class="w-full h-full object-cover rounded-full">
+                            {% else %}
+                                <svg class="absolute w-12 h-12 text-gray-400 -left-1 rounded-full" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            {% endif %}
+                        </div>
+                        <div id="tooltip-user-{{ chirp.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                            {{ chirp.author }}
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-semibold text-sm">{{ replies.0.author.username }}</span>
+                            <span class="text-gray-500 text-xs">{{ replies.0.created_at|timesince }}</span>
                         </div>
                     </div>
                 </div>
+            </div>
                 
         
         <div>
