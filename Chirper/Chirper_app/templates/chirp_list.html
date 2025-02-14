@@ -26,7 +26,8 @@
         
         <!-- Content -->
         <div class="space-y-4">
-        <p class= "bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ chirp.content }}</p>
+        <div class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg p-2.5" id="dynamic-box"></div>
+        <p class= "text-white mb-2 text-to-grab">{{ chirp.content }}</p>
         </div>
         <br>
                         
@@ -87,3 +88,17 @@
        <p class="text-gray-400 mt-2">Be the first to share something!</p>
    </div>
 {% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to update the content of the dynamic box
+        function updateDynamicBox(content) {
+            const dynamicBox = document.getElementById('dynamic-box');
+            dynamicBox.textContent = content;
+        }
+
+        // Example of grabbing text from an element and updating the box
+        const textToGrab = document.querySelector('.text-to-grab').textContent;
+        updateDynamicBox(textToGrab);
+    });
+</script>
