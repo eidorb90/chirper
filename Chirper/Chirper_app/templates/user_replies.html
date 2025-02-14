@@ -16,10 +16,10 @@
                 </div>
                 
                 <div>
-                    {% comment %} <div class="flex items-center space-x-2">
+                    <div class="flex items-center space-x-2">
                         <span class="font-semibold text-sm">{{ replies.0.author.username }}</span>
                         <span class="text-white text-xs">{{ replies.0.created_at|timesince }} ago</span>
-                    </div> {% endcomment %}
+                    </div>
         
         
                             <p class="text-white mb-2">{{ replies.0.content }}</p>
@@ -34,7 +34,7 @@
 
                     <div class="flex items-center space-x-2 mb-1">
                         <span class="font-semibold text-sm">{{ reply.author.username }}</span>
-                        <span class="text-white text-xs">{{ reply.created_at|timesince }} ago</span>
+                        {% comment %} <span class="text-white text-xs">{{ reply.created_at|timesince }} ago</span> {% endcomment %}
                     </div>
 
                     <p class="text-gray-700 mb-2">{{ reply.content }}</p>
