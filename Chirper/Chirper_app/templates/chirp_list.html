@@ -34,9 +34,7 @@
 
  
         <!-- Actions -->
-        <div class="flex space-x-4">
-            <span class="text-sm text-white mb-4">{{ chirp.created_at|timesince }} ago</span>
-            <br>
+        <div class="flex items-center space-x-4">
             <button hx-post="{% url 'like_chirp' chirp.id %}"
                     hx-target=".like_count_{{ chirp.id }}"
                     hx-swap="innerText"
@@ -55,6 +53,7 @@
                 </svg>
                 <span>Reply</span>
             </button>
+            <span class="text-sm text-white">{{ chirp.created_at|timesince }} ago</span>
         </div>
  
         <!-- Reply Form -->
