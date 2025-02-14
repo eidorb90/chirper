@@ -32,7 +32,7 @@
                
         
                <!-- Actions -->
-               <div class="flex space-x-4 border-t pt-4">
+               <div class="flex items-center space-x-4">
                 <span class="text-sm text-white mb-4">{{ chirp.created_at|timesince }} ago</span>
                    <br>
                     <button hx-post="{% url 'like_chirp' chirp.id %}"
