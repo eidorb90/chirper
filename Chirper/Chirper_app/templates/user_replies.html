@@ -32,10 +32,7 @@
                         <p class="text-sm text-white mb-2">Reply to: {{ reply.parent_reply.content|truncatechars:50 }}</p>
                     {% endif %}
 
-                    <div class="flex items-center space-x-2 mb-1">
-                        <span class="font-semibold text-sm">{{ reply.author.username }}</span>
-                        <span class="text-white text-xs">{{ reply.created_at|timesince }} ago</span>
-                    </div>
+                    
 
                     <p class="text-gray-700 mb-2">{{ reply.content }}</p>
                     
