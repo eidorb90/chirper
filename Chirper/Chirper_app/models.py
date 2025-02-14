@@ -25,7 +25,13 @@ class User(AbstractUser):
         null=True,
         default='profile_pic/default.png'
     )
-    
+    followers = models.ManyToManyField(
+        'self',
+        through='UserFollowing',
+        symmetrical=False,
+        related_name='following'
+    )
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -62,6 +68,17 @@ class User(AbstractUser):
 
         super().save(*args, **kwargs)
     
+
+class UserFollowing(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following_relationships')
+    following_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower_relationships')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'following_user')
+    
+    def __str__(self):
+        return f'{self.user.username} follows {self.following_user.username}'
 
 class Chirp(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

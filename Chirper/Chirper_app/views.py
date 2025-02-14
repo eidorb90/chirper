@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect, HttpResponse
-from django.db.models import Q
+from django.db.models import Q, Count, Exists, OuterRef
 from django.contrib.auth.decorators import login_required
-from .models import Chirp, Reply, User
+from .models import Chirp, Reply, User, UserFollowing
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from .forms import CustomUserCreationForm, EmailAuthenticationForm
 
@@ -102,15 +102,30 @@ def search(request):
     
     if q:
         chirp_results = Chirp.objects.filter(Q(title__icontains=q) | Q(content__icontains=q)).order_by('-created_at', '-like_count')[:20]
+        
         reply_results = Reply.objects.filter(Q(content__icontains=q)).order_by('-created_at', '-like_count')[:10]
+        
+        # Subquery to check if the current user follows each account
+        following_subquery = UserFollowing.objects.filter(user=request.user, following_user=OuterRef('pk'))
+        
+        account_results = User.objects.filter(Q(username__contains=q)).annotate(follower_count=Count('follower_relationships'),following_status=Exists(following_subquery)).order_by('-follower_count', '-created_at')
     else:
         chirp_results = []
         reply_results = []
+        account_results = []
 
     if request.headers.get('HX-Request'):
-        return render(request, 'results_partial.html', {'chirp_results' : chirp_results, 'reply_results' : reply_results})
+        return render(request, 'results_partial.html', {
+            'chirp_results': chirp_results,
+            'reply_results': reply_results,
+            'account_results': account_results
+        })
 
-    return render(request, 'results.html', {'chirp_results' : chirp_results, 'reply_results' : reply_results})
+    return render(request, 'results.html', {
+        'chirp_results': chirp_results,
+        'reply_results': reply_results,
+        'account_results': account_results
+    })
 
 def register(request):
     if request.method == 'POST':
@@ -189,6 +204,68 @@ def user_chirps(request):
 def user_replies(request):
     return render(request, 'user_replies.html', {'replies' : request.user.replies.all()})
 
+@login_required
+def view_other_account(request, username):
+    try:
+        account = User.objects.get(username=username)
+        following_status = UserFollowing.objects.filter(
+            user=request.user, 
+            following_user=account
+        ).exists()
+        return render(request, 'other_account.html', {
+            'user': account,
+            'following_status': following_status
+        })
+    except User.DoesNotExist:
+        return redirect('home')
+    
+@login_required
+def other_chirps(request, username):
+    try:
+        user = User.objects.get(username=username)
+        chirps = Chirp.objects.filter(author=user).order_by('-created_at')
+        return render(request, 'user_chirps.html', {'chirps': chirps, 'user': user})
+    except User.DoesNotExist:
+        return redirect('home')
+
+@login_required
+def other_replies(request, username):
+    try:
+        user = User.objects.get(username=username)
+        replies = Reply.objects.filter(author=user).order_by('-created_at')
+        return render(request, 'user_replies.html', {'replies': replies, 'user': user})
+    except User.DoesNotExist:
+        return redirect('home')
+    
+@login_required
+def follow_user(request, username):
+    try:
+        user_to_follow = User.objects.get(username=username)
+        following_status = UserFollowing.objects.filter(
+            user=request.user, 
+            following_user=user_to_follow
+        ).exists()
+        
+        if following_status:
+            UserFollowing.objects.filter(
+                user=request.user, 
+                following_user=user_to_follow
+            ).delete()
+            following_status = False
+        else:
+            UserFollowing.objects.create(
+                user=request.user, 
+                following_user=user_to_follow
+            )
+            following_status = True
+            
+        return render(request, 'follow_button.html', {
+            'user': user_to_follow,
+            'following_status': following_status
+        })
+            
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
 
 # Going to be used in the future just going to leave current progress here whoever wants to can work on it
 # @login_required

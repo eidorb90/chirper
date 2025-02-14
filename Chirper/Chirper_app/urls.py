@@ -16,7 +16,13 @@ urlpatterns = [
     path('profile/chirps/', views.user_chirps, name='user_chirps'),
     path('profile/replies/', views.user_replies, name='user_replies'),
     path('profile/username/', views.change_username, name='change_username'),
-    path('profile/profile_pic/', views.change_pfp, name="change_pfp")
+    path('profile/profile_pic/', views.change_pfp, name="change_pfp"),
+    path('view/<str:username>/', views.view_other_account, name="view_other_account"),
+    path('view/<str:username>/chirps', views.other_chirps, name="other_chirps"),
+    path('view/<str:username>/replies', views.other_replies, name="other_replies"),
+    path('follow/<str:username>/', views.follow_user, name="follow_user"),
+
+
     # TODO work on likes in the future
     # path('profile/likes/', views.user_likes, name='user_likes'),
 ]
