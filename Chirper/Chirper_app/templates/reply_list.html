@@ -18,16 +18,14 @@
         
         <div>
             <br>
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2 gap: 20px">
                 <span class="font-semibold text-sm">{{ replies.0.author.username }}</span>
                 <span class="text-white text-xs">{{ replies.0.created_at|timesince }} ago</span>
-                <br>
             </div>
             
 
                     <div class="rounded-lg flex space-x-4 border-t pt-4 border-top-width: 2px">
                         <p class="text-white mb-2">{{ replies.0.content }}</p>
-                        <br>
                     </div>
                     
                     <!-- Existing reply buttons -->
