@@ -3,13 +3,13 @@
         {% for reply in user.replies.all %}
             <div class= "shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
                 <!-- Profile Picture -->
-                <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 text-white">
                     {% if reply.author.profile_image %}
                         <img src="{{ reply.author.profile_image.url }}" 
                              alt="{{ reply.author.username }}'s profile" 
                              class="w-full h-full object-cover">
                     {% else %}
-                        <svg class="w-full h-full text-white fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                         </svg>
                     {% endif %}
