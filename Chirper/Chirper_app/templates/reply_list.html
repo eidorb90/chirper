@@ -15,12 +15,13 @@
                         </svg>
                     {% endif %}
                 </div>
-
-                <div class="flex-1">
-                    <div class="flex items-center space-x-2 mb-1">
+                
+                <div>
+                    <div class="flex items-center space-x-2">
                         <span class="font-semibold text-sm">{{ replies.0.author.username }}</span>
                         <span class="text-white text-xs">{{ replies.0.created_at|timesince }} ago</span>
                     </div>
+        
 
                     <p class="text-white mb-2">{{ replies.0.content }}</p>
                     
