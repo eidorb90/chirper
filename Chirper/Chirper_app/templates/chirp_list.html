@@ -34,8 +34,8 @@
 
  
         <!-- Actions -->
-        <div class="flex space-x-5">
-            <span class="text-sm text-white mb-4">{{ chirp.created_at|timesince }} ago</span>
+        <div class="flex space-x-4">
+            <span class="text-sm text-white mb-5">{{ chirp.created_at|timesince }} ago</span>
             <br>
             <button hx-post="{% url 'like_chirp' chirp.id %}"
                     hx-target=".like_count_{{ chirp.id }}"
