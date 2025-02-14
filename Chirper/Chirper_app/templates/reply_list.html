@@ -90,9 +90,9 @@
                                     </div>
 
                                     <div class="flex-1">
-                                        <div class="flex items-center space-x-2 mb-1">
-                                            <span class="font-semibold text-white text-sm">{{ nested_reply.author.username }}</span>
-                                            <span class="text-gray-500 text-xs">{{ nested_reply.created_at|timesince }} ago</span>
+                                        <div class="flex flex-col">
+                                            <span class="font-semibold text-sm">{{ nested_replies.author.username }}</span>
+                                            <span class="text-gray-500 text-xs mb-2">{{ nested_replies.0.created_at|timesince }}</span>
                                         </div>
 
                                         <p class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ nested_reply.content }}</p>
@@ -207,9 +207,9 @@
                                                     </div>
 
                                                     <div class="flex-1">
-                                                        <div class="flex flex-col">
-                                                            <span class="font-semibold text-sm">{{ nested_replies.author.username }}</span>
-                                                            <span class="text-gray-500 text-xs mb-2">{{nested_replies.0.created_at|timesince }}</span>
+                                                        <div class="flex items-center space-x-2 mb-1">
+                                                            <span class="font-semibold text-sm">{{ nested_reply.author.username }}</span>
+                                                            <span class="text-gray-500 text-xs">{{ nested_reply.created_at|timesince }} ago</span>
                                                         </div>
 
                                                         <p class="text-gray-700 mb-2">{{ nested_reply.content }}</p>
