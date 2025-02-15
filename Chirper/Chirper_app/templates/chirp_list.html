@@ -65,7 +65,7 @@
             </div>
 
             <div class="replies-{{ chirp.id }} mt-4 space-y-3">
-                {% include 'reply_list.html'%}
+                {% include 'reply_list.html' with replies=chirp.replies.all %}
             </div>
         </div>
     </div>
