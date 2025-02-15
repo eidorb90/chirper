@@ -219,16 +219,3 @@
         {% endif %}
     {% endwith %}
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Function to update the content of the dynamic box
-        function updateDynamicBox(content) {
-            const dynamicBox = document.getElementById('dynamic-box');
-            dynamicBox.textContent = content;
-        }
-
-        // Example of grabbing text from an element and updating the box
-        const textToGrab = document.querySelector('.text-to-grab').textContent;
-        updateDynamicBox(textToGrab);
-    });
-</script>
