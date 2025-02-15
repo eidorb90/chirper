@@ -64,9 +64,9 @@
                 </form>
             </div>
 
-            <div class="replies-{{ chirp.id }} mt-4 space-y-3">
+            {% comment %} <div class="replies-{{ chirp.id }} mt-4 space-y-3">
                 {% include 'reply_list.html' with replies=chirp.replies.all %}
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
     {% endfor %}
