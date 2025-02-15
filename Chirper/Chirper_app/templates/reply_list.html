@@ -166,21 +166,6 @@
                                         </button>
                                     </div>
 
-                                    <!-- Existing reply form and nested replies -->
-                                    <div id="reply-form-{{ reply.id }}" class="hidden mt-4">
-                                        <form hx-post="{% url 'create_reply_reply' reply.id %}"
-                                              hx-target="#nested-replies-{{ reply.id }}"
-                                              hx-swap="innerHTML"
-                                              class="space-y-4">
-                                            <textarea name="content" 
-                                                      class="w-full p-2 border rounded" 
-                                                      placeholder="Write a reply..."></textarea>
-                                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                                                Send Reply
-                                            </button>
-                                        </form>
-                                    </div>
-
                                     <!-- Nested replies -->
                                     {% if reply.replies.all %}
                                         <div id="nested-replies-{{ reply.id }}" class="ml-8 mt-4 space-y-3">
@@ -234,3 +219,16 @@
         {% endif %}
     {% endwith %}
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to update the content of the dynamic box
+        function updateDynamicBox(content) {
+            const dynamicBox = document.getElementById('dynamic-box');
+            dynamicBox.textContent = content;
+        }
+
+        // Example of grabbing text from an element and updating the box
+        const textToGrab = document.querySelector('.text-to-grab').textContent;
+        updateDynamicBox(textToGrab);
+    });
+</script>
