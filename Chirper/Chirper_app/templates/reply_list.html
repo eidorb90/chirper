@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <!-- Nested Reply Content -->
-                                    <p class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ nested_reply.content }}</p>
+                                    <p class="text-white mb-2">{{ nested_reply.content }}</p>
                                     <div class="flex mt-2 space-x-4">
                                         <button hx-post="{% url 'like_reply' nested_reply.id %}" 
                                                 hx-target=".like_count_{{ nested_reply.id }}" 
