@@ -66,44 +66,54 @@
                 </div>
 
                 <!-- Nested replies for first reply (existing) -->
-                {% if replies.0.replies.all %}
-                    <div id="nested-replies-{{ replies.0.id }}" class="ml-8 mt-4 space-y-3 hidden">
+                        {% if replies.0.replies.all %}
+                        <div id="nested-replies-{{ replies.0.id }}" class="ml-8 mt-4 space-y-3 hidden">
                         {% for nested_reply in replies.0.replies.all|dictsort:"created_at" %}
-                        <div class="bg-gray border border-gray-600 text-white text-sm p-3 rounded-lg mb-2 flex items-start space-x-3">
-                                <div class="flex-1">
-                                    <div class="flex items-center space-x-2 mb-1">
-                                        <!-- Profile Picture for Nested Reply -->
-                                        <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                                            {% if nested_reply.author.profile_image %}
-                                                <img src="{{ nested_reply.author.profile_image.url }}" alt="{{ nested_reply.author.username }}'s profile" class="w-full h-full object-cover rounded-full">
-                                            {% else %}
-                                                <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                                                </svg>
-                                            {% endif %}
-                                        </div>
-                                        
-                                        <div class="flex flex-col ml-1">
-                                            <span class="font-semibold text-white text-sm">{{ nested_reply.author.username }}</span>
+                            {% if not forloop.first %}
+                                <div class="bg-gray border border-gray-600 text-white text-sm p-3 rounded-lg mb-2 flex items-start space-x-3">
+                                    <!-- Profile Picture -->
+                                    <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                                        {% if nested_reply.author.profile_image %}
+                                            <img src="{{ nested_reply.author.profile_image.url }}" alt="{{ nested_reply.author.username }}'s profile" class="w-full h-full object-cover rounded-full">
+                                        {% else %}
+                                            <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Rest of the existing reply template remains the same -->
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-semibold text-sm">{{ nested_reply.author.username }}</span>
                                             <span class="text-gray-500 text-xs">{{ nested_reply.created_at|timesince }} ago</span>
                                         </div>
-                                    </div>
-                                
-                                    <!-- Nested Reply Content -->
-                                    <p class="text-white mb-2">{{ nested_reply.content }}</p>
-                                    <div class="flex mt-2 space-x-4">
-                                        <button hx-post="{% url 'like_reply' nested_reply.id %}" 
-                                                hx-target=".like_count_{{ nested_reply.id }}" 
-                                                hx-swap="innerText"
-                                                class="text-white hover:text-blue-500 flex items-center space-x-1">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
-                                            </svg>
-                                            <span class="like_count_{{ nested_reply.id }}">{{ nested_reply.like_count }}</span>
-                                        </button>
+
+                                        <p class="text-white mb-2">{{ nested_reply.content }}</p>
+                                        
+                                        <!-- Existing buttons -->
+                                        <div class="flex mt-2 space-x-4">
+                                            <!-- Like and Reply buttons remain unchanged -->
+                                            <button hx-post="{% url 'like_reply' nested_reply.id %}" 
+                                                    hx-target=".like_count_{{ nested_reply.id }}" 
+                                                    hx-swap="innerText"
+                                                    class="text-white hover:text-blue-500 flex items-center space-x-1">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                                                </svg>
+                                                <span class="like_count_{{ nested_reply.id }}">{{ nested_reply.like_count }}</span>
+                                            </button>
+                                            <button onclick="document.getElementById('reply-form-{{ nested_reply.id }}').classList.toggle('hidden')"
+                                                    class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                                </svg>
+                                                <span>Reply</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     <br>
