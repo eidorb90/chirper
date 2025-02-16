@@ -2,10 +2,10 @@
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             <!-- Show first reply -->
-            <div class="bg-gray border border-gray-600 text-white text-sm p-3 rounded-lg mb-2 flex items-start space-x-3">
-                
+            <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+                <div class="flex flex-col">
                     <!-- Author -->
-                    
+                    <div class="flex items-center gap-3 mb-4">
                         <div data-tooltip-target="tooltip-user-{{ chirp.id }}" class="relative w-10 h-10 overflow-hidden rounded-full bg-gray-100">
                             {% if replies.0.author.profile_image %}
                                 <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile" class="w-full h-full object-cover rounded-full">
@@ -19,7 +19,8 @@
                             <span class="font-semibold text-sm">{{ replies.0.author.username }}</span>
                             <span class="text-gray-500 text-xs">{{ replies.0.created_at|timesince }} ago</span>
                         </div>
-                    
+                    </div>
+                </div>
 
                 <div class="space-y-4">
                     <p class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ replies.0.content }}</p>
