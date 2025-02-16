@@ -20,7 +20,7 @@
     {% if nested_replies|length > 1 %}
         <!-- Show more nested replies button -->
         <button onclick="document.getElementById('more-nested-replies-{{ nested_replies.0.parent_reply.id }}').classList.toggle('hidden')"
-                class="text-blue-500 hover:text-blue-700 text-sm mb-2 ml-0">
+                class="text-blue-500 hover:text-blue-700 text-sm mb-1 ml-0">
             Show replies ({{ nested_replies|length|add:"-1" }})
         </button>
         
