@@ -2,6 +2,7 @@
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             {% for reply in replies %}
+                {% if not chirps|some:"replies__id" == reply.id %}
                 <div class="bg-gray-50 p-3 rounded-lg mb-2 flex items-start space-x-3">
                     <!-- Profile Picture -->
                     <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
@@ -104,6 +105,7 @@
                         {% endif %}
                     </div>
                 </div>
+                {% endif %}
             {% endfor %}
         {% else %}
             <div class="text-center py-10">
