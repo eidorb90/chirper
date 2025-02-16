@@ -2,7 +2,7 @@
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             <!-- Show first reply -->
-            <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+            <div class= "bg-gray border border-gray-600 text-white text-sm p-3 rounded-lg mb-2 flex items-start space-x-3">
                 <div class="flex flex-col">
                     <!-- Author -->
                     <div class="flex items-center gap-3 mb-4">
@@ -102,7 +102,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                    
+                    <br>
                     <button onclick="document.getElementById('nested-replies-{{ replies.0.id }}').classList.toggle('hidden')"
                             class="text-blue-500 hover:text-blue-700">
                         Show replies ({{ replies.0.replies.count|add:"-1" }})
