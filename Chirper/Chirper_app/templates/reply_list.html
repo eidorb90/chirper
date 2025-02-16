@@ -74,22 +74,22 @@
                         {% for nested_reply in replies.0.replies.all|dictsort:"created_at" %}
                             <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
                                 <!-- Profile Picture for Nested Reply -->
-                                <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                                     {% if nested_reply.author.profile_image %}
                                         <img src="{{ nested_reply.author.profile_image.url }}" alt="{{ nested_reply.author.username }}'s profile" class="w-full h-full object-cover rounded-full">
                                     {% else %}
-                                        <svg class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
                                         </svg>
                                     {% endif %}
                                 </div>
                                 
-                                <div class="flex-1">
+                                <!-- Nested Reply Content -->
                                     <div class="flex flex-col">
                                         <span class="font-semibold text-white text-sm">{{ nested_reply.author.username }}</span>
                                         <span class="text-gray-500 text-xs">{{ nested_reply.created_at|timesince }} ago</span>
                                     </div>
-                                </div>
+                                
 
                                 <p class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ nested_reply.content }}</p>
                                 
