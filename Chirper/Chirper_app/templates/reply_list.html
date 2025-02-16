@@ -2,7 +2,6 @@
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             {% for reply in replies %}
-                {% if not chirps|some:"replies__id" == reply.id %}
                 <div class="bg-gray-50 p-3 rounded-lg mb-2 flex items-start space-x-3">
                     <!-- Profile Picture -->
                     <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
@@ -46,10 +45,11 @@
                         </div>
 
                         <div id="reply-form-{{ reply.id }}" class="hidden mt-4">
-                            <form hx-post="{% url 'create_reply_reply' reply.id %}"
+                            <form id="reply-form-{{ reply.id }}-form" hx-post="{% url 'create_reply_reply' reply.id %}"
                                   hx-target="#nested-replies-{{ reply.id }}"
                                   hx-swap="innerHTML"
-                                  class="space-y-4">
+                                  class="space-y-4"
+                                  onsubmit="addNestedReply(event, {{ reply.id }})">
                                 {% csrf_token %}
                                 <textarea name="content" 
                                           class="w-full p-2 border rounded" 
@@ -114,3 +114,24 @@
         {% endif %}
     {% endwith %}
 </div>
+
+<script>
+    function addNestedReply(event, replyId) {
+        event.preventDefault();
+        const form = document.getElementById(`reply-form-${replyId}-form`);
+        const formData = new FormData(form);
+        
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            document.querySelector(`#nested-replies-${replyId}`).innerHTML = html;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
