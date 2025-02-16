@@ -128,7 +128,7 @@
                                         {% if reply.replies.all %}
                                             <div id="nested-replies-{{ reply.id }}" class="ml-8 mt-4 space-y-3 hidden">
                                                 {% for nested_reply in reply.replies.all|dictsort:"created_at"|slice:":5" %}
-                                                    <div class="bg-gray-100 p-3 rounded-lg mb-2 flex items-start space-x-3">
+                                                    <div class="bg-gray p-3 rounded-lg mb-2 flex items-start space-x-3">
                                                         <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                                                             {% if nested_reply.author.profile_image %}
                                                                 <img src="{{ nested_reply.author.profile_image.url }}" 
