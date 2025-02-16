@@ -1,4 +1,4 @@
-<div class="replies-{{ chirp.id }} space-y-3">
+{% comment %} <div class="replies-{{ chirp.id }} space-y-3">
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             {% for reply in replies %}
@@ -221,4 +221,4 @@
         })
         .catch(error => console.error('Error:', error));
     }
-</script>
+</script> {% endcomment %}
