@@ -90,9 +90,13 @@
         .then(response => response.text())
         .then(html => {
             document.querySelector(`.replies-${chirpId}`).innerHTML = html;
+            const repliesCount = document.querySelectorAll(`.replies-${chirpId} > .reply-item`).length;
             const showMoreButton = document.querySelector(`#more-replies-${chirpId}`);
             if (showMoreButton) {
-                showMoreButton.classList.remove('hidden');
+                if (repliesCount > 1) {
+                    showMoreButton.classList.remove('hidden');
+                    showMoreButton.textContent = `Show more replies (${repliesCount - 1})`;
+                }
             }
         })
         .catch(error => console.error('Error:', error));
