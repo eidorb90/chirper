@@ -22,10 +22,12 @@
                     </div>
                 </div>
 
+                <!-- Reply Content -->
                 <div class="space-y-4">
                     <p class="bg-gray-600 border border-gray-600 text-white text-sm p-3 rounded-lg mb-2 flex items-start space-x-3">{{ replies.0.content }}</p>
                 </div>
                 <br>
+
                 <!-- Existing reply buttons -->
                 <div class="flex space-x-4">
                     <button hx-post="{% url 'like_reply' replies.0.id %}" 
