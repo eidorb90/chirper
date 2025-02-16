@@ -19,11 +19,12 @@
 
     {% if nested_replies|length > 1 %}
         <!-- Show more nested replies button -->
+        <div class="flex justify-start">
         <button onclick="document.getElementById('more-nested-replies-{{ nested_replies.0.parent_reply.id }}').classList.toggle('hidden')"
-                class="text-blue-500 hover:text-blue-700 text-sm mb-1 ml-0">
+                class="text-blue-500 hover:text-blue-700 text-sm mb-2 ">
             Show replies ({{ nested_replies|length|add:"-1" }})
         </button>
-        
+    </div>
 
         <!-- Container for additional nested replies -->
         <div id="more-nested-replies-{{ nested_replies.0.parent_reply.id }}" class="hidden space-y-3 mt-2">
