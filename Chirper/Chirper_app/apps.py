@@ -5,7 +5,7 @@ from django.apps import AppConfig
 # from .forms import RegistrationForm, LoginForm
 # from django.contrib.auth.forms import AuthenticationForm
 
-class ChirperAppConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Chirper_app'
 
+class ChirperAppConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "Chirper_app"

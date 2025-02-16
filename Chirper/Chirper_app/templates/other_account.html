@@ -27,21 +27,11 @@
                 <h1 id="username" class="text-3xl font-bold text-gray-900">{{ user.username }}</h1>
                 <p class="text-gray-500 mb-8">Member since {{ user.date_joined|date:"F Y" }}</p>
                 <div class="w-full border-b border-gray-200 my-8"></div>
-                <div class="flex space-x-4 justify-center">
-                    <div class="text-center">
-                        <span class="font-bold">{{ user.follower_relationships.count }}</span>
-                        <span class="text-gray-500">Followers</span>
-                    </div>
-                    <div class="text-center">
-                        <span class="font-bold">{{ user.following_relationships.count }}</span>
-                        <span class="text-gray-500">Following</span>
-                    </div>
-                </div>
+
+                <!-- Include the stats and button template once -->
+                {% include 'profile_stats.html' %}
             </div>
 
-            <div class="p-6">
-                {% include 'follow_button.html' %}
-            </div>
         </div>
     </div>
 

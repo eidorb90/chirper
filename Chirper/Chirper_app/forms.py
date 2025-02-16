@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -16,14 +17,19 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
 
+
 class EmailAuthenticationForm(AuthenticationForm):
     # username = forms.EmailField(label='Email')
 
     username = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
-        label='Email'
+        widget=forms.EmailInput(
+            attrs={"class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
+        ),
+        label="Email",
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
-        label='Password'
+        widget=forms.PasswordInput(
+            attrs={"class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
+        ),
+        label="Password",
     )

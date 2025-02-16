@@ -8,30 +8,30 @@ from .forms import CustomUserCreationForm, EmailAuthenticationForm
 
 # Create your views here.
 def home(request):
-
     if request.user.is_authenticated:
-        chirps = Chirp.objects.all().order_by('-created_at') 
+        chirps = Chirp.objects.all().order_by("-created_at")
 
-        return render(request, 'home.html', {
-            'chirps' : chirps
-        })
+        return render(request, "home.html", {"chirps": chirps})
     else:
         return redirect("login_view")
 
+
 @login_required
-def account(request):    
-    return render(request, 'account.html', {'user' : request.user})
+def account(request):
+    return render(request, "account.html", {"user": request.user})
+
 
 @login_required
 def create_chirp(request):
     if request.method == "POST":
-        title = request.POST.get('title')
-        content = request.POST.get('content')
+        title = request.POST.get("title")
+        content = request.POST.get("content")
         author = request.user
         Chirp.objects.create(title=title, content=content, author=author)
-        chirps = Chirp.objects.all().order_by('-created_at')
-        return render(request, 'chirp_list.html', {'chirps' : chirps})
-    return HttpResponseRedirect('/')
+        chirps = Chirp.objects.all().order_by("-created_at")
+        return render(request, "chirp_list.html", {"chirps": chirps})
+    return HttpResponseRedirect("/")
+
 
 @login_required
 def create_chirp_reply(request, chirp_id):
@@ -40,31 +40,37 @@ def create_chirp_reply(request, chirp_id):
         author = request.user
         reply = Reply.objects.create(
             chirp=chirp,
-            content=request.POST.get('content'),
+            content=request.POST.get("content"),
             is_chirp_reply=True,
-            author=author
+            author=author,
         )
-        return render(request, 'reply_list.html', {'chirp' : chirp})
-    return HttpResponseRedirect('/')
+        return render(request, "reply_list.html", {"chirp": chirp})
+    return HttpResponseRedirect("/")
+
 
 @login_required
 def create_reply_reply(request, reply_id):
     if request.method == "POST":
         parent_reply = Reply.objects.get(id=reply_id)
-        chirp = parent_reply.chirp if parent_reply.chirp else parent_reply.parent_reply.chirp
+        chirp = (
+            parent_reply.chirp
+            if parent_reply.chirp
+            else parent_reply.parent_reply.chirp
+        )
         author = request.user
         reply = Reply.objects.create(
             parent_reply=parent_reply,
-            content=request.POST.get('content'),
+            content=request.POST.get("content"),
             is_chirp_reply=False,
-            author=author
+            author=author,
         )
         # Get all nested replies, not just the new one
-        all_nested_replies = parent_reply.replies.all().order_by('created_at')
-        return render(request, 'nested_reply.html', {
-            'nested_replies' : all_nested_replies
-        })
-    return HttpResponseRedirect('/')
+        all_nested_replies = parent_reply.replies.all().order_by("created_at")
+        return render(
+            request, "nested_reply.html", {"nested_replies": all_nested_replies}
+        )
+    return HttpResponseRedirect("/")
+
 
 @login_required
 def like_chirp(request, chirp_id):
@@ -81,6 +87,7 @@ def like_chirp(request, chirp_id):
     chirp.save()
     return HttpResponse(chirp.like_count)
 
+
 @login_required
 def like_reply(request, reply_id):
     reply = Reply.objects.get(id=reply_id)
@@ -96,179 +103,232 @@ def like_reply(request, reply_id):
     reply.save()
     return HttpResponse(reply.like_count)
 
+
 @login_required
 def search(request):
-    q = request.GET.get('q', '')
-    
+    q = request.GET.get("q", "")
+
     if q:
-        chirp_results = Chirp.objects.filter(Q(title__icontains=q) | Q(content__icontains=q)).order_by('-created_at', '-like_count')[:20]
-        
-        reply_results = Reply.objects.filter(Q(content__icontains=q)).order_by('-created_at', '-like_count')[:10]
-        
+        chirp_results = Chirp.objects.filter(
+            Q(title__icontains=q) | Q(content__icontains=q)
+        ).order_by("-created_at", "-like_count")[:20]
+
+        reply_results = Reply.objects.filter(Q(content__icontains=q)).order_by(
+            "-created_at", "-like_count"
+        )[:10]
+
         # Subquery to check if the current user follows each account
-        following_subquery = UserFollowing.objects.filter(user=request.user, following_user=OuterRef('pk'))
-        
-        account_results = User.objects.filter(Q(username__contains=q)).annotate(follower_count=Count('follower_relationships'),following_status=Exists(following_subquery)).order_by('-follower_count', '-created_at')
+        following_subquery = UserFollowing.objects.filter(
+            user=request.user, following_user=OuterRef("pk")
+        )
+
+        account_results = (
+            User.objects.filter(Q(username__contains=q))
+            .annotate(
+                follower_count=Count("follower_relationships"),
+                following_status=Exists(following_subquery),
+            )
+            .order_by("-follower_count", "-created_at")
+        )
     else:
         chirp_results = []
         reply_results = []
         account_results = []
 
-    if request.headers.get('HX-Request'):
-        return render(request, 'results_partial.html', {
-            'chirp_results': chirp_results,
-            'reply_results': reply_results,
-            'account_results': account_results
-        })
+    if request.headers.get("HX-Request"):
+        return render(
+            request,
+            "results_partial.html",
+            {
+                "chirp_results": chirp_results,
+                "reply_results": reply_results,
+                "account_results": account_results,
+            },
+        )
 
-    return render(request, 'results.html', {
-        'chirp_results': chirp_results,
-        'reply_results': reply_results,
-        'account_results': account_results
-    })
+    return render(
+        request,
+        "results.html",
+        {
+            "chirp_results": chirp_results,
+            "reply_results": reply_results,
+            "account_results": account_results,
+        },
+    )
+
 
 def register(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login_view')  
+            return redirect("login_view")
     else:
         form = CustomUserCreationForm()
-    return render(request, 'register.html', {'form' : form})
+    return render(request, "register.html", {"form": form})
 
-from django.contrib import messages
 
 def login_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = EmailAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('username') 
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=User.objects.get(email=email).username, password=password)
+            email = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(
+                request,
+                username=User.objects.get(email=email).username,
+                password=password,
+            )
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect("home")
     else:
         form = EmailAuthenticationForm()
-    return render(request, 'login.html', {'form' : form})
+    return render(request, "login.html", {"form": form})
+
 
 @login_required
 def change_username(request):
     if request.method == "POST":
-        new_name = request.POST.get('new_username', '').strip()
+        new_name = request.POST.get("new_username", "").strip()
         if new_name:
-            taken_username_list = User.objects.all().values_list('username', flat=True)
+            taken_username_list = User.objects.all().values_list("username", flat=True)
             if new_name not in taken_username_list:
                 request.user.username = new_name
                 request.user.save()
-                return render(request, 'username_display.html', {
-                    'username' : new_name,
-                    'message' : "Username Updated Successfully",
-                    'status' : 'success'
-                })  
-            return render(request, 'username_display.html', {
-                'username' : request.user.username,
-                'message' : "Username Already Taken",
-                'status' : 'error'
-            })
-        return render(request, 'username_display.html', {
-            'username' : request.user.username,
-            'message' : "Username cannot be empty",
-            'status' : 'error'
-        })
-    return render(request, 'username_display.html', {
-        'username' : request.user.username
-    })
+                return render(
+                    request,
+                    "username_display.html",
+                    {
+                        "username": new_name,
+                        "message": "Username Updated Successfully",
+                        "status": "success",
+                    },
+                )
+            return render(
+                request,
+                "username_display.html",
+                {
+                    "username": request.user.username,
+                    "message": "Username Already Taken",
+                    "status": "error",
+                },
+            )
+        return render(
+            request,
+            "username_display.html",
+            {
+                "username": request.user.username,
+                "message": "Username cannot be empty",
+                "status": "error",
+            },
+        )
+    return render(request, "username_display.html", {"username": request.user.username})
 
 
 @login_required
 def change_pfp(request):
-    if request.method == 'POST':
-        if 'profile_image' in request.FILES:
-            request.user.profile_image = request.FILES['profile_image']
+    if request.method == "POST":
+        print("Got post Request")
+        if "profile_image" in request.FILES:
+            print("Got profile_image")
+            request.user.profile_image = request.FILES["profile_image"]
             request.user.save()
 
-    return render(request, 'pfp_container.html', {'user': request.user})
+    return render(request, "pfp_container.html", {"user": request.user})
+
 
 @login_required
 def logout(request):
     auth_logout(request)
-    return redirect('login_view')
+    return redirect("login_view")
+
 
 @login_required
 def user_chirps(request):
-    return render(request, 'user_chirps.html', {'chirps' : request.user.chirps.all()})
+    return render(request, "user_chirps.html", {"chirps": request.user.chirps.all()})
+
 
 @login_required
 def user_replies(request):
-    return render(request, 'user_replies.html', {'replies' : request.user.replies.all()})
+    return render(request, "user_replies.html", {"replies": request.user.replies.all()})
+
 
 @login_required
 def view_other_account(request, username):
     try:
         account = User.objects.get(username=username)
         following_status = UserFollowing.objects.filter(
-            user=request.user, 
-            following_user=account
+            user=request.user, following_user=account
         ).exists()
-        return render(request, 'other_account.html', {
-            'user': account,
-            'following_status': following_status
-        })
+        return render(
+            request,
+            "other_account.html",
+            {"user": account, "following_status": following_status},
+        )
     except User.DoesNotExist:
-        return redirect('home')
-    
+        return redirect("home")
+
+
 @login_required
 def other_chirps(request, username):
     try:
         user = User.objects.get(username=username)
-        chirps = Chirp.objects.filter(author=user).order_by('-created_at')
-        return render(request, 'user_chirps.html', {'chirps': chirps, 'user': user})
+        chirps = Chirp.objects.filter(author=user).order_by("-created_at")
+        return render(request, "user_chirps.html", {"chirps": chirps, "user": user})
     except User.DoesNotExist:
-        return redirect('home')
+        return redirect("home")
+
 
 @login_required
 def other_replies(request, username):
     try:
         user = User.objects.get(username=username)
-        replies = Reply.objects.filter(author=user).order_by('-created_at')
-        return render(request, 'user_replies.html', {'replies': replies, 'user': user})
+        replies = Reply.objects.filter(author=user).order_by("-created_at")
+        return render(request, "user_replies.html", {"replies": replies, "user": user})
     except User.DoesNotExist:
-        return redirect('home')
-    
+        return redirect("home")
+
+
 @login_required
 def follow_user(request, username):
     try:
         user_to_follow = User.objects.get(username=username)
         following_status = UserFollowing.objects.filter(
-            user=request.user, 
-            following_user=user_to_follow
+            user=request.user, following_user=user_to_follow
         ).exists()
-        
+
         if following_status:
             UserFollowing.objects.filter(
-                user=request.user, 
-                following_user=user_to_follow
+                user=request.user, following_user=user_to_follow
             ).delete()
             following_status = False
         else:
             UserFollowing.objects.create(
-                user=request.user, 
-                following_user=user_to_follow
+                user=request.user, following_user=user_to_follow
             )
             following_status = True
-            
-        return render(request, 'follow_button.html', {
-            'user': user_to_follow,
-            'following_status': following_status
-        })
-            
+
+        return render(
+            request,
+            "profile_stats.html",
+            {
+                "user": user_to_follow,
+                "following_status": following_status,
+            },
+        )
+
     except User.DoesNotExist:
         return HttpResponse(status=404)
 
-# Going to be used in the future just going to leave current progress here whoever wants to can work on it
-# @login_required
-# def user_likes(request):
-#     return render(request, 'user_likes.html', {'likes' : request.user.likes.all()})
 
+@login_required
+def change_privacy(request):
+    if request.method == "POST":
+        user = request.user
+        user.private = not user.private
+        user.save()
+
+        return render(request, "privacy_button.html", {"user": user})
+
+    return HttpResponse(status=400)

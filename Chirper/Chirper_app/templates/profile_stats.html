@@ -9,4 +9,15 @@
             <span class="text-gray-500">Following</span>
         </div>
     </div>
+
+    {% if request.user != user %}
+    <button hx-post="{% url 'follow_user' user.username %}" hx-target="#profile-stats-container"
+        class="{% if following_status %}bg-gray-200 hover:bg-gray-300 text-gray-800{% else %}bg-blue-500 hover:bg-blue-600 text-white{% endif %} px-4 py-2 rounded-full font-medium text-sm transition-colors mt-4">
+        {% if following_status %}
+        Following
+        {% else %}
+        Follow
+        {% endif %}
+    </button>
+    {% endif %}
 </div>
