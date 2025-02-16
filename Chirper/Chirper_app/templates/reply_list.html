@@ -71,7 +71,7 @@
                         {% for nested_reply in replies.0.replies.all|dictsort:"created_at" %}
                         <div class="bg-gray border border-gray-600 text-white text-sm p-3 rounded-lg mb-2 flex items-start space-x-3">
                                 <div class="flex flex-col">
-                                    <div class="flex items-center gap-3 mb-4">
+                                    
                                         <!-- Profile Picture for Nested Reply -->
                                         <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                                             {% if nested_reply.author.profile_image %}
@@ -83,6 +83,7 @@
                                             {% endif %}
                                         </div>
                                         <div class="flex flex-col ml-1">
+                                            <div class="flex items-center space-x-2 mb-1">
                                             <span class="font-semibold text-white text-sm">{{ nested_reply.author.username }}</span>
                                             <span class="text-gray-500 text-xs">{{ nested_reply.created_at|timesince }} ago</span>
                                         </div>
