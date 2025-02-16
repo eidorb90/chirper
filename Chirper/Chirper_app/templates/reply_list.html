@@ -63,7 +63,7 @@
                         <!-- Nested replies -->
                         <div id="nested-replies-{{ reply.id }}" class="ml-8 mt-4 space-y-3">
                             {% for nested_reply in reply.replies.all|dictsort:"created_at" %}
-                                <div class="bg-gray-100 p-3 rounded-lg mb-2 flex items-start space-x-3">
+                                <div class="bg-gray-50 p-3 rounded-lg mb-2 flex items-start space-x-3">
                                     <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                                         {% if nested_reply.author.profile_image %}
                                             <img src="{{ nested_reply.author.profile_image.url }}" 
