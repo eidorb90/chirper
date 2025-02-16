@@ -2,7 +2,7 @@
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             <!-- Show first reply -->
-            <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+            <div class='shadow-md mx-auto mb-8 rounded-lg p-6 hover:shadow-lg transition-shadow' style='background-color: #374151; color: #FFFFFF;'>
                 <div class="flex flex-col">
                     <!-- Author -->
                     <div class="flex items-center gap-3 mb-4">
@@ -21,9 +21,9 @@
                         </div>
                     </div>
                 </div>
-
+            
                 <div class="space-y-4">
-                    <p class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ replies.0.content }}</p>
+                    <p class="bg-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ replies.0.content }}</p>
                 </div>
                 <br>
                 <!-- Existing reply buttons -->
@@ -47,7 +47,7 @@
                         <span>Reply</span>
                     </button>
                 </div>
-
+            
                 <!-- First reply form (existing) -->
                 <div id="reply-form-{{ replies.0.id }}" class="hidden mt-4">
                     <form hx-post="{% url 'create_reply_reply' replies.0.id %}"
@@ -55,13 +55,14 @@
                           hx-swap="innerHTML"
                           class="space-y-4">
                         <textarea name="content" 
-                                  class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                                  class="bg-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
                                   placeholder="Write a reply..."></textarea>
                         <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                             Send Reply
                         </button>
                     </form>
                 </div>
+            </div>
 
                 <!-- Nested replies for first reply (existing) -->
                 {% if replies.0.replies.all %}
