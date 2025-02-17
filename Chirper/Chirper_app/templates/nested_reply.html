@@ -17,7 +17,12 @@
         </div>
     </div>
 
-    
+    {% if nested_replies|length > 1 %}
+        <!-- Show more nested replies button -->
+        <button onclick="document.getElementById('more-nested-replies-{{ nested_replies.id }}').classList.toggle('hidden')"
+                class="text-blue-500 hover:text-blue-700 text-sm">
+            Show more replies ({{ nested_replies|length|add:"-1" }})
+        </button>
 
         <!-- Container for additional nested replies -->
         <div id="more-nested-replies-{{ nested_replies.id }}" class="hidden space-y-3 mt-2">
@@ -42,5 +47,5 @@
                 {% endif %}
             {% endfor %}
         </div>
-    
+    {% endif %}
 {% endif %}
