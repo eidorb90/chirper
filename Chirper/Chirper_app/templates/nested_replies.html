@@ -44,7 +44,9 @@
                     </div>
 
                     <!-- Recursive nested replies -->
-                    {% include "nested_replies.html" with parent_reply=nested_reply %}
+                    <div id="nested-replies-{{ nested_reply.id }}" class="ml-8 mt-4 space-y-3">
+                        {% include "nested_replies.html" with parent_reply=nested_reply %}
+                    </div>
                 </div>
             </div>
         {% endfor %}
