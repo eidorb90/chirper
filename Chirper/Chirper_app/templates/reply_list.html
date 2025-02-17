@@ -119,7 +119,7 @@
                     {% for reply in replies %}
                         {% if not forloop.first %}
                             <!-- Existing reply template, but with profile picture styling -->
-                            <div class="bg-gray-50 p-3 rounded-lg mb-2 flex items-start space-x-3">
+                            <div class="bg-gray p-3 rounded-lg mb-2 flex items-start space-x-3">
                                 <!-- Profile Picture -->
                                 <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                                     {% if reply.author.profile_image %}
