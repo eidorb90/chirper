@@ -19,13 +19,13 @@
 
     {% if nested_replies|length > 1 %}
         <!-- Show more nested replies button -->
-        <button onclick="document.getElementById('more-nested-replies-{{ nested_replies.id }}').classList.toggle('hidden')"
+        <button onclick="document.getElementById('more-nested-replies-{{ nested_replies.0.parent_reply.id }}').classList.toggle('hidden')"
                 class="text-blue-500 hover:text-blue-700 text-sm">
             Show more replies ({{ nested_replies|length|add:"-1" }})
         </button>
 
         <!-- Container for additional nested replies -->
-        <div id="more-nested-replies-{{ nested_replies.id }}" class="hidden space-y-3 mt-2">
+        <div id="more-nested-replies-{{ nested_replies.0.parent_reply.id }}" class="hidden space-y-3 mt-2">
             {% for nested_reply in nested_replies %}
                 {% if not forloop.first %}
                     <div class="bg-grey p-3 rounded-lg mb-2 flex items-start space-x-3">
