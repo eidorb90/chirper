@@ -50,7 +50,7 @@
                             <!-- Nested replies -->
                             {% if reply.replies.count > 0 %}
                                 <div id="nested-replies-{{ reply.id }}" class="ml-8 mt-4 space-y-3">
-                                    {% include "nested_replies.html" with parent_reply=reply %}
+                                    {% include "nested_reply.html" with parent_reply=reply %}
                                 </div>
                             {% endif %}
                         </div>
