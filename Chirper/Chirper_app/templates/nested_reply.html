@@ -25,7 +25,7 @@
         </button>
 
         <!-- Container for additional nested replies -->
-        <div id="more-nested-replies-{{ nested_replies.0.parent_reply.id }}" class="hidden space-y-3 mt-2">
+        <div id="more-nested-replies-{{ nested_replies.0.parent_reply.id }}" class="hidden space-y-3" style="padding-top: 0rem;">
             {% for nested_reply in nested_replies %}
                 {% if not forloop.first %}
                     <div class="bg-grey p-3 rounded-lg mb-2 flex items-start space-x-3">
