@@ -123,7 +123,7 @@
                         {% if not forloop.first %}
                             <!-- Existing reply template, but with profile picture styling -->
                              
-                            <div class="bg-gray p-3 rounded-lg mb-2 flex items-start space-x-3">
+                            <div class="bg-gray p-3 mb-2 flex items-start space-x-3 flex space-x-4 border-t pt-4" style = "border-top-width: 1px; border-left-width: thin; border-top-left-radius: 10px; border-color: #47546a;">
                                 <!-- Profile Picture -->
                                 <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                                     {% if reply.author.profile_image %}
@@ -188,9 +188,8 @@
                                         <div id="nested-replies-{{ reply.id }}" class="ml-8 space-y-3" style="padding-top: 0rem;">
                                             {% for nested_reply in reply.replies.all|dictsort:"created_at" %}
                                             
-                                            <div class="flex space-x-4 border-t pt-4" style = "border-top-width: 1px; border-left-width: thin; border-top-left-radius: 10px;">
-                                            </div>
-                                                <div class="bg-gray p-3 rounded-lg mb-2 flex items-start space-x-3">
+                                            
+                                            <div class="bg-gray p-3 mb-2 flex items-start space-x-3 flex space-x-4 border-t pt-4" style = "border-top-width: 1px; border-left-width: thin; border-top-left-radius: 10px; border-color: #47546a;">
                                                     <!-- Similar nested reply styling as before -->
                                                     <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                                                         {% if nested_reply.author.profile_image %}
