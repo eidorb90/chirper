@@ -1,4 +1,4 @@
-<div class="replies-{{ chirp.id }} mt-4 space-y-3">
+<div class="replies-{{ chirp.id }} space-y-3"  style="padding-top: 0rem;">
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
         {% if replies %}
             <!-- Show first reply -->
