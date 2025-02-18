@@ -119,11 +119,22 @@
             </h2>
 
             {% if reply_results %}
-                
-                <div class="replies-{{ chirp.id }} space-y-3"  style="padding-top: 0rem;">
-                    {% include 'reply_list.html' with replies=chirp.replies.all %}
-                </div>
-                
+                {% for reply in reply_results %}
+                    <div class="bg-gray p-3 mb-2 flex items-start space-x-3 flex space-x-4 border-t pt-4">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                {% if reply.chirp.title %}
+                                    <p class="text-sm text-white mb-2">Reply to: {{ reply.chirp.title }}</p>
+                                {% else %}
+                                <p class="text-sm text-white mb-2">Reply to: {{ reply.parent_reply.content }}</p>
+                                {% endif %}
+                                
+                                <p class="text-white mt-3 leading-relaxed">{{ reply.content }}</p>
+                            </div>
+                            <span class="text-sm text-gray-400 italic ml-4">{{ reply.created_at|timesince }} ago</span>
+                        </div>
+                    </div>
+                {% endfor %}
             {% else %}
                 <div class="text-center py-10 bg-white rounded-xl shadow-md">
                     <p class="text-white text-lg">No Replies found for "{{ request.GET.q }}" 🔍</p>
