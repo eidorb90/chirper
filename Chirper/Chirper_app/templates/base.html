@@ -16,7 +16,7 @@
     
     <title>Chirper</title>
 </head>
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' style="height: inherit">
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' style="min-height: 100%">
     <nav class="bg-gray-800 p-4 shadow-lg">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="{% url 'home' %}" class="text-white text-2xl font-bold hover:text-gray-300">Chirper</a>
