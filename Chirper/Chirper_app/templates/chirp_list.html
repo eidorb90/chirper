@@ -30,8 +30,7 @@
         </div>
         
         
-        <div class="flex space-x-4 border-t pt-4">
-        </div>
+        
         <!-- Actions -->
         <div class="flex items-center space-x-4">
             <button hx-post="{% url 'like_chirp' chirp.id %}"
@@ -53,7 +52,8 @@
                 <span>Reply</span>
             </button>
         </div>
- 
+        <div class="flex space-x-4 border-t pt-4">
+        </div>
         <!-- Reply Form -->
         <div id="reply-form-{{ chirp.id }}" class="hidden mt-4">
             <form hx-post="{% url 'create_chirp_reply' chirp.id %}"
