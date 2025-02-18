@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html style = "height: 100%">
+<html class = "bg-gray-900 antialiased" style = "height: 100%">
 <head>
     {% load static %}
     {% csrf_token %}
@@ -34,7 +34,7 @@
         </div>
     </nav>
 
-    <div class="dark:bg-gray-900 antialiased" style = "height: 100%">
+    <div class="bg-gray-900 antialiased" style = "height: 100%">
         {% block content %}
         {% endblock %}
     </div>
