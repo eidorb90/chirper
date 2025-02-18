@@ -1,6 +1,6 @@
 {% if nested_replies.0 %}
     <!-- Show first nested reply -->
-    <div class="bg-grey p-3 rounded-lg mb-2 flex items-start space-x-3">
+    <div class="bg-grey p-3 rounded-lg mb-2 flex items-start space-x-3" style="padding-top: 0rem;">
         <p class="text-white">{{ nested_replies.0.content }}</p>
         <span class="text-sm text-gray-500">{{ nested_replies.0.created_at|timesince }} ago</span>
         
