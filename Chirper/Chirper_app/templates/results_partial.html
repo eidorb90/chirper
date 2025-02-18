@@ -69,6 +69,22 @@
                         </button>
                         
                     </div>
+                    <!-- Reply Form -->
+                    <div id="reply-form-{{ chirp.id }}" class="hidden mt-4">
+                        <form hx-post="{% url 'create_chirp_reply' chirp.id %}"
+                              hx-target=".replies-{{ chirp.id }}"
+                              hx-swap="innerHTML"
+                              class="space-y-4">
+                            {% csrf_token %}
+            
+                            <textarea name="content"
+                                      class="w-full p-2 border rounded" style = "background-color: #4b5563;"
+                                      placeholder="Write a reply..."></textarea>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                Send Reply
+                            </button>
+                        </form>
+                    </div>
                             
             
                     <!-- Replies -->
