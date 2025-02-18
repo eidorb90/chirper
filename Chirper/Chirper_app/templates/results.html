@@ -16,7 +16,7 @@
                     type="text" 
                     name="q" 
                     value="{{ request.GET.q }}"
-                    class="flex-1 p-2 border rounded text-white"
+                    class="flex-1 p-2 border border-gray-600 focus:ring-blue-500 focus:border-blue-500 rounded text-white"
                     style = "background-color: #4b5563;"
                     placeholder="Search chirps..." 
                     hx-get="{% url 'search' %}"
