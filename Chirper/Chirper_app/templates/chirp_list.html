@@ -53,8 +53,8 @@
             </button>
         </div>
         <br>
-        <div class="flex space-x-4 border-t pt-4" style="padding-top: 0rem;">
-        </div>
+    <div class="flex space-x-4 border-t pt-4" style="padding-top: 0rem;">
+        
         <!-- Reply Form -->
         <div id="reply-form-{{ chirp.id }}" class="hidden mt-4">
             <form hx-post="{% url 'create_chirp_reply' chirp.id %}"
@@ -71,6 +71,7 @@
                 </button>
             </form>
         </div>
+    </div>
  
         <!-- Replies -->
         <div class="replies-{{ chirp.id }} mt-4 space-y-3">
