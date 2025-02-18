@@ -53,7 +53,7 @@
             </button>
         </div>
         <br>
-    <div class="flex space-x-4 border-t pt-4" style="padding-top: 0rem;">
+    <div class="flex space-x-4 border-t pt-4">
         
         <!-- Reply Form -->
         <div id="reply-form-{{ chirp.id }}" class = "hidden" style="margin-top: .5rem;" >
@@ -74,7 +74,7 @@
     </div>
  
         <!-- Replies -->
-        <div class="replies-{{ chirp.id }} mt-4 space-y-3">
+        <div class="replies-{{ chirp.id }} space-y-3"  style="padding-top: 0rem;">
             {% include 'reply_list.html' with replies=chirp.replies.all %}
         </div>
     </div>
