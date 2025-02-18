@@ -11,7 +11,7 @@
 
         {% if chirp_results %}
             {% for chirp in chirp_results %}
-            <div class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+            <div class="bg-gray shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
                 <div class="flex flex-col">
                     <div id="tooltip-user-{{ chirp.id }}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
                         {{chirp.author}}
@@ -80,12 +80,12 @@
         {% else %}
             {% if request.GET.q %}
                 <div class="text-center py-10 bg-white rounded-xl shadow-md">
-                    <p class="text-gray-500 text-lg">No Chirps found for "{{ request.GET.q }}" 🔍</p>
-                    <p class="text-gray-400 mt-2">Try different keywords or check your spelling</p>
+                    <p class="text-white text-lg">No Chirps found for "{{ request.GET.q }}" 🔍</p>
+                    <p class="text-white mt-2">Try different keywords or check your spelling</p>
                 </div>
             {% else %}
                 <div class="text-center py-10 bg-white rounded-xl shadow-md">
-                    <p class="text-gray-500 text-lg">Start searching to see results!</p>
+                    <p class="text-white text-lg">Start searching to see results!</p>
                 </div>
             {% endif %}
         {% endif %}
@@ -103,7 +103,7 @@
 
             {% if reply_results %}
                 {% for reply in reply_results %}
-                    <div class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+                    <div class="bg-gray shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 {% if reply.chirp.title %}
@@ -112,7 +112,7 @@
                                 <p class="text-sm text-gray-500 mb-2">Reply to: {{ reply.parent_reply.content }}</p>
                                 {% endif %}
                                 
-                                <p class="text-gray-700 mt-3 leading-relaxed">{{ reply.content }}</p>
+                                <p class="text-white mt-3 leading-relaxed">{{ reply.content }}</p>
                             </div>
                             <span class="text-sm text-gray-400 italic ml-4">{{ reply.created_at|timesince }} ago</span>
                         </div>
@@ -120,8 +120,8 @@
                 {% endfor %}
             {% else %}
                 <div class="text-center py-10 bg-white rounded-xl shadow-md">
-                    <p class="text-gray-500 text-lg">No Replies found for "{{ request.GET.q }}" 🔍</p>
-                    <p class="text-gray-400 mt-2">Try different keywords or check your spelling</p>
+                    <p class="text-white text-lg">No Replies found for "{{ request.GET.q }}" 🔍</p>
+                    <p class="text-white mt-2">Try different keywords or check your spelling</p>
                 </div>
             {% endif %}
         </div>
