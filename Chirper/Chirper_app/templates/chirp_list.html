@@ -60,7 +60,7 @@
             <form hx-post="{% url 'create_chirp_reply' chirp.id %}"
                   hx-target=".replies-{{ chirp.id }}"
                   hx-swap="innerHTML"
-                  class="space-y-4" style="margin-top: .5rem">
+                  class="space-y-4" style="margin-top: .5rem;">
                 {% csrf_token %}
 
                 <textarea name="content"
