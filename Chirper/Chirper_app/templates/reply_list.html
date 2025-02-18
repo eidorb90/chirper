@@ -185,6 +185,7 @@
 
                                     <!-- Nested replies -->
                                     {% if reply.replies.all %}
+                                    <br>
                                         <div id="nested-replies-{{ reply.id }}" class="ml-8 space-y-3" style="padding-top: 0rem;">
                                             {% for nested_reply in reply.replies.all|dictsort:"created_at" %}
                                             
