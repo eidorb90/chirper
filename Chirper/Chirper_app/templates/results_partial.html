@@ -119,11 +119,11 @@
             </h2>
 
             {% if reply_results %}
-                {% for reply in reply_results %}
+                
                 <div class="replies-{{ chirp.id }} space-y-3"  style="padding-top: 0rem;">
                     {% include 'reply_list.html' with replies=chirp.replies.all %}
                 </div>
-                {% endfor %}
+                
             {% else %}
                 <div class="text-center py-10 bg-white rounded-xl shadow-md">
                     <p class="text-white text-lg">No Replies found for "{{ request.GET.q }}" 🔍</p>
