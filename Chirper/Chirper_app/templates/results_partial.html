@@ -1,3 +1,91 @@
+<!-- Account Section -->
+{% if account_results or request.GET.q %}
+<div class="mt-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+        </svg>
+        Accounts
+    </h2>
+
+    {% if account_results %}
+    <div class="space-y-4">
+        {% for account in account_results %}
+        {% if account.private == False %}
+        <div
+            class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <!-- Profile Image -->
+                    <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                        {% if account.profile_image %}
+                        <img src="{{ account.profile_image.url }}" alt="{{ account.username }}'s profile"
+                            class="w-full h-full object-cover">
+                        {% else %}
+                        <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- User Info -->
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-lg text-gray-900">{{ account.username }}</h3>
+                            <span class="text-sm text-gray-500">· {{ account.created_at|timesince }} ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Follow Button -->
+                    <div class="flex-shrink-0">
+                        {% if request.user != account %}
+                        {% include 'follow_button.html' with user=account following_status=account.following_status %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="flex-shrink-0">
+                        {% if request.user != account %}
+                        <a href="{% url 'view_other_account' account.username %}"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-colors inline-block">
+                            View Profile
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-10 bg-white rounded-xl shadow-md">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <p class="text-gray-500 text-lg mt-4">No accounts found for "{{ request.GET.q }}" 🔍</p>
+            <p class="text-gray-400 mt-2">Try different keywords or check your spelling</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-10 bg-white rounded-xl shadow-md">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <p class="text-gray-500 text-lg mt-4">No accounts found for "{{ request.GET.q }}" 🔍</p>
+        <p class="text-gray-400 mt-2">Try different keywords or check your spelling</p>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+                    
+
+
+
+
 
 <!-- Chirps Section -->
 

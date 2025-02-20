@@ -1,0 +1,12 @@
+<div id="profile-stats-container">
+    <div class="flex space-x-4 justify-center">
+        <div class="text-center">
+            <span id="follow_count" class="font-bold">{{ user.follower_relationships.count }}</span>
+            <span class="text-gray-500">Followers</span>
+        </div>
+        <div class="text-center">
+            <span class="font-bold">{{ user.following_relationships.count }}</span>
+            <span class="text-gray-500">Following</span>
+        </div>
+    </div>
+</div>
