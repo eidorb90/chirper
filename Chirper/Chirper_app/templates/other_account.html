@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %}
 {% load static %}
 
 {% block title %}{{ user.username }}'s Profile - Chirper{% endblock %}
@@ -55,4 +55,4 @@
         {% include 'user_chirps.html' %}
     </div>
 </div>
-{% endblock %}
+{% endblock %} {% endcomment %}
