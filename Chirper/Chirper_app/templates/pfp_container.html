@@ -1,13 +1,13 @@
 <div id="pfp_container" class="w-32 h-32 relative">
     {% if user.profile_image %}
-        <img src="{{ user.profile_image.url }}" 
-             alt="Profile picture" 
-             class="w-full h-full rounded-full object-cover shadow-lg">
+    <img src="{{ user.profile_image.url }}" alt="Profile picture"
+        class="w-full h-full rounded-full object-cover shadow-lg">
     {% else %}
-        <div class="w-full h-full rounded-full bg-gray-100 flex items-center justify-center shadow-lg">
-            <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-            </svg>
-        </div>
+    <div class="w-full h-full rounded-full bg-gray-100 flex items-center justify-center shadow-lg">
+        <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
+            </path>
+        </svg>
+    </div>
     {% endif %}
 </div>

@@ -4,23 +4,15 @@
 {% block title %}Search Results - Chirper{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto px-4 bg-gray-900 antialiased">
-    <h1 class="text-white text-2xl text-center mb-8">Search Results</h1>
+<div class="max-w-3xl mx-auto px-4">
+    <h1 class="text-gray-800 text-2xl text-center mb-8">Search Results</h1>
 
     <!-- Search Form -->
     <form class="mb-8">
         <div class="flex gap-2">
-            <input 
-            type="text" 
-            name="q" 
-            value="{{ request.GET.q }}" 
-            class="bg-gray flex-1 p-2 border border-gray-600 focus:ring-blue-500 focus:border-blue-500 rounded text-white"
-            style = "background-color: #4b5563;"
-            placeholder="Search chirps..." 
-            hx-get="{% url 'search' %}"
-            hx-trigger="keyup changed delay:250ms"
-            hx-target="#search-results" 
-            hx-push-url="true">
+            <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded"
+                placeholder="Search chirps..." hx-get="{% url 'search' %}" hx-trigger="keyup changed delay:250ms"
+                hx-target="#search-results" hx-push-url="true">
         </div>
     </form>
 
@@ -31,7 +23,7 @@
         <!-- Account Section -->
         {% if account_results or request.GET.q %}
         <div class="mt-8">
-            <h2 class="text-2xl font-bold text-white mb-4 flex items-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
@@ -64,7 +56,8 @@
 
 
         {% for chirp in results %}
-        <div class="bg-gray-600 shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+        <div
+            class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
             <div class="flex flex-col">
                 <div id="tooltip-user-{{ chirp.id }}" role="tooltip"
                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
@@ -86,10 +79,10 @@
                 </div>
 
                 <!-- Title -->
-                <h2 class="text-xl font-bold text-white mb-2">{{ chirp.title }}</h2>
+                <h2 class="text-xl font-bold text-gray-900 mb-2">{{ chirp.title }}</h2>
 
                 <!-- Content -->
-                <p class="text-white mb-4">{{ chirp.content }}</p>
+                <p class="text-gray-700 mb-4">{{ chirp.content }}</p>
 
                 <!-- Timestamp -->
                 <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
@@ -137,12 +130,12 @@
         {% else %}
         {% if request.GET.q %}
         <div class="text-center py-10">
-            <p class="text-white text-lg">No results found for "{{ request.GET.q }}" 🔍</p>
-            <p class="text-white mt-2">Try different keywords or check your spelling</p>
+            <p class="text-gray-500 text-lg">No results found for "{{ request.GET.q }}" 🔍</p>
+            <p class="text-gray-400 mt-2">Try different keywords or check your spelling</p>
         </div>
         {% else %}
         <div class="text-center py-10">
-            <p class="text-white text-lg">Start searching to see results!</p>
+            <p class="text-gray-500 text-lg">Start searching to see results!</p>
         </div>
         {% endif %}
         {% endif %}

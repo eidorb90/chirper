@@ -1,6 +1,6 @@
 {% if nested_replies.0 %}
 <!-- Show first nested reply -->
-<div class="bg-grey p-3 rounded-lg mb-2 flex items-start space-x-3" style="padding-top: 0rem;">
+<div class="bg-gray-100 p-3 rounded-lg mb-2">
     <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
         {% if replies.0.author.profile_image %}
         {% if replies.0.author.username %}
@@ -31,7 +31,7 @@
         </svg>
         {% endif %}
     </div>
-    <p class="text-white">{{ nested_replies.0.content }}</p>
+    <p class="text-gray-700">{{ nested_replies.0.content }}</p>
     <span class="text-sm text-gray-500">{{ nested_replies.0.created_at|timesince }} ago</span>
 
     <div class="flex mt-4 space-x-4">
@@ -59,7 +59,7 @@
 <div id="more-nested-replies-{{ nested_replies.0.parent_reply.id }}" class="hidden space-y-3 mt-2">
     {% for nested_reply in nested_replies %}
     {% if not forloop.first %}
-    <div class="bg-grey p-3 rounded-lg mb-2 flex items-start space-x-3">
+    <div class="bg-gray-100 p-3 rounded-lg mb-2">
         <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
             {% if replies.0.author.profile_image %}
             {% if replies.0.author.username %}
@@ -90,7 +90,7 @@
             </svg>
             {% endif %}
         </div>
-        <p class="text-white">{{ nested_reply.content }}</p>
+        <p class="text-gray-700">{{ nested_reply.content }}</p>
         <span class="text-sm text-gray-500">{{ nested_reply.created_at|timesince }} ago</span>
 
         <div class="flex mt-4 space-x-4">
