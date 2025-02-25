@@ -1,4 +1,10 @@
-from django.shortcuts import render, HttpResponseRedirect, redirect, HttpResponse
+from django.shortcuts import (
+    render,
+    HttpResponseRedirect,
+    redirect,
+    HttpResponse,
+    get_object_or_404,
+)
 from django.db.models import Q, Count, Exists, OuterRef
 from django.contrib.auth.decorators import login_required
 from .models import Chirp, Reply, User, UserFollowing
@@ -31,6 +37,14 @@ def create_chirp(request):
         chirps = Chirp.objects.all().order_by("-created_at")
         return render(request, "chirp_list.html", {"chirps": chirps})
     return HttpResponseRedirect("/")
+
+
+@login_required
+def delete_chirp(request, chirp_id):
+    chirp = get_object_or_404(Chirp, id=chirp_id)
+    print(chirp)
+    chirp.delete()
+    return HttpResponse("")
 
 
 @login_required
