@@ -42,7 +42,6 @@
             </div>
 
                     <p class="text-gray-700 mb-2">{{ replies.0.content|safe }}</p>
-                    <p class="text-gray-700 mb-2">{{ replies.0.content|safe }}</p>
                     
                     <!-- Existing reply buttons -->
                     <div class="flex mt-2 space-x-4">
@@ -77,10 +76,7 @@
                               hx-swap="innerHTML"
                               class="space-y-4">
                             <trix-editor input="reply_content_{{chirp.id}}"
-                            <trix-editor input="reply_content_{{chirp.id}}"
                                     class="w-full p-2 border rounded" 
-                                    placeholder="Write a reply..."></trix-editor>
-                            <input id="reply_content_{{chirp.id}}" type="hidden" name="content">
                                     placeholder="Write a reply..."></trix-editor>
                             <input id="reply_content_{{chirp.id}}" type="hidden" name="content">
                             <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
@@ -135,7 +131,6 @@
                             <span class="text-gray-500 text-xs">{{ nested_reply.created_at|timesince }} ago</span>
                         </div>
 
-                                        <p class="text-gray-700 mb-2">{{ nested_reply.content|safe }}</p>
                                         <p class="text-gray-700 mb-2">{{ nested_reply.content|safe }}</p>
                                         
                                         <div class="flex mt-2 space-x-4">
@@ -192,7 +187,6 @@
                 </div>
 
                                     <p class="text-gray-700 mb-2">{{ reply.content|safe }}</p>
-                                    <p class="text-gray-700 mb-2">{{ reply.content|safe }}</p>
                                     
                                     <!-- Existing buttons -->
                                     <div class="flex mt-2 space-x-4">
@@ -222,10 +216,7 @@
                                               hx-swap="innerHTML"
                                               class="space-y-4">
                                             <trix-editor input="reply_content_{{chirp.id}}"
-                                            <trix-editor input="reply_content_{{chirp.id}}"
                                                     class="w-full p-2 border rounded" 
-                                                    placeholder="Write a reply..."></trix-editor>
-                                            <input id="reply_content_{{chirp.id}}" type="hidden" name="content">
                                                     placeholder="Write a reply..."></trix-editor>
                                             <input id="reply_content_{{chirp.id}}" type="hidden" name="content">
                                             <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
@@ -258,7 +249,6 @@
                                 <span class="text-gray-500 text-xs">{{ nested_reply.created_at|timesince }} ago</span>
                             </div>
 
-                                                        <p class="text-gray-700 mb-2">{{ nested_reply.content|safe }}</p>
                                                         <p class="text-gray-700 mb-2">{{ nested_reply.content|safe }}</p>
                                                         
                                                         <div class="flex mt-2 space-x-4">
