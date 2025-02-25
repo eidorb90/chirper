@@ -1,51 +1,21 @@
 {% if nested_replies.0 %}
-<!-- Show first nested reply -->
-<div class="bg-gray-100 p-3 rounded-lg mb-2">
-    <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-        {% if replies.0.author.profile_image %}
-        {% if replies.0.author.username %}
-        <!-- Take the user to their own account -->
-        {% if replies.0.author.username == request.user.username %}
-        <form method="post" action="{% url 'account' %}">
-            {% csrf_token %}
-            <button type="submit">
-                <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                    class="w-full h-full object-cover rounded-full">
+    <!-- Show first nested reply -->
+    <div class="bg-gray-100 p-3 rounded-lg mb-2">
+        <p class="text-gray-700">{{ nested_replies.0.content|safe }}</p>
+        <span class="text-sm text-gray-500">{{ nested_replies.0.created_at|timesince }} ago</span>
+        
+        <div class="flex mt-4 space-x-4">
+            <button hx-post="{% url 'like_reply' nested_replies.0.id %}" 
+                    hx-target=".like_count_{{ nested_replies.0.id }}" 
+                    hx-swap="innerText"
+                    class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                </svg>
+                <span class="like_count_{{ nested_replies.0.id }}">{{ nested_replies.0.like_count }}</span>
             </button>
-        </form>
-        {% else %}
-        <!-- Take the user to someone elses account -->
-        <form method="post" action="{% url 'view_other_account' replies.0.author.username %}">
-            {% csrf_token %}
-            <button type="submit">
-                <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                    class="w-full h-full object-cover rounded-full">
-            </button>
-        </form>
-        {% endif %}
-
-        {% endif %}
-        {% else %}
-        <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-        </svg>
-        {% endif %}
+        </div>
     </div>
-    <p class="text-gray-700">{{ nested_replies.0.content }}</p>
-    <span class="text-sm text-gray-500">{{ nested_replies.0.created_at|timesince }} ago</span>
-
-    <div class="flex mt-4 space-x-4">
-        <button hx-post="{% url 'like_reply' nested_replies.0.id %}" hx-target=".like_count_{{ nested_replies.0.id }}"
-            hx-swap="innerText" class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5">
-                </path>
-            </svg>
-            <span class="like_count_{{ nested_replies.0.id }}">{{ nested_replies.0.like_count }}</span>
-        </button>
-    </div>
-</div>
 
 {% if nested_replies|length > 1 %}
 <!-- Show more nested replies button -->
@@ -55,58 +25,28 @@
     Show more replies ({{ nested_replies|length|add:"-1" }})
 </button>
 
-<!-- Container for additional nested replies -->
-<div id="more-nested-replies-{{ nested_replies.0.parent_reply.id }}" class="hidden space-y-3 mt-2">
-    {% for nested_reply in nested_replies %}
-    {% if not forloop.first %}
-    <div class="bg-gray-100 p-3 rounded-lg mb-2">
-        <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-            {% if replies.0.author.profile_image %}
-            {% if replies.0.author.username %}
-            <!-- Take the user to their own account -->
-            {% if replies.0.author.username == request.user.username %}
-            <form method="post" action="{% url 'account' %}">
-                {% csrf_token %}
-                <button type="submit">
-                    <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                        class="w-full h-full object-cover rounded-full">
-                </button>
-            </form>
-            {% else %}
-            <!-- Take the user to someone elses account -->
-            <form method="post" action="{% url 'view_other_account' replies.0.author.username %}">
-                {% csrf_token %}
-                <button type="submit">
-                    <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                        class="w-full h-full object-cover rounded-full">
-                </button>
-            </form>
-            {% endif %}
-
-            {% endif %}
-            {% else %}
-            <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-            </svg>
-            {% endif %}
+        <!-- Container for additional nested replies -->
+        <div id="more-nested-replies-{{ nested_replies.0.parent_reply.id }}" class="hidden space-y-3 mt-2">
+            {% for nested_reply in nested_replies %}
+                {% if not forloop.first %}
+                    <div class="bg-gray-100 p-3 rounded-lg mb-2">
+                        <p class="text-gray-700">{{ nested_reply.content|safe }}</p>
+                        <span class="text-sm text-gray-500">{{ nested_reply.created_at|timesince }} ago</span>
+                        
+                        <div class="flex mt-4 space-x-4">
+                            <button hx-post="{% url 'like_reply' nested_reply.id %}" 
+                                    hx-target=".like_count_{{ nested_reply.id }}" 
+                                    hx-swap="innerText"
+                                    class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                                </svg>
+                                <span class="like_count_{{ nested_reply.id }}">{{ nested_reply.like_count }}</span>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-        <p class="text-gray-700">{{ nested_reply.content }}</p>
-        <span class="text-sm text-gray-500">{{ nested_reply.created_at|timesince }} ago</span>
-
-        <div class="flex mt-4 space-x-4">
-            <button hx-post="{% url 'like_reply' nested_reply.id %}" hx-target=".like_count_{{ nested_reply.id }}"
-                hx-swap="innerText" class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5">
-                    </path>
-                </svg>
-                <span class="like_count_{{ nested_reply.id }}">{{ nested_reply.like_count }}</span>
-            </button>
-        </div>
-    </div>
     {% endif %}
-    {% endfor %}
-</div>
-{% endif %}
 {% endif %}

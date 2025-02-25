@@ -54,8 +54,8 @@
         <h2 class="text-xl font-bold text-gray-900 mb-2">{{ chirp.title }}</h2>
 
         <!-- Content -->
-        <p class="text-gray-700 mb-4">{{ chirp.content }}</p>
-
+        <p class="text-gray-700 mb-4">{{ chirp.content|safe }}</p>
+ 
         <!-- Timestamp -->
         <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
 
@@ -89,7 +89,10 @@
                 hx-swap="innerHTML" class="space-y-4">
                 {% csrf_token %}
 
-                <textarea name="content" class="w-full p-2 border rounded" placeholder="Write a reply..."></textarea>
+                <trix-editor input="reply_content_{{chirp.id}}"
+                          class="w-full p-2 border rounded"
+                          placeholder="Write a reply..."></trix-editor>
+                <input id="reply_content_{{chirp.id}}" type="hidden" name="content">
                 <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     Send Reply
                 </button>
