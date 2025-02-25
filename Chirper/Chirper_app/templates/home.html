@@ -14,8 +14,9 @@
             {% csrf_token %}
             <div class="space-y-4">
                 <input type="text" name="title" class="w-full p-2 border rounded" placeholder="Title" required>
-                <textarea name="content" class="w-full p-2 border rounded" placeholder="Whats Happening?"
-                    required></textarea>
+                <input id="content" type="hidden" name="content" required>
+                <trix-editor input="content" class="w-full p-2 border rounded" placeholder="Whats Happening?"
+                    required></trix-editor>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Chirp</button>
             </div>
         </form>

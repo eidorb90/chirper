@@ -1,36 +1,6 @@
 {% if nested_replies.0 %}
 <!-- Show first nested reply -->
 <div class="bg-gray-100 p-3 rounded-lg mb-2">
-    <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-        {% if replies.0.author.profile_image %}
-        {% if replies.0.author.username %}
-        <!-- Take the user to their own account -->
-        {% if replies.0.author.username == request.user.username %}
-        <form method="post" action="{% url 'account' %}">
-            {% csrf_token %}
-            <button type="submit">
-                <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                    class="w-full h-full object-cover rounded-full">
-            </button>
-        </form>
-        {% else %}
-        <!-- Take the user to someone elses account -->
-        <form method="post" action="{% url 'view_other_account' replies.0.author.username %}">
-            {% csrf_token %}
-            <button type="submit">
-                <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                    class="w-full h-full object-cover rounded-full">
-            </button>
-        </form>
-        {% endif %}
-
-        {% endif %}
-        {% else %}
-        <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-        </svg>
-        {% endif %}
-    </div>
     <p class="text-gray-700">{{ nested_replies.0.content }}</p>
     <span class="text-sm text-gray-500">{{ nested_replies.0.created_at|timesince }} ago</span>
 
@@ -60,36 +30,6 @@
     {% for nested_reply in nested_replies %}
     {% if not forloop.first %}
     <div class="bg-gray-100 p-3 rounded-lg mb-2">
-        <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-            {% if replies.0.author.profile_image %}
-            {% if replies.0.author.username %}
-            <!-- Take the user to their own account -->
-            {% if replies.0.author.username == request.user.username %}
-            <form method="post" action="{% url 'account' %}">
-                {% csrf_token %}
-                <button type="submit">
-                    <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                        class="w-full h-full object-cover rounded-full">
-                </button>
-            </form>
-            {% else %}
-            <!-- Take the user to someone elses account -->
-            <form method="post" action="{% url 'view_other_account' replies.0.author.username %}">
-                {% csrf_token %}
-                <button type="submit">
-                    <img src="{{ replies.0.author.profile_image.url }}" alt="{{ replies.0.author.username }}'s profile"
-                        class="w-full h-full object-cover rounded-full">
-                </button>
-            </form>
-            {% endif %}
-
-            {% endif %}
-            {% else %}
-            <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-            </svg>
-            {% endif %}
-        </div>
         <p class="text-gray-700">{{ nested_reply.content }}</p>
         <span class="text-sm text-gray-500">{{ nested_reply.created_at|timesince }} ago</span>
 
