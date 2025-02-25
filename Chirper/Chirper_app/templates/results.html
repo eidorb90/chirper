@@ -11,8 +11,9 @@
     <form class="mb-8">
         <div class="flex gap-2">
             <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded"
-                placeholder="Search chirps..." hx-get="{% url 'search' %}" hx-trigger="keyup changed delay:250ms"
-                hx-target="#search-results" hx-push-url="true">
+                placeholder="Search chirps..." hx-get="{% url 'search' %}"
+                hx-trigger="keyup changed delay:250ms, keyup[key=='Enter'], load" , hx-target="#search-results"
+                hx-push-url="true">
         </div>
     </form>
 

@@ -25,10 +25,11 @@ We are building Chirper on the Django Framwork. Using Tailwind to make the styli
 1. Allow users to filter chirps 
 2. ~~Allow users to follow each other~~
 3. ~~make it look nice (we will be doing this along the way)  (Brodie)~~
-4. Allow rich text chirps (so allow people to do text formatting such as bold underline possibly add images and videos)
+4. ~~Allow rich text chirps (so allow people to do text formatting such as bold underline possibly add images and videos)~~
 5. ~~Allow to toggle profile private~~
-6. Allow user to delete their account but not chirps
+6. ~~Allow user to delete their account but not chirps~~
 7. ~~Integrate HTMX (going to be doing this along the way)~~
+8. Delete account 
 
 ## TODO self
 
