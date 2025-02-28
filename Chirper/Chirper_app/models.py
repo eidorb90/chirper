@@ -1,6 +1,16 @@
-from django.db import models
+"""
+Brodie Rogers
+models.py
+<brodie.rogers@cune.students.edu>
 
-# from django.utils.timezone import now
+Description:
+    This is the file in which we create the different models for our database
+    Django uses Object relational mapping (ORM) this allows us to define our
+    tables for each model as a Python class.
+
+"""
+
+from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
@@ -10,10 +20,9 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 import uuid
 
-# Create your models here.
-
 
 class User(AbstractUser):
+    # Create the meta data for the model
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -27,6 +36,8 @@ class User(AbstractUser):
         null=True,
         default="profile_pic/default.png",
     )
+
+    # This creates a ManyToMany relationship between two different users
     followers = models.ManyToManyField(
         "self", through="UserFollowing", symmetrical=False, related_name="following"
     )

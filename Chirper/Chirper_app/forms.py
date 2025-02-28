@@ -1,3 +1,22 @@
+"""
+
+Marcus please do this file sinnce you were the one to make it
+
+Brodie Rogers
+admin.py
+<brodie.rogers@cune.students.edu>
+
+Description:
+    aslkdfja;lskdjfaklsdvlkasjdvkasdlv
+    aslkdjvalksdv;laj
+
+Help:
+    asdkfja;lsdjalskdjvklasdva
+    sdvj;asdjvklasjdkvljaskdv
+    asdvjajsdlva;sdklv
+
+"""
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User

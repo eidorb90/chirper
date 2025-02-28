@@ -1,3 +1,21 @@
+"""
+Brodie Rogers
+admin.py
+<brodie.rogers@cune.students.edu>
+
+Description:
+    In this file we create the specify the differnt
+    database tables that we want to see in the admin pannel.
+    With each of these pannels we can sepecify what
+    information from each model that we want.
+
+Help:
+    The classes defined below are somewhat self explanatory,
+    we specify what we want to be able to have the model to be
+    listed by, able to search with, and what we want to be able to filter by.
+
+"""
+
 from django.contrib import admin
 from .models import Chirp, Reply, User
 

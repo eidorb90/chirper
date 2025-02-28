@@ -1,3 +1,15 @@
+"""
+Brodie Rogers
+urls.py
+<brodie.rogers@cune.students.edu>
+
+Description:
+    Here we register the different urls/paths for our app
+    Django makes this very simple by linking each path with
+    a "view" from our views.py file.
+
+"""
+
 from django.urls import path
 from . import views
 
@@ -31,6 +43,4 @@ urlpatterns = [
     path("view/<str:username>/replies", views.other_replies, name="other_replies"),
     path("follow/<str:username>/", views.follow_user, name="follow_user"),
     path("profile/privacy/", views.change_privacy, name="change_privacy"),
-    # TODO work on likes in the future
-    # path('profile/likes/', views.user_likes, name='user_likes'),
 ]
