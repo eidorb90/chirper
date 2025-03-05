@@ -68,13 +68,13 @@
                 {% endautoescape %}
             </div>
         </div>
-        
+        <br>
 
         
 
 
         <!-- Actions -->
-        <div class="flex">
+        <div class="flex pt-4">
             <button hx-post="{% url 'like_chirp' chirp.id %}" hx-target=".like_count_{{ chirp.id }}" hx-swap="innerText"
                 class="text-white hover:text-blue-500 flex items-center space-x-1">
                 {% csrf_token %}
