@@ -6,7 +6,7 @@ dist/
 wheels/
 *.egg-info
 Chirper/db.sqlite3
-Chirper/media
+Chirper/media/
 Chirper/Chirper_app/migrations
 
 # Virtual environments

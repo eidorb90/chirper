@@ -11,15 +11,15 @@
             <!-- Profile Picture Display -->
             <div id="pfp_container" class="w-32 h-32 relative">
                 {% if user.profile_image %}
-                    <img src="{{ user.profile_image.url }}" 
-                         alt="Profile picture" 
-                         class="w-full h-full rounded-full object-cover shadow-lg">
+                <img src="{{ user.profile_image.url }}" alt="Profile picture"
+                    class="w-full h-full rounded-full object-cover shadow-lg">
                 {% else %}
-                    <div class="w-full h-full rounded-full bg-gray-100 flex items-center justify-center shadow-lg">
-                        <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
+                <div class="w-full h-full rounded-full bg-gray-100 flex items-center justify-center shadow-lg">
+                    <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
                 {% endif %}
             </div>
 
@@ -27,6 +27,16 @@
                 <h1 id="username" class="text-3xl font-bold text-gray-900">{{ user.username }}</h1>
                 <p class="text-gray-500 mb-8">Member since {{ user.date_joined|date:"F Y" }}</p>
                 <div class="w-full border-b border-gray-200 my-8"></div>
+                <div class="flex space-x-4 justify-center">
+                    <div class="text-center">
+                        <span class="font-bold">{{ user.follower_relationships.count }}</span>
+                        <span class="text-gray-500">Followers</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="font-bold">{{ user.following_relationships.count }}</span>
+                        <span class="text-gray-500">Following</span>
+                    </div>
+                </div>
             </div>
 
             <h1 class="text-2xl font-bold text-gray-900 mb-8 text-center">Settings</h1>
@@ -35,48 +45,37 @@
             <div class="space-y-8 max-w-2xl mx-auto w-full">
                 <!-- Profile Picture Update Section -->
                 <div class="bg-gray-50 rounded-lg p-6">
-                    <form hx-post="{% url 'change_pfp' %}"
-                    hx-target="#pfp_container"
-                    hx-encoding="multipart/form-data"
-                    class="w-full">
-                  {% csrf_token %}
-                  <div class="flex flex-col gap-6">
-                      <div class="w-full">
-                          <input type="file" 
-                                 name="profile_image" 
-                                 accept="image/*"
-                                 class="block w-full text-sm text-gray-500
+                    <form hx-post="{% url 'change_pfp' %}" hx-target="#pfp_container" hx-encoding="multipart/form-data"
+                        class="w-full">
+                        {% csrf_token %}
+                        <div class="flex flex-col gap-6">
+                            <div class="w-full">
+                                <input type="file" name="profile_image" accept="image/*" class="block w-full text-sm text-gray-500
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
                                         file:text-sm file:font-semibold
                                         file:bg-blue-50 file:text-blue-700
                                         hover:file:bg-blue-100
                                         cursor-pointer">
-                      </div>
-                      <button type="submit" 
-                              class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
+                            </div>
+                            <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
                                      hover:bg-blue-600 transition duration-200 shadow-md
                                      font-semibold">
-                          Update Profile Picture
-                      </button>
-                  </div>
-              </form>
+                                Update Profile Picture
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- Username Section -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <h2 class="text-lg font-semibold text-gray-700 mb-4">Username</h2>
-                    <form hx-post="{% url 'change_username' %}"
-                          hx-target="#username-section"
-                          class="w-full">
+                    <form hx-post="{% url 'change_username' %}" hx-target="#username-section" class="w-full">
                         {% csrf_token %}
                         <div class="flex flex-col gap-4">
-                            <input type="text" 
-                                   name="new_username" 
-                                   class="w-full p-3 border rounded-lg bg-white" 
-                                   placeholder="Enter New Username">
-                            <button type="submit" 
-                                    class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
+                            <input type="text" name="new_username" class="w-full p-3 border rounded-lg bg-white"
+                                placeholder="Enter New Username">
+                            <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
                                            hover:bg-blue-600 transition duration-200 shadow-md
                                            font-semibold">
                                 Update Username
@@ -88,13 +87,22 @@
                 <!-- Account Section -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <h2 class="text-lg font-semibold text-gray-700 mb-4">Account</h2>
+                    {% include 'privacy_button.html' %}
                     <form method="post" action="{% url 'logout' %}" class="w-full">
                         {% csrf_token %}
-                        <button type="submit" 
-                                class="w-full bg-white border border-red-500 text-red-500 px-6 py-3 rounded-lg
-                                       hover:bg-red-50 transition duration-200
-                                       font-semibold">
+                        <button type="submit" class="w-full bg-white border border-red-500 text-red-500 px-6 py-3 rounded-lg
+                                           hover:bg-red-50 transition duration-200
+                                           font-semibold">
                             Logout
+                        </button>
+                    </form>
+                    <form method="post" action="{% url 'delete_account' %}" class="w-full"
+                        onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                        {% csrf_token %}
+                        <button type="submit" class="w-full bg-white border border-red-500 text-red-500 px-6 py-3 rounded-lg
+                                           hover:bg-red-50 transition duration-200
+                                           font-semibold">
+                            Delete Account
                         </button>
                     </form>
                 </div>
@@ -105,14 +113,12 @@
     <!-- Tabs Navigation -->
     <div class="border-b border-gray-200">
         <nav class="flex justify-center">
-            <button hx-get="{% url 'user_chirps' %}"
-                    hx-target="#content-area"
-                    class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
+            <button hx-get="{% url 'user_chirps' %}" hx-target="#content-area"
+                class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
                 Chirps
             </button>
-            <button hx-get="{% url 'user_replies' %}"
-                    hx-target="#content-area"
-                    class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
+            <button hx-get="{% url 'user_replies' %}" hx-target="#content-area"
+                class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
                 Replies
             </button>
         </nav>

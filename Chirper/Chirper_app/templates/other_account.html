@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ user.username }}'s Profile - Chirper{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Profile Header Section -->
+    <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+        <div class="flex flex-col items-center">
+            <!-- Profile Picture Display -->
+            <div id="pfp_container" class="w-32 h-32 relative">
+                {% if user.profile_image %}
+                <img src="{{ user.profile_image.url }}" alt="Profile picture"
+                    class="w-full h-full rounded-full object-cover shadow-lg">
+                {% else %}
+                <div class="w-full h-full rounded-full bg-gray-100 flex items-center justify-center shadow-lg">
+                    <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                {% endif %}
+            </div>
+
+            <div id="username-section" class="text-center mt-6">
+                <h1 id="username" class="text-3xl font-bold text-gray-900">{{ user.username }}</h1>
+                <p class="text-gray-500 mb-8">Member since {{ user.date_joined|date:"F Y" }}</p>
+                <div class="w-full border-b border-gray-200 my-8"></div>
+
+                <!-- Include the stats and button template once -->
+                {% include 'profile_stats.html' %}
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Tabs Navigation -->
+    <div class="border-b border-gray-200">
+        <nav class="flex justify-center">
+            <button hx-get="{% url 'other_chirps' user.username %}" hx-target="#content-area"
+                class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
+                Chirps
+            </button>
+            <button hx-get="{% url 'other_replies' user.username %}" hx-target="#content-area"
+                class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
+                Replies
+            </button>
+        </nav>
+    </div>
+
+    <!-- Content Area -->
+    <div id="content-area" class="p-6">
+        {% include 'user_chirps.html' %}
+    </div>
+</div>
+{% endblock %}

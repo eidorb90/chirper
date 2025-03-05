@@ -1,6 +1,26 @@
+"""
+
+Marcus please do this file sinnce you were the one to make it
+
+Brodie Rogers
+admin.py
+<brodie.rogers@cune.students.edu>
+
+Description:
+    aslkdfja;lskdjfaklsdvlkasjdvkasdlv
+    aslkdjvalksdv;laj
+
+Help:
+    asdkfja;lsdjalskdjvklasdva
+    sdvj;asdjvklasjdkvljaskdv
+    asdvjajsdlva;sdklv
+
+"""
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
+
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(required=True)
@@ -9,7 +29,14 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2",
+        )
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -20,15 +47,19 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
 
+
 class EmailAuthenticationForm(AuthenticationForm):
     # username = forms.EmailField(label='Email')
 
     username = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
-        label='Email'
+        widget=forms.EmailInput(
+            attrs={"class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
+        ),
+        label="Email",
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'mt-1 block w-full rounded-md border-gray-300 shadow-sm'}),
-        label='Password'
+        widget=forms.PasswordInput(
+            attrs={"class": "mt-1 block w-full rounded-md border-gray-300 shadow-sm"}
+        ),
+        label="Password",
     )
-    
