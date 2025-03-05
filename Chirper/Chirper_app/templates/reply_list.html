@@ -81,7 +81,8 @@
             {% if replies.0.replies.all %}
             <div id="nested-replies-{{ replies.0.id }}" class="ml-8 mt-4 space-y-3">
                 {% for nested_reply in replies.0.replies.all|dictsort:"created_at" %}
-                <div class="bg-gray-100 p-3 rounded-lg mb-2 flex items-start space-x-3">
+                <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
+                style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
                     <!-- Profile Picture for Nested Reply -->
                     <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                         {% if replies.0.author.profile_image %}
