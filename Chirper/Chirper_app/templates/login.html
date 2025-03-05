@@ -1,46 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}Login - Chirper{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="dark:bg-gray-900 antialiased">
+    <div class="max-w-lg mx-auto my-10 dark:bg-gray-900 antialiased p-8 rounded-xl shadow shadow-slate-300 border-2 border-gray-700 rounded-xl">
+        <h1 class="text-white text-4xl font-medium">Login</h1>
+        <p class="text-gray-300">Fill out the form below to log in to your account.</p>
 
         <form hx-post="{% url 'login_view' %}" hx-target="body" class="space-y-4">
             {% csrf_token %}
-
+            
             {% if form.errors %}
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <p class="font-bold">Invalid username or password.</p>
             </div>
             {% endif %}
-
-            {% for field in form %}
-            <div class="space-y-2">
-                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
-                    {{ field.label }}
-                </label>
-                {{ field }}
+            
+            <div class="mb-6">
+                <label for="{{ form.username.id_for_label }}" class="block mb-2 text-sm font-medium text-white" style="font-size: .95rem;">Email</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-6">
+                <label for="{{ form.password.id_for_label }}" class="block mb-2 text-sm font-medium text-white" style="font-size: .95rem;">Password</label>
+                {{ form.password }}
                 {% if field.help_text %}
                 <p class="text-sm text-gray-500">{{ field.help_text }}</p>
                 {% endif %}
             </div>
-            {% endfor %}
-
-            <button type="submit"
-                class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">
-                Login
-            </button>
+            <button type="submit" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-600">Submit</button>
         </form>
-
         <div class="mt-4 text-center">
-            <p class="text-sm text-gray-600">
-                Don't have an account?
+            <p class="text-sm text-white">
+                Don't have an account? 
                 <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-600">Register here</a>
             </p>
         </div>
     </div>
-</div>
+</body>
 {% endblock %}

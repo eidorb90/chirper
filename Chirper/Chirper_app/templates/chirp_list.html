@@ -1,6 +1,7 @@
 {% if chirps %}
 {% for chirp in chirps %}
-<div class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+<div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
+    style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
     <div class="flex flex-col">
 
         <div class="flex items-center gap-3 mb-4">
@@ -47,17 +48,31 @@
                 {{chirp.author}}
                 <div class="tooltip-arrow" data-popper-arrow></div>
             </div>
-            <span class="font-semibold text-sm">{{ chirp.author.username }}</span>
+            <div class="flex flex-col ml-1">
+                <span class="font-semibold text-sm">{{ chirp.author.username }}</span>
+                <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
+            </div>
         </div>
 
+
         <!-- Title -->
-        <h2 class="text-xl font-bold text-gray-900 mb-2">{{ chirp.title }}</h2>
+        <h2 class="text-xl font-bold text-white mb-2">{{ chirp.title }}</h2>
+        <div class="flex space-x-3 border-t pt-4" style="padding-top: 0rem;"></div>
+
+
 
         <!-- Content -->
-        <p class="text-gray-700 mb-4">{{ chirp.content|safe }}</p>
+        <div class="text-white mb-4">
+            <div class="trix-content prose prose-invert">
+                {% autoescape off %}
+                {{ chirp.content }}
+                {% endautoescape %}
+            </div>
+        </div>
+        <br>
 
         <!-- Timestamp -->
-        <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
+
 
         <!-- Actions -->
         <div class="flex space-x-4 border-t pt-4">
