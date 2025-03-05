@@ -207,8 +207,8 @@
 
     {% if reply_results %}
     {% for reply in reply_results %}
-    
-    <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+    <div
+        class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
         <div class="flex justify-between items-start">
             <div class="flex-1">
                 {% if reply.chirp.title %}
