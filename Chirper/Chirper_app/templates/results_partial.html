@@ -141,7 +141,8 @@
             <!-- Timestamp -->
 
             <!-- Actions -->
-            <div class="flex-item">
+            <div class="flex-item" style = "width: min-content;
+  border: 2px dotted;">
                 <button hx-post="{% url 'like_chirp' chirp.id %}" hx-target=".like_count_{{ chirp.id }}"
                     hx-swap="innerText" class="text-white hover:text-blue-500 flex items-center space-x-1">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
