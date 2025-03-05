@@ -37,11 +37,11 @@
 
         <div class="flex-1">
             <div class="flex items-center space-x-2 mb-1">
-                <span class="font-semibold text-sm">{{ replies.0.author.username }}</span>
+                <span class="font-semibold text-white text-sm">{{ replies.0.author.username }}</span>
                 <span class="text-gray-500 text-xs">{{ replies.0.created_at|timesince }} ago</span>
             </div>
 
-                    <p class="text-gray-700 mb-2">{{ replies.0.content|safe }}</p>
+                    <p class="text-white bg-gray-600 border border-gray-600 w-full p-2 border rounded">{{ replies.0.content|safe }}</p>
                     
                     <!-- Existing reply buttons -->
                     <div class="flex mt-2 space-x-4">
