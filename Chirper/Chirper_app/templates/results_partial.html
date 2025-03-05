@@ -84,7 +84,7 @@
 
 <!-- Chirps Section -->
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+    <h2 class="text-2xl font-bold text-white mb-4 flex items-center">
         <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
@@ -169,13 +169,13 @@
     {% endfor %}
     {% else %}
     {% if request.GET.q %}
-    <div class="text-center py-10 bg-white rounded-xl shadow-md">
-        <p class="text-gray-500 text-lg">No Chirps found for "{{ request.GET.q }}" 🔍</p>
-        <p class="text-gray-400 mt-2">Try different keywords or check your spelling</p>
+    <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+        <p class="text-white text-lg">No Chirps found for "{{ request.GET.q }}" 🔍</p>
+        <p class="text-white mt-2">Try different keywords or check your spelling</p>
     </div>
     {% else %}
-    <div class="text-center py-10 bg-white rounded-xl shadow-md">
-        <p class="text-gray-500 text-lg">Start searching to see results!</p>
+    <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+        <p class="text-white text-lg">Start searching to see results!</p>
     </div>
     {% endif %}
     {% endif %}
