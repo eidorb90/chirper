@@ -28,6 +28,15 @@ def account(request):
 
 
 @login_required
+def delete_account(request):
+    if request.user.is_authenticated:
+        account_id = request.user.id
+        account = get_object_or_404(User, id=account_id)
+        account.delete()
+        return redirect("register")
+
+
+@login_required
 def create_chirp(request):
     if request.method == "POST":
         title = request.POST.get("title")
@@ -42,7 +51,6 @@ def create_chirp(request):
 @login_required
 def delete_chirp(request, chirp_id):
     chirp = get_object_or_404(Chirp, id=chirp_id)
-    print(chirp)
     chirp.delete()
     return HttpResponse("")
 

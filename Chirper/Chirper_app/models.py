@@ -84,10 +84,14 @@ class User(AbstractUser):
 
 class UserFollowing(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="following_relationships"
+        User,
+        on_delete=models.CASCADE,
+        related_name="following_relationships",
     )
     following_user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="follower_relationships"
+        User,
+        on_delete=models.CASCADE,
+        related_name="follower_relationships",
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -104,7 +108,9 @@ class Chirp(models.Model):
     content = models.TextField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     like_count = models.IntegerField(default=0)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="chirps")
+    author = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name="chirps"
+    )
     likes = models.ManyToManyField(User, related_name="liked_chirps", blank=True)
 
     def __str__(self):
@@ -117,14 +123,16 @@ class Reply(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     like_count = models.IntegerField(default=0)
     is_chirp_reply = models.BooleanField(default=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="replies")
+    author = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name="replies"
+    )
     likes = models.ManyToManyField(User, related_name="liked_replies", blank=True)
 
     chirp = models.ForeignKey(
-        Chirp, on_delete=models.CASCADE, related_name="replies", null=True, blank=True
+        Chirp, on_delete=models.SET_NULL, related_name="replies", null=True, blank=True
     )
     parent_reply = models.ForeignKey(
-        "self", on_delete=models.CASCADE, related_name="replies", null=True, blank=True
+        "self", on_delete=models.SET_NULL, related_name="replies", null=True, blank=True
     )
 
     def clean(self):

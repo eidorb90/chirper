@@ -16,6 +16,7 @@ from . import views
 urlpatterns = [
     path("", views.home, name="home"),
     path("account", views.account, name="account"),
+    path("delete_account", views.delete_account, name="delete_account"),
     path("login/", views.login_view, name="login_view"),
     path("register/", views.register, name="register"),
     path("create_chirp/", views.create_chirp, name="create_chirp"),
