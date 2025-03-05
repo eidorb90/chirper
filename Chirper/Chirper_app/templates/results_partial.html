@@ -207,14 +207,14 @@
 
     {% if reply_results %}
     {% for reply in reply_results %}
-    <div
-        class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+    
+    <div class="bg-gray p-3 mb-2 rounded-lg flex items-start space-x-3" style = "background-color: #374151;">
         <div class="flex justify-between items-start">
             <div class="flex-1">
                 {% if reply.chirp.title %}
                 <p class="text-sm text-gray-500 mb-2">Reply to: {{ reply.chirp.title }}</p>
                 {% else %}
-                <p class="text-sm text-gray-500 mb-2">Reply to: {{ reply.parent_reply.content }}</p>
+                <p class="text-sm text-gray-500 mb-2">Reply to: {{ reply.parent_reply.content|safe }}</p>
                 {% endif %}
 
                 <p class="text-gray-700 mt-3 leading-relaxed">{{ reply.content|safe }}</p>
