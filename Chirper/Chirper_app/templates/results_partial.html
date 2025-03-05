@@ -214,7 +214,7 @@
                 {% if reply.chirp.title %}
                 <p class="text-sm text-gray-500 mb-2">Reply to: {{ reply.chirp.title }}</p>
                 {% else %}
-                <p class="text-sm text-gray-500 mb-2">Reply to: {{ reply.parent_reply.content|safe }}</p>
+                <p class="text-sm text-white mb-2">Reply to: {{ reply.parent_reply.content|safe }}</p>
                 {% endif %}
 
                 <p class="text-white mt-3 leading-relaxed">{{ reply.content|safe }}</p>
