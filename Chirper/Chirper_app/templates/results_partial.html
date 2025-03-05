@@ -115,16 +115,19 @@
                         clip-rule="evenodd"></path>
                 </svg>
                 {% endif %}
+                <div class="flex flex-col ml-1">
+                    <span class="font-semibold text-sm">{{ chirp.author.username }}</span>
+                    <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
+                </div>
             </div>
 
             <!-- Title -->
-            <h2 class="text-xl font-bold text-gray-900 mb-2">{{ chirp.title }}</h2>
+            <h2 class="text-xl font-bold text-white mb-2">{{ chirp.title }}</h2>
 
             <!-- Content -->
-            <p class="text-gray-700 mb-4">{{ chirp.content|safe }}</p>
+            <p class="text-white mb-4">{{ chirp.content|safe }}</p>
 
             <!-- Timestamp -->
-            <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
 
             <!-- Actions -->
             <div class="flex space-x-4 border-t pt-4">
