@@ -74,7 +74,7 @@
                     <form hx-post="{% url 'change_username' %}" hx-target="#username-section" class="w-full">
                         {% csrf_token %}
                         <div class="flex flex-col gap-4">
-                            <input type="text" name="new_username" class="w-full p-3 border rounded-lg bg-white"
+                            <input type="text" name="new_username" class="bg-gray-600 border border-gray-600 w-full p-2 border rounded"
                                 placeholder="Enter New Username">
                             <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
                                            hover:bg-blue-600 transition duration-200 shadow-md
