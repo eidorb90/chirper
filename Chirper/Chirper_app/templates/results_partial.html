@@ -217,7 +217,7 @@
                 <p class="text-sm text-white mb-2">Reply to: {{ reply.parent_reply.content|safe }}</p>
                 {% endif %}
 
-                <p class="text-white mt-3 leading-relaxed">{{ reply.content|safe }}</p>
+                <p class="text-white mt-3">{{ reply.content|safe }}</p>
             </div>
             <span class="text-sm text-gray-400 italic ml-4">{{ reply.created_at|timesince }} ago</span>
         </div>
