@@ -36,12 +36,11 @@
             {% endif %}
         </div>
 
-        <div class="flex items-center gap-3 mb-4">
-            <div class="flex flex-col ml-1">
+        <div class="flex-1">
+            <div class="flex items-center space-x-2 mb-1">
                 <span class="font-semibold text-white text-sm">{{ replies.0.author.username }}</span>
                 <span class="text-gray-500 text-xs">{{ replies.0.created_at|timesince }} ago</span>
             </div>
-        </div>
 
                     <p class="mb-2 text-white">{{ replies.0.content|safe }}</p>
                     
