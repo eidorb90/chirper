@@ -4,7 +4,7 @@
 {% block title %}Search Results - Chirper{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto px-4">
+<div class="max-w-3xl mx-auto px-4 bg-gray-900 antialiased">
     <br>
     <h1 class="text-white text-2xl text-center mb-8">Search Results</h1>
 
@@ -34,8 +34,8 @@
 
             {% if account_results %}
             {% for account in account_results %}
-            <div
-                class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+            
+            <div class="bg-gray-600 shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
                 <div class="flex justify-between items-start">
                     <div class="flex-1">
                         <img src="{{ user.profile_image.url }}" alt="Profile picture"
