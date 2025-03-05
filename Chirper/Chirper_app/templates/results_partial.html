@@ -34,13 +34,13 @@
                     <!-- User Info -->
                     <div class="flex-1">
                         <div class="flex items-center gap-2">
-                            <h3 class="font-semibold text-lg text-gray-900">{{ account.username }}</h3>
+                            <h3 class="font-semibold text-lg text-white">{{ account.username }}</h3>
                             <span class="text-sm text-gray-500">· {{ account.created_at|timesince }} ago</span>
                         </div>
                     </div>
 
                     <!-- Follow Button -->
-                    <div class="flex-shrink-0">
+                    <div class="flex">
                         {% if request.user != account %}
                         {% include 'follow_button.html' with user=account following_status=account.following_status %}
                         {% endif %}
