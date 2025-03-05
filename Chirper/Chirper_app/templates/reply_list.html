@@ -118,7 +118,7 @@
                     </div>
 
                     <div class="flex-1">
-                        <div class="flex items-center space-x-2 mb-1">
+                        <div class="flex flex-col ml-1">
                             <span class="font-semibold text-sm">{{ nested_reply.author.username }}</span>
                             <span class="text-white text-xs">{{ nested_reply.created_at|timesince }} ago</span>
                         </div>
@@ -173,7 +173,7 @@
 
             <!-- Rest of the existing reply template remains the same -->
             <div class="flex-1">
-                <div class="flex items-center space-x-2 mb-1">
+                <div class="flex flex-col ml-1">
                     <span class="font-semibold text-white text-sm">{{ reply.author.username }}</span>
                     <span class="text-gray-500 text-xs">{{ reply.created_at|timesince }} ago</span>
                 </div>
@@ -186,7 +186,7 @@
                                         <button hx-post="{% url 'like_reply' reply.id %}" 
                                                 hx-target=".like_count_{{ reply.id }}" 
                                                 hx-swap="innerText"
-                                                class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                                                class="text-white hover:text-blue-500 flex items-center space-x-1">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
                                             </svg>
