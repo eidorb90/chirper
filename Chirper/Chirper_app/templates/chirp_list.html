@@ -1,46 +1,42 @@
+<div space-y-4>
 {% if chirps %}
 {% for chirp in chirps %}
 <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
     style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
     <div class="flex flex-col">
-
         <div class="flex items-center gap-3 mb-4">
             <div data-tooltip-target="tooltip-user-{{ chirp.id }}"
                 class="relative w-10 h-10 overflow-hidden rounded-full bg-gray-100">
                 {% if chirp.author.profile_image %}
-                {% if chirp.author.username %}
-                <!-- Take the user to their own account -->
-                {% if chirp.author.username == request.user.username %}
-                <form method="post" action="{% url 'account' %}">
-                    {% csrf_token %}
-                    <button type="submit">
-                        <img src="{{ chirp.author.profile_image.url }}" alt="{{ chirp.author.username }}'s profile"
-                            class="w-full h-full object-cover rounded-full">
-                    </button>
-                </form>
+                    {% if chirp.author.username %}
+                        <!-- Take the user to their own account -->
+                        {% if chirp.author.username == request.user.username %}
+                            <form method="post" action="{% url 'account' %}">
+                                {% csrf_token %}
+                                <button type="submit">
+                                    <img src="{{ chirp.author.profile_image.url }}" alt="{{ chirp.author.username }}'s profile"
+                                        class="w-full h-full object-cover rounded-full">
+                                </button>
+                            </form>
+                        {% else %}
+                            <!-- Take the user to someone else's account  -->
+                            <form method="post" action="{% url 'view_other_account' chirp.author.username %}">
+                                {% csrf_token %}
+                                <button type="submit">
+                                    <img src="{{ chirp.author.profile_image.url }}" alt="{{ chirp.author.username }}'s profile"
+                                        class="w-full h-full object-cover rounded-full">
+                                </button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <p>No username available</p>
+                    {% endif %}
                 {% else %}
-                <!-- Take the user to someone else's account  -->
-                <form method="post" action="{% url 'view_other_account' chirp.author.username %}">
-                    {% csrf_token %}
-                    <button type="submit">
-                        <img src="{{ chirp.author.profile_image.url }}" alt="{{ chirp.author.username }}'s profile"
-                            class="w-full h-full object-cover rounded-full">
-                    </button>
-                </form>
-                {% endif %}
-                {% else %}
-                <p>No username available</p>
-                {% endif %}
-
-
-
-
-                {% else %}
-                <svg class="absolute w-12 h-12 text-gray-400 -left-1 rounded-full" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                        clip-rule="evenodd"></path>
-                </svg>
+                    <svg class="absolute w-12 h-12 text-gray-400 -left-1 rounded-full" fill="currentColor"
+                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd"></path>
+                    </svg>
                 {% endif %}
             </div>
             <div id="tooltip-user-{{ chirp.id }}" role="tooltip"
@@ -50,9 +46,10 @@
             </div>
             <div class="flex flex-col ml-1">
                 <span class="font-semibold text-sm">{{ chirp.author.username }}</span>
-                <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
+                <span class="text-sm text-gray-500">{{ chirp.created_at|timesince }} ago</span>
             </div>
         </div>
+    </div>
 
 
         <!-- Title -->
@@ -124,3 +121,14 @@
     <p class="text-gray-400 mt-2">Be the first to share something!</p>
 </div>
 {% endif %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach(function (form) {
+            form.addEventListener("submit", function () {
+                form.querySelector("trix-editor").value = "";
+            });
+        });
+    });
+</script>

@@ -11,7 +11,7 @@
     <!-- Search Form -->
     <form class="mb-8">
         <div class="flex gap-2">
-            <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded"
+            <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded text-white" style = "background-color: #4b5563;"
                 placeholder="Search chirps..." hx-get="{% url 'search' %}"
                 hx-trigger="keyup changed delay:250ms, keyup[key=='Enter'], load" , hx-target="#search-results"
                 hx-push-url="true">
@@ -144,3 +144,8 @@
     </div>
 </div>
 {% endblock %}
+<script>
+    function clearReplyForm(form) {
+        form.querySelector("trix-editor").value = "";
+    }
+</script>

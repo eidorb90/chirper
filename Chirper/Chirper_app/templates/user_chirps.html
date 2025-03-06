@@ -1,3 +1,15 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach(function (form) {
+            form.addEventListener("submit", function () {
+                form.querySelector("trix-editor").value = "";
+                form.querySelector("trix-editor").editor.loadHTML("");
+                form.querySelector("trix-editor").editor.setSelectedRange([0, 0]);
+            });
+        });
+    });
+    
+</script>
 {% if user.chirps.all %}
 <div class="space-y-6">
     {% for chirp in user.chirps.all %}
@@ -20,14 +32,9 @@
                     </svg>
                     {% endif %}
                 </div>
-                <div id="tooltip-user-{{ chirp.id }}" role="tooltip"
-                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                    {{chirp.author}}
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
                 <div class="flex flex-col ml-1">
                     <span class="font-semibold text-sm">{{ chirp.author.username }}</span>
-                    <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
+                    <span class="text-sm text-gray-500">{{ chirp.created_at|timesince }} ago</span>
                 </div>
             </div>
 
@@ -42,9 +49,6 @@
                     {% endautoescape %}
                 </div>
             </div>
-
-            <!-- Timestamp -->
-
 
             <!-- Actions -->
             <div class="flex">
@@ -69,6 +73,7 @@
                     <span>Reply</span>
                 </button>
             </div>
+            <br>
             <div class="flex">
                 <button hx-post="{% url 'delete_chirp' chirp.id %}" hx-confirm="Are you sure?"
                     hx-target="closest #chirp-container" hx-swap="outerHTML" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
@@ -111,3 +116,12 @@
     <p class="mt-1 text-sm text-gray-500">Get started with your first chirp!</p>
 </div>
 {% endif %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach(function (form) {
+            form.addEventListener("submit", function () {
+                form.querySelector("trix-editor").value = "";
+            });
+        });
+    });
+</script>
