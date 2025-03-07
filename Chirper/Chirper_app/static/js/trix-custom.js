@@ -31,15 +31,6 @@ function initializeCustomToolbarButtons(toolbarElement) {
     Trix.config.textAttributes.tt = { tagName: "span", style: { fontSize: "0.75em" }, inheritable: true };
     Trix.config.textAttributes.ttu = { tagName: "span", style: { fontSize: "1.5em" }, inheritable: true };
 
-    // Handle Tt and TT attribute toggle
-    toolbarElement.addEventListener("click", function(event) {
-        const button = event.target;
-        if (button.dataset.trixAttribute === "tt" || button.dataset.trixAttribute === "ttu") {
-            const attributeName = button.dataset.trixAttribute;
-            const editor = document.querySelector("trix-editor").editor;
-            editor.toggleAttribute(attributeName);
-        }
-    });
 }
 
 
