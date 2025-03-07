@@ -7,13 +7,10 @@ admin.py
 <brodie.rogers@cune.students.edu>
 
 Description:
-    aslkdfja;lskdjfaklsdvlkasjdvkasdlv
-    aslkdjvalksdv;laj
+    This module contains form definitions for the web application. These forms are used to handle user input and validate data before processing.
 
 Help:
-    asdkfja;lsdjalskdjvklasdva
-    sdvj;asdjvklasjdkvljaskdv
-    asdvjajsdlva;sdklv
+    To use these forms, import the desired form class from this module and instantiate it in your view. You can then render the form in your template and handle form submissions.
 
 """
 
