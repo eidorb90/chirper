@@ -9,7 +9,8 @@
 // live update features.
 
 function initializeCustomToolbarButtons(toolbarElement) {
-    // Remove the original Heading1 button
+
+    // Remove the original heading buttons
     const originalHeadingButton = toolbarElement.querySelector('[data-trix-attribute="heading1"]');
     if (originalHeadingButton) {
         originalHeadingButton.remove();
@@ -17,22 +18,21 @@ function initializeCustomToolbarButtons(toolbarElement) {
 
     // Add custom button for Tt (downsize)
     if (!toolbarElement.querySelector('[data-trix-attribute="tt"]')) {
-        const ttButtonHTML = '<button type="button" class="trix-button" data-trix-attribute="tt" title="Monospace" style="font-size: 1.25em;">Tt</button>';
+        const ttButtonHTML = '<button type="button" class="trix-button" data-trix-attribute="tt" title="Monospace" tabindex="-1" style="font-size: 1em">Tt</button>';
         toolbarElement.querySelector(".trix-button-group--block-tools").insertAdjacentHTML("afterbegin", ttButtonHTML);
     }
 
     // Add custom button for TT (upsize)
     if (!toolbarElement.querySelector('[data-trix-attribute="ttu"]')) {
-        const ttUButtonHTML = '<button type="button" class="trix-button" data-trix-attribute="ttu" title="Monospace Upsize" style="font-size: 1.25em;">TT</button>';
+        const ttUButtonHTML = '<button type="button" class="trix-button" data-trix-attribute="ttu" title="Monospace Upsize" tabindex="-1" style="font-size: 1em">TT</button>';
         toolbarElement.querySelector(".trix-button-group--block-tools").insertAdjacentHTML("afterbegin", ttUButtonHTML);
     }
 
-    // Define Tt and TT attributes in Trix
+    // Define Tt, TT, and attributes in Trix
     Trix.config.textAttributes.tt = { tagName: "span", style: { fontSize: "0.75em" }, inheritable: true };
     Trix.config.textAttributes.ttu = { tagName: "span", style: { fontSize: "1.5em" }, inheritable: true };
 
 }
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const observer = new MutationObserver(function(mutations) {
