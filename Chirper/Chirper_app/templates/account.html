@@ -4,9 +4,10 @@
 {% block title %}{{ user.username }}'s Profile - Chirper{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto px-4 py-8">
+<body class="dark:bg-gray-900 antialiased">
+<div class='max-w-4xl mx-auto px-4 py-8'>
     <!-- Profile Header Section -->
-    <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
         <div class="flex flex-col items-center">
             <!-- Profile Picture Display -->
             <div id="pfp_container" class="w-32 h-32 relative">
@@ -24,9 +25,9 @@
             </div>
 
             <div id="username-section" class="text-center mt-6">
-                <h1 id="username" class="text-3xl font-bold text-gray-900">{{ user.username }}</h1>
-                <p class="text-gray-500 mb-8">Member since {{ user.date_joined|date:"F Y" }}</p>
-                <div class="w-full border-b border-gray-200 my-8"></div>
+                <h1 id="username" class="text-3xl font-bold text-white">{{ user.username }}</h1>
+                <p class="text-gray-500 mb-8" style = "margin-bottom: 1rem;"> Member since {{ user.date_joined|date:"F Y" }}</p>
+                <div class="w-full border-b border-gray-200 my-8" style = "margin-bottom: 1rem;  margin-top: 0rem;"></div>
                 <div class="flex space-x-4 justify-center">
                     <div class="text-center">
                         <span class="font-bold">{{ user.follower_relationships.count }}</span>
@@ -38,13 +39,13 @@
                     </div>
                 </div>
             </div>
-
-            <h1 class="text-2xl font-bold text-gray-900 mb-8 text-center">Settings</h1>
+            <br>
+            <h1 class="text-2xl font-bold text-white mb-8 text-center">Settings</h1>
 
             <!-- Settings Sections -->
             <div class="space-y-8 max-w-2xl mx-auto w-full">
                 <!-- Profile Picture Update Section -->
-                <div class="bg-gray-50 rounded-lg p-6">
+                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
                     <form hx-post="{% url 'change_pfp' %}" hx-target="#pfp_container" hx-encoding="multipart/form-data"
                         class="w-full">
                         {% csrf_token %}
@@ -68,12 +69,12 @@
                 </div>
 
                 <!-- Username Section -->
-                <div class="bg-gray-50 rounded-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Username</h2>
+                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+                    <h2 class="text-lg font-semibold text-white mb-4">Username</h2>
                     <form hx-post="{% url 'change_username' %}" hx-target="#username-section" class="w-full">
                         {% csrf_token %}
                         <div class="flex flex-col gap-4">
-                            <input type="text" name="new_username" class="w-full p-3 border rounded-lg bg-white"
+                            <input type="text" name="new_username" class="bg-gray-600 border border-gray-600 w-full p-2 border rounded"
                                 placeholder="Enter New Username">
                             <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
                                            hover:bg-blue-600 transition duration-200 shadow-md
@@ -83,25 +84,35 @@
                         </div>
                     </form>
                 </div>
-
-                <!-- Account Section -->
-                <div class="bg-gray-50 rounded-lg p-6">
-                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Account</h2>
+                
+                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+                    <h2 class="text-lg font-semibold text-white mb-4">Public/Private</h2>
                     {% include 'privacy_button.html' %}
+                </div>
+                <!-- Account Section -->
+                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+                    <h2 class="text-lg font-semibold text-white mb-4">Account</h2>
+                    
+                
                     <form method="post" action="{% url 'logout' %}" class="w-full">
                         {% csrf_token %}
-                        <button type="submit" class="w-full bg-white border border-red-500 text-red-500 px-6 py-3 rounded-lg
-                                           hover:bg-red-50 transition duration-200
-                                           font-semibold">
+                        <button type="submit" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
+                        hover:bg-red-700 transition duration-200
+                        font-semibold">
                             Logout
                         </button>
                     </form>
+                    </div>
+
+                    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+                        <h2 class="text-lg font-semibold text-white mb-4">Delete Account</h2>
+                    
                     <form method="post" action="{% url 'delete_account' %}" class="w-full"
                         onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
                         {% csrf_token %}
-                        <button type="submit" class="w-full bg-white border border-red-500 text-red-500 px-6 py-3 rounded-lg
-                                           hover:bg-red-50 transition duration-200
-                                           font-semibold">
+                        <button type="submit" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
+                        hover:bg-red-700 transition duration-200
+                        font-semibold">
                             Delete Account
                         </button>
                     </form>
@@ -114,11 +125,11 @@
     <div class="border-b border-gray-200">
         <nav class="flex justify-center">
             <button hx-get="{% url 'user_chirps' %}" hx-target="#content-area"
-                class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
+                class="px-6 py-4 text-white hover:text-gray-700 font-medium">
                 Chirps
             </button>
             <button hx-get="{% url 'user_replies' %}" hx-target="#content-area"
-                class="px-6 py-4 text-gray-500 hover:text-gray-700 font-medium">
+                class="px-6 py-4 text-white hover:text-gray-700 font-medium">
                 Replies
             </button>
         </nav>

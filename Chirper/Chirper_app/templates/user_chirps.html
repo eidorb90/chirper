@@ -1,8 +1,21 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach(function (form) {
+            form.addEventListener("submit", function () {
+                form.querySelector("trix-editor").value = "";
+                form.querySelector("trix-editor").editor.loadHTML("");
+                form.querySelector("trix-editor").editor.setSelectedRange([0, 0]);
+            });
+        });
+    });
+    
+</script>
 {% if user.chirps.all %}
 <div class="space-y-6">
     {% for chirp in user.chirps.all %}
     <div id="chirp-container"
-        class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4">
+    class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
+    style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
         <div class="flex flex-col">
             <!-- Author -->
             <div class="flex items-center gap-3 mb-4">
@@ -19,27 +32,28 @@
                     </svg>
                     {% endif %}
                 </div>
-                <div id="tooltip-user-{{ chirp.id }}" role="tooltip"
-                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                    {{chirp.author}}
-                    <div class="tooltip-arrow" data-popper-arrow></div>
+                <div class="flex flex-col ml-1">
+                    <span class="font-semibold text-sm">{{ chirp.author.username }}</span>
+                    <span class="text-sm text-gray-500">{{ chirp.created_at|timesince }} ago</span>
                 </div>
-                <span class="font-semibold text-sm">{{ chirp.author.username }}</span>
             </div>
 
             <!-- Title -->
-            <h2 class="text-xl font-bold text-gray-900 mb-2">{{ chirp.title }}</h2>
+            <h2 class="text-xl font-bold text-white mb-2">{{ chirp.title }}</h2>
 
             <!-- Content -->
-            <p class="text-gray-700 mb-4">{{ chirp.content|safe }}</p>
-
-            <!-- Timestamp -->
-            <span class="text-sm text-gray-500 mb-4">{{ chirp.created_at|timesince }} ago</span>
+            <div class="text-white mb-4">
+                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                    {% autoescape off %}
+                    {{ chirp.content }}
+                    {% endautoescape %}
+                </div>
+            </div>
 
             <!-- Actions -->
-            <div class="flex space-x-4 border-t pt-4">
+            <div class="flex">
                 <button hx-post="{% url 'like_chirp' chirp.id %}" hx-target=".like_count_{{ chirp.id }}"
-                    hx-swap="innerText" class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                    hx-swap="innerText" class="text-white hover:text-blue-500 flex items-center space-x-1">
                     {% csrf_token %}
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path
@@ -49,7 +63,7 @@
                     <span class="like_count_{{ chirp.id }}">{{ chirp.like_count }}</span>
                 </button>
                 <button onclick="document.getElementById('reply-form-{{ chirp.id }}').classList.toggle('hidden')"
-                    class="text-gray-500 hover:text-blue-500 flex items-center space-x-1">
+                    class="text-white hover:text-blue-500 flex items-center space-x-1">
                     {% csrf_token %}
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path
@@ -59,11 +73,12 @@
                     <span>Reply</span>
                 </button>
             </div>
-            <div class="flex space-x-4 border-t pt-4">
+            <br>
+            <div class="flex">
                 <button hx-post="{% url 'delete_chirp' chirp.id %}" hx-confirm="Are you sure?"
-                    hx-target="closest #chirp-container" hx-swap="outerHTML" class="w-full bg-white border border-red-500 text-red-500 px-6 py-3 rounded-lg
-                    hover:bg-red-50 transition duration-200
-                    font-semibold">
+                    hx-target="closest #chirp-container" hx-swap="outerHTML" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
+                        hover:bg-red-700 transition duration-200
+                        font-semibold">
                     Delete
                 </button>
 
@@ -101,3 +116,12 @@
     <p class="mt-1 text-sm text-gray-500">Get started with your first chirp!</p>
 </div>
 {% endif %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach(function (form) {
+            form.addEventListener("submit", function () {
+                form.querySelector("trix-editor").value = "";
+            });
+        });
+    });
+</script>

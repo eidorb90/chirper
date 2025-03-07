@@ -5,24 +5,30 @@
 
 {% block content %}
 <div class="max-w-3xl mx-auto px-4">
-    <h1 class="text-gray-800 text-2xl text-center mb-8">Welcome to Chirper.</h1>
+    <br>
+    <h1 class="text-white text-2xl text-center mb-8">Welcome to Chirper.</h1>
 
-    <h3 class="text-black text-xl text-center mb-2">New Chirp</h3>
+    <h3 class="text-white text-xl text-center mb-2">New Chirp</h3>
     <section
-        class="bg-gradient-to-r from-gray-100 to-gray-200 shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow">
+        class="bg-gray-100 shadow-md mx-auto mb-8 border border-gray-100 rounded-lg p-6 hover:shadow-lg transition-shadow"
+        style="background-color: rgb(55 65 81); border-color: #4b5563;">
         <form hx-post="{% url 'create_chirp' %}" hx-target="#chirp-list" method="POST">
             {% csrf_token %}
             <div class="space-y-4">
-                <input type="text" name="title" class="w-full p-2 border rounded" placeholder="Title" required>
-                <input id="content" type="hidden" name="content" required>
-                <trix-editor input="content" class="w-full p-2 border rounded" placeholder="Whats Happening?"
-                    required></trix-editor>
+                <input type="text" name="title"
+                    class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    style="border-color: #4b5563;" placeholder="Title" required>
+                <input id="content" type="hidden" class="text-white" name="content" required>
+                <trix-editor input="content"
+                    class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    style="border-color: #4b5563;" placeholder="Whats Happening?"required>
+                </trix-editor>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Chirp</button>
             </div>
         </form>
     </section>
 
-    <h3 class="text-black text-xl text-center mb-2">Feed</h3>
+    <h3 class="text-white text-xl text-center mb-2">Feed</h3>
     <div class="space-y-4">
         <div id="chirp-list">
             {% include 'chirp_list.html' %}
@@ -30,3 +36,12 @@
     </div>
 </div>
 {% endblock %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach(function (form) {
+            form.addEventListener("submit", function () {
+                form.querySelector("trix-editor").value = "";
+            });
+        });
+    });
+</script>
