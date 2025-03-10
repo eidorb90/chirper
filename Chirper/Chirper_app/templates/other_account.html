@@ -6,10 +6,27 @@
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 py-8">
     <!-- Profile Header Section -->
-    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
-        <div class="flex flex-col items-center">
+    <div class="  shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" 
+    style=" 
+    
+    width: 400px;
+
+    height: 400px;
+
+    border: 2px solid blue;
+    
+    display: flex; 
+    
+    justify-content: center; 
+    
+    align-items: center;
+    
+    border-radius: 50%; 
+
+    background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">        
+    <div class="flex flex-col items-center">
             <!-- Profile Picture Display -->
-            <div id="pfp_container" class="w-32 h-32 relative">
+            <div id="pfp_container" class="w-32 h-32 relative" style = "width: 9rem; height: 9rem;">
                 {% if user.profile_image %}
                 <img src="{{ user.profile_image.url }}" alt="Profile picture"
                     class="w-full h-full rounded-full object-cover shadow-lg">
@@ -25,8 +42,8 @@
 
             <div id="username-section" class="text-center mt-6">
                 <h1 id="username" class="text-3xl font-bold text-white">{{ user.username }}</h1>
-                <p class="text-gray-500 mb-8">Member since {{ user.date_joined|date:"F Y" }}</p>
-                <div class="w-full border-b border-gray-200 my-8"></div>
+                <p class="text-gray-500 mb-8" style = "margin-bottom: 1rem;">Member since {{ user.date_joined|date:"F Y" }}</p>
+                <div class="w-full border-b border-gray-200 my-8" style = "margin-bottom: 1rem;  margin-top: 0rem;"></div>
 
                 <!-- Include the stats and button template once -->
                 {% include 'profile_stats.html' %}

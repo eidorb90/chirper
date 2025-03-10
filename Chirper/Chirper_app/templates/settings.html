@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Settings - Chirper{% endblock %}
+
+{% block content %}
+      <br>
+<h1 class="text-white text-3xl text-center mb-8">Settings</h1>
+    
+
+    <!-- Username Section -->
+<div class="max-w-3xl mx-auto px-4">
+                
+    
+    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+        <h2 class="text-lg font-semibold text-white mb-4">Privacy Status</h2>
+            {% include 'privacy_button.html' %}
+        </div>
+        <!-- Account Section -->
+    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+        <h2 class="text-lg font-semibold text-white mb-4">Account</h2>
+            
+
+        <form method="post" action="{% url 'logout' %}" class="w-full">
+            {% csrf_token %}
+            <button type="submit" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
+            hover:bg-red-700 transition duration-200
+            font-semibold">
+                Logout
+            </button>
+        </form>
+    </div>
+
+    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+        <h2 class="text-lg font-semibold text-white mb-4">Delete Account</h2>
+        
+        <form method="post" action="{% url 'delete_account' %}" class="w-full"
+            onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+            {% csrf_token %}
+            <button type="submit" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
+            hover:bg-red-700 transition duration-200
+            font-semibold">
+                Delete Account
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

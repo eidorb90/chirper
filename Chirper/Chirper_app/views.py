@@ -20,6 +20,12 @@ def home(request):
         return render(request, "home.html", {"chirps": chirps})
     else:
         return redirect("login_view")
+    
+def settings(request):
+    """
+    Render the settings view for the authenticated user.
+    """
+    return render(request, "settings.html", {"user": request.user})
 
 
 @login_required
@@ -274,6 +280,7 @@ def user_chirps(request):
 @login_required
 def user_replies(request):
     return render(request, "user_replies.html", {"replies": request.user.replies.all()})
+
 
 
 @login_required

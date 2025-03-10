@@ -19,8 +19,9 @@
     <title>Chirper</title>
 </head>
 
+
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <nav class="bg-gray-800 p-4 shadow-lg">
+    <nav class="p-4 shadow-lg" style="background-color: #1f2937;">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="{% url 'home' %}" class="text-white text-2xl font-bold hover:text-gray-300">Chirper</a>
 
@@ -31,6 +32,8 @@
                     class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Home</a>
                 <a href="{% url 'account' %}"
                     class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Profile</a>
+                <a href="{% url 'settings_view' %}"
+                    class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Settings</a>
                 <a href="{% url 'search' %}"
                     class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Search</a>
                 {% else %}

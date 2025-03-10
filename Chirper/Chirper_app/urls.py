@@ -21,6 +21,7 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("create_chirp/", views.create_chirp, name="create_chirp"),
     path("delete_chirp/<uuid:chirp_id>/", views.delete_chirp, name="delete_chirp"),
+    path("settings/", views.settings, name="settings_view"),
     path(
         "chirp/<uuid:chirp_id>/reply/",
         views.create_chirp_reply,

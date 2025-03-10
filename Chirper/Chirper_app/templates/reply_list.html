@@ -2,8 +2,8 @@
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
     {% if replies %}
     <!-- Show first reply -->
-    <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
-        style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+    <div class="shadow-md mx-auto mb-8 border rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+
         <div class="flex items-center space-x-3">
             <!-- Profile Picture -->
             <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
@@ -44,7 +44,7 @@
         </div>
         <br>
         <div class="text-white mb-4">
-            <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+            <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                 {% autoescape off %}
                 {{ replies.0.content }}
                 {% endautoescape %}
@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="text-white mb-4">
-                        <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                        <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                             {% autoescape off %}
                             {{ nested_reply.content }}
                             {% endautoescape %}
@@ -159,7 +159,7 @@
             </div>
             <br>
             <div class="text-white mb-4">
-                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                     {% autoescape off %}
                     {{ reply.content }}
                     {% endautoescape %}

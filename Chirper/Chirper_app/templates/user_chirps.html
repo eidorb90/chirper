@@ -14,8 +14,8 @@
 <div class="space-y-6">
     {% for chirp in user.chirps.all %}
     <div id="chirp-container"
-    class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
-    style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+    class="shadow-md mx-auto mb-8 border rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+
         <div class="flex flex-col">
             <!-- Author -->
             <div class="flex items-center gap-3 mb-4">
@@ -43,7 +43,7 @@
 
             <!-- Content -->
             <div class="text-white mb-4">
-                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                     {% autoescape off %}
                     {{ chirp.content }}
                     {% endautoescape %}
@@ -89,7 +89,7 @@
                 <form hx-post="{% url 'create_chirp_reply' chirp.id %}" hx-target=".replies-{{ chirp.id }}"
                     hx-swap="innerHTML" class="space-y-4">
                     {% csrf_token %}
-                    <trix-editor input="reply_content_{{chirp.id}}" class="w-full p-2 border rounded"
+                    <trix-editor input="reply_content_{{chirp.id}}" class="w-full p-2 border rounded" style = "background-color: #242d41"
                         placeholder="Write a reply..."></trix-editor>
                     <input id="reply_content_{{chirp.id}}" type="hidden" name="content">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">

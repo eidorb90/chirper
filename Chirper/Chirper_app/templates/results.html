@@ -11,7 +11,7 @@
     <!-- Search Form -->
     <form class="mb-8">
         <div class="flex gap-2">
-            <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded text-white" style = "background-color: #4b5563;"
+            <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded text-white" style = "border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;"
                 placeholder="Search chirps..." hx-get="{% url 'search' %}"
                 hx-trigger="keyup changed delay:250ms, keyup[key=='Enter'], load" , hx-target="#search-results"
                 hx-push-url="true">
@@ -48,7 +48,7 @@
             </div>
             {% endfor %}
             {% else %}
-            <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+            <div class="text-center py-10 rounded-xl shadow-md"  style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
                 <p class="text-white text-lg">No Accounts found for "{{ request.GET.q }}" 🔍</p>
                 <p class="text-white mt-2">Try different keywords or check your spelling</p>
             </div>
