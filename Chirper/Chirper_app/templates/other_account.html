@@ -1,3 +1,26 @@
+{# 
+    Template: other_account.html
+    Description: This template extends the base.html and is used to display the profile page of another user on Chirper.
+    It includes the user's profile picture, username, and membership date. It also provides navigation tabs for viewing 
+    the user's chirps and replies.
+
+    Blocks:
+    - title: Sets the title of the page to the user's username followed by "Profile - Chirper".
+    - content: Contains the main content of the profile page.
+
+    Sections:
+    - Profile Header Section: Displays the user's profile picture, username, and membership date.
+        - Profile Picture Display: Shows the user's profile image if available, otherwise displays a default icon.
+        - Username Section: Shows the user's username and membership date.
+        - Profile Stats: Includes the profile_stats.html template to display user statistics.
+
+    - Tabs Navigation: Provides navigation buttons to switch between the user's chirps and replies.
+        - Chirps Button: Loads the user's chirps via an AJAX request.
+        - Replies Button: Loads the user's replies via an AJAX request.
+
+    - Content Area: Initially includes the user_chirps.html template to display the user's chirps.
+#}
+
 {% extends 'base.html' %}
 {% load static %}
 

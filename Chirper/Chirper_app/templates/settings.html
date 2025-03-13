@@ -1,3 +1,25 @@
+{# 
+    Template: settings.html
+    Description: This template extends 'base.html' and provides the settings page for the Chirper application. 
+    It includes sections for privacy status, account management, and account deletion.
+
+    Blocks:
+    - title: Sets the title of the page to "Settings - Chirper".
+    - content: Contains the main content of the settings page.
+
+    Sections:
+    - Privacy Status: Includes the 'privacy_button.html' template to manage privacy settings.
+    - Account: Provides a form to log out of the account.
+    - Delete Account: Provides a form to delete the account with a confirmation prompt.
+
+    Styles:
+    - Uses Tailwind CSS classes for styling and transitions.
+    - Custom inline styles for background color, border, and text color.
+
+    Forms:
+    - Logout Form: Submits a POST request to the 'logout' URL.
+    - Delete Account Form: Submits a POST request to the 'delete_account' URL with a confirmation prompt.
+#}
 {% extends 'base.html' %}
 {% load static %}
 

@@ -1,3 +1,18 @@
+{#
+    This template displays user replies and nested replies in a structured format.
+
+    - If the user has replies, it iterates through each reply and displays:
+        - The author's profile picture or a default SVG if no profile picture is available.
+        - The author's username and the time since the reply was created.
+        - Context for the reply, indicating if it is a reply to a chirp or another reply.
+        - The content of the reply, rendered without escaping HTML.
+        - A like button with the current like count, which uses HTMX for asynchronous updates.
+        - Nested replies, if any, displayed in a nested structure with similar details.
+
+    - If the user has no replies, a message is displayed encouraging the user to join the conversation.
+
+    - A JavaScript function `clearReplyForm` is included to clear the reply form after submission.
+#}
 {% if user.replies.all %}
 <div class="space-y-4">
     {% for reply in user.replies.all %}

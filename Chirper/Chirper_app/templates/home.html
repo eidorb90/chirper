@@ -1,3 +1,22 @@
+{# 
+    Template: home.html
+
+    Description:
+    This template extends 'base.html' and is used to render the home page of the Chirper application. 
+    It includes the following sections:
+    
+    - Title Block: Sets the title of the page to "Home - Chirper".
+    
+    - Content Block: 
+        - A welcome message and a form for creating a new chirp.
+        - The form uses HTMX for asynchronous submission to the 'create_chirp' URL and targets the element with id "chirp-list" for updates.
+        - The form includes CSRF protection, a title input, a hidden content input, and a Trix editor for rich text input.
+        - A submit button styled with Tailwind CSS classes.
+        - A feed section that includes the 'chirp_list.html' template to display the list of chirps.
+    
+    - JavaScript:
+        - An event listener that clears the Trix editor content after form submission.
+#}
 {% extends 'base.html' %}
 {% load static %}
 

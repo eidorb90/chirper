@@ -1,3 +1,38 @@
+{# 
+This template renders a list of chirps (posts) for a specific user. It includes the following features:
+
+1. JavaScript:
+    - Adds event listeners to all forms to clear the trix-editor content upon form submission.
+
+2. Chirps Display:
+    - Checks if the user has any chirps.
+    - Iterates over each chirp and displays it in a styled container.
+    - Each chirp includes:
+      - Author's profile image or a default icon.
+      - Author's username and the time since the chirp was created.
+      - Chirp title and content.
+      - Buttons for liking, replying, and deleting the chirp.
+
+3. Chirp Actions:
+    - Like button: Sends a POST request to like the chirp and updates the like count.
+    - Reply button: Toggles the visibility of the reply form.
+    - Delete button: Sends a POST request to delete the chirp with a confirmation prompt.
+
+4. Reply Form:
+    - Hidden by default and toggled by the reply button.
+    - Uses trix-editor for input.
+    - Sends a POST request to create a reply and updates the replies section.
+
+5. Replies Display:
+    - Includes a separate template to render the list of replies for each chirp.
+
+6. No Chirps Message:
+    - Displays a message and an icon if the user has no chirps.
+
+7. Additional JavaScript:
+    - Adds event listeners to all forms to clear the trix-editor content upon form submission (repeated for redundancy).
+
+#}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll("form").forEach(function (form) {

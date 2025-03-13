@@ -1,3 +1,32 @@
+{# 
+This template renders a list of replies for a given chirp. The main components of this template are:
+
+1. Replies Container:
+    - A div with a class `replies-{{ chirp.id }}` that contains all replies for a specific chirp.
+
+2. First Reply:
+    - The first reply is displayed prominently with profile picture, username, creation time, content, and like button.
+    - If the reply author has a profile image, it is displayed; otherwise, a default SVG icon is shown.
+    - The username is displayed and linked to the author's profile. If the author is the current user, it links to their own account.
+    - The reply content is displayed with HTML autoescaping turned off.
+    - A like button is provided to like the reply, with the like count dynamically updated.
+
+3. Nested Replies:
+    - If the first reply has nested replies, they are displayed in a nested container.
+    - Each nested reply includes the author's profile picture, username, creation time, content, and a like button.
+
+4. Show More Replies:
+    - If there are more than one reply, a "Show more replies" button is displayed.
+    - Clicking this button reveals the remaining replies, each styled similarly to the first reply.
+
+5. Reply Form:
+    - A hidden form is provided for replying to the first reply or any other reply.
+    - The form uses Trix editor for rich text input and submits via HTMX for dynamic updates.
+
+6. JavaScript:
+    - A script function `clearReplyForm` is included to clear the Trix editor content after submitting a reply.
+
+#}
 <div class="replies-{{ chirp.id }} space-y-3">
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
     {% if replies %}

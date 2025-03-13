@@ -1,3 +1,29 @@
+{# 
+    This template extends the base.html template and is used for rendering the login page of the Chirper application.
+
+    Template Tags:
+    - {% extends 'base.html' %}: Inherits the structure from base.html.
+    - {% load static %}: Loads the static template tag library.
+
+    Blocks:
+    - {% block title %}: Sets the title of the page to "Login - Chirper".
+    - {% block content %}: Contains the main content of the login page.
+
+    Head Section:
+    - Includes meta tags for character set and viewport settings.
+    - Sets the title of the document to "Login".
+    - Links to the Tailwind CSS stylesheet for styling.
+
+    Body Section:
+    - Applies Tailwind CSS classes for styling the body and main container.
+    - Displays a heading and a description for the login form.
+    - Contains a form that posts to the 'login_view' URL using HTMX for AJAX requests.
+    - Includes CSRF token for security.
+    - Displays an error message if the form has errors.
+    - Contains input fields for username and password with labels.
+    - Includes a submit button styled with Tailwind CSS.
+    - Provides a link to the registration page for users who don't have an account.
+#}
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Login - Chirper{% endblock %}

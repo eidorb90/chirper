@@ -4,6 +4,15 @@
 
 ---
 
+## What everyone did
+
+Marcus: frontend
+Brodie:
+Abe: 
+
+
+---
+
 ## Introduction
 
 Chirper is a social web application that allows users to interact with others on the platform. This project is developed for our Web Development class as our second project of the year. (You can find links to our first project 'task-timer' in our personal GitHubs!)

@@ -1,3 +1,20 @@
+{# 
+    This is the base template for the Chirper application. It includes the following:
+
+    - Loads the static files and CSRF token.
+    - Sets up the HTML document with a dark background and antialiased text.
+    - Includes meta tags and scripts for CSRF protection and various libraries:
+        - htmx for handling AJAX requests.
+        - Tailwind CSS for styling.
+        - Flowbite for additional UI components.
+        - Trix for rich text editing.
+    - Custom styles for the Trix editor and toolbar to match the dark theme.
+    - The body tag includes a CSRF token header for htmx requests.
+    - A navigation bar that changes based on user authentication status:
+        - If the user is authenticated, links to Home, Profile, Settings, and Search are shown.
+        - If the user is not authenticated, links to Register and Login are shown.
+    - A content block where other templates can insert their content.
+#}
 {% load static %}
 <!DOCTYPE html>
 <html class="bg-gray-900 antialiased">

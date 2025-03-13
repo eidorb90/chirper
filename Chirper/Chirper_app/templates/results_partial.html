@@ -1,3 +1,26 @@
+{#
+    This template renders the search results for accounts, chirps, and replies based on the user's query.
+
+    Account Section:
+    - Displays a list of accounts matching the search query.
+    - Each account card includes profile image, username, account creation time, follow button, and a link to view the profile.
+    - If no accounts are found, a message is displayed indicating no results.
+
+    Chirps Section:
+    - Displays a list of chirps matching the search query.
+    - Each chirp card includes profile image, username, chirp creation time, title, content, like button, reply button, and a reply form.
+    - If no chirps are found, a message is displayed indicating no results.
+
+    Replies Section:
+    - Displays a list of replies matching the search query.
+    - Each reply card includes the reply content, the author, and the time since the reply was created.
+    - If no replies are found, a message is displayed indicating no results.
+
+    Additional Notes:
+    - The template uses Tailwind CSS for styling.
+    - The template includes HTMX attributes for handling like and reply actions dynamically.
+    - The template includes CSRF tokens for form submissions.
+#}
 <!-- Account Section -->
 {% if account_results or request.GET.q %}
 <div class="mt-8">

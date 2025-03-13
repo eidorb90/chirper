@@ -1,3 +1,31 @@
+{# 
+    Template: results.html
+    Description: This template displays the search results for the Chirper application. It extends the base.html template and includes a search form, account results, and chirp results.
+    
+    Blocks:
+    - title: Sets the title of the page to "Search Results - Chirper".
+    - content: Contains the main content of the page, including the search form and results.
+
+    Sections:
+    - Search Form: A form that allows users to search for chirps. It uses HTMX for live search results.
+    - Results Container: Displays the search results, including accounts and chirps.
+        - Account Section: Shows a list of accounts matching the search query.
+            - If no accounts are found, a message is displayed.
+        - Chirp Results: Shows a list of chirps matching the search query.
+            - Each chirp includes the author's profile image, title, content, timestamp, and actions (like and reply).
+            - Replies: Displays replies to each chirp and includes a form to add new replies.
+        - No Results: If no results are found, a message is displayed.
+
+    HTMX Attributes:
+    - hx-get: Used in the search input to fetch search results.
+    - hx-trigger: Specifies the events that trigger the search.
+    - hx-target: Specifies the target element for the search results.
+    - hx-push-url: Updates the URL with the search query.
+    - hx-post: Used in the like and reply forms to send data to the server.
+
+    JavaScript:
+    - clearReplyForm: A function to clear the reply form after submission.
+#}
 {% extends 'base.html' %}
 {% load static %}
 

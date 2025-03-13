@@ -22,6 +22,23 @@ import uuid
 
 
 class User(AbstractUser):
+    """
+    User model that extends Django's AbstractUser.
+
+    Attributes:
+        id (UUIDField): Primary key for the user, generated automatically.
+        email (EmailField): Unique email address for the user.
+        created_at (DateTimeField): Timestamp when the user was created.
+        username (CharField): Unique username for the user.
+        private (BooleanField): Indicates if the user's profile is private.
+        profile_image (ImageField): Profile image of the user with validation for file extensions.
+        followers (ManyToManyField): Many-to-many relationship to represent followers and following users.
+
+    Methods:
+        __str__(): Returns the username of the user.
+        set_password(raw_password): Sets the user's password.
+        save(*args, **kwargs): Custom save method to handle profile image processing.
+    """
     # Create the meta data for the model
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
@@ -52,6 +69,7 @@ class User(AbstractUser):
         self.password = make_password(raw_password)
 
     def save(self, *args, **kwargs):
+        # Check if the instance is being updated
         if not self._state.adding:
             try:
                 old_instance = self.__class__.objects.get(pk=self.pk)
@@ -60,12 +78,12 @@ class User(AbstractUser):
         else:
             old_instance = None
 
+        # Process new profile image if it has changed
         if (
             old_instance
             and old_instance.profile_image != self.profile_image
             and self.profile_image
         ):
-            # Process new profile image
             img = Image.open(self.profile_image)
             img.thumbnail((300, 300), Image.LANCZOS)
             if img.mode != "RGB":
@@ -83,6 +101,17 @@ class User(AbstractUser):
 
 
 class UserFollowing(models.Model):
+    """
+    UserFollowing model represents the relationship between users who follow each other.
+
+    Attributes:
+        user (ForeignKey): Reference to the User who is following another user.
+        following_user (ForeignKey): Reference to the User who is being followed.
+        created_at (DateTimeField): Timestamp when the following relationship was created, set automatically.
+
+    Methods:
+        __str__(): Returns a string representation of the following relationship.
+    """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -103,6 +132,21 @@ class UserFollowing(models.Model):
 
 
 class Chirp(models.Model):
+    """
+    Chirp model represents a post in the Chirper application.
+
+    Attributes:
+        id (UUIDField): Primary key for the Chirp, generated automatically.
+        title (CharField): The title of the chirp, limited to 50 characters.
+        content (TextField): The content of the chirp, limited to 255 characters.
+        created_at (DateTimeField): Timestamp when the chirp was created, set automatically.
+        like_count (IntegerField): The number of likes the chirp has received, default is 0.
+        author (ForeignKey): Reference to the User who authored the chirp, can be null.
+        likes (ManyToManyField): Users who have liked the chirp, can be blank.
+
+    Methods:
+        __str__(): Returns a string representation of the chirp, limited to the first 50 characters of the content.
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=255)
@@ -118,6 +162,25 @@ class Chirp(models.Model):
 
 
 class Reply(models.Model):
+    """
+    Reply model represents a reply to a Chirp or another Reply in the Chirper application.
+
+    Attributes:
+        id (UUIDField): Primary key for the Reply, generated automatically.
+        content (TextField): The content of the reply, limited to 255 characters.
+        created_at (DateTimeField): Timestamp when the reply was created, set automatically.
+        like_count (IntegerField): The number of likes the reply has received, default is 0.
+        is_chirp_reply (BooleanField): Indicates if the reply is to a Chirp, default is True.
+        author (ForeignKey): Reference to the User who authored the reply, can be null.
+        likes (ManyToManyField): Users who have liked the reply, can be blank.
+        chirp (ForeignKey): Reference to the Chirp this reply is connected to, can be null or blank.
+        parent_reply (ForeignKey): Reference to another Reply this reply is connected to, can be null or blank.
+
+    Methods:
+        clean(): Validates that the reply is connected to either a Chirp or another Reply.
+        save(*args, **kwargs): Validates and saves the reply.
+        __str__(): Returns a string representation of the reply, limited to the first 50 characters of the content.
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     content = models.TextField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -136,6 +199,7 @@ class Reply(models.Model):
     )
 
     def clean(self):
+        # Ensure that a reply is connected to either a Chirp or another Reply
         if (self.chirp is None and self.parent_reply is None) or (
             self.chirp and self.parent_reply
         ):
@@ -144,7 +208,7 @@ class Reply(models.Model):
             )
 
     def save(self, *args, **kwargs):
-        self.clean()
+        self.clean()  # Validate before saving
         super().save(*args, **kwargs)
 
     def __str__(self):
