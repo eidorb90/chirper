@@ -1,10 +1,10 @@
-{# 
+<!-- 
     This template renders a profile picture container with a specified width and height.
     - If the user has a profile image, it displays the image with full width and height, rounded corners, and a shadow.
     - If the user does not have a profile image, it displays a default placeholder with a gray background, centered SVG icon, and a shadow.
     - The container has a fixed size of 10rem by 10rem.
     - The SVG icon represents a user silhouette.
-#}
+-->
 <div id="pfp_container" class="w-32 h-32 relative" style = "width: 10rem; height: 10rem;">
     {% if user.profile_image %}
     <img src="{{ user.profile_image.url }}" alt="Profile picture"

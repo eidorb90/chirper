@@ -1,4 +1,4 @@
-{# 
+<!--
 This template renders a list of replies for a given chirp. The main components of this template are:
 
 1. Replies Container:
@@ -26,7 +26,7 @@ This template renders a list of replies for a given chirp. The main components o
 6. JavaScript:
     - A script function `clearReplyForm` is included to clear the Trix editor content after submitting a reply.
 
-#}
+-->
 <div class="replies-{{ chirp.id }} space-y-3">
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
     {% if replies %}
