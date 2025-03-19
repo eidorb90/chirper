@@ -1,4 +1,4 @@
-<!--
+{% comment %}
     This template renders the search results for accounts, chirps, and replies based on the user's query.
 
     Account Section:
@@ -20,7 +20,7 @@
     - The template uses Tailwind CSS for styling.
     - The template includes HTMX attributes for handling like and reply actions dynamically.
     - The template includes CSRF tokens for form submissions.
--->
+{% endcomment %}
 <!-- Account Section -->
 {% if account_results or request.GET.q %}
 <div class="mt-8">

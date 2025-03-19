@@ -1,4 +1,4 @@
-<!--
+{% comment %}
 This template renders a list of chirps (posts) with their details and interactions. 
 It includes the following sections:
 
@@ -30,7 +30,7 @@ It includes the following sections:
 
 7. JavaScript:
     - Adds an event listener to clear the trix-editor content after form submission.
--->
+{% endcomment %}
 <div space-y-4>
 {% if chirps %}
 {% for chirp in chirps %}

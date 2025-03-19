@@ -1,4 +1,4 @@
-<!--
+{% comment %}
     This template displays user replies and nested replies in a structured format.
 
     - If the user has replies, it iterates through each reply and displays:
@@ -12,7 +12,7 @@
     - If the user has no replies, a message is displayed encouraging the user to join the conversation.
 
     - A JavaScript function `clearReplyForm` is included to clear the reply form after submission.
--->
+{% endcomment %}
 {% if user.replies.all %}
 <div class="space-y-4">
     {% for reply in user.replies.all %}

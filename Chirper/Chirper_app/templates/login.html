@@ -1,4 +1,4 @@
-<!--
+{% comment %}
     This template extends the base.html template and is used for rendering the login page of the Chirper application.
 
     Template Tags:
@@ -6,7 +6,7 @@
     - load static : Loads the static template tag library.
 
     Blocks:
-    - block title : Sets the title of the page to "Login - Chirper".
+    - {% block title %} : Sets the title of the page to "Login - Chirper".
     -  block content : Contains the main content of the login page.
 
     Head Section:
@@ -23,7 +23,8 @@
     - Contains input fields for username and password with labels.
     - Includes a submit button styled with Tailwind CSS.
     - Provides a link to the registration page for users who don't have an account.
--->
+{% endcomment %}
+
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Login - Chirper{% endblock %}
