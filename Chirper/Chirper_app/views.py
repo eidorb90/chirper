@@ -1,3 +1,24 @@
+"""
+Brodie Rogers
+views.py
+<brodie.rogers@cune.students.edu>
+
+Description:
+    This file contains all the view functions for our app
+    Each view handles specific HTTP requests and returns appropriate HTTP responses
+    The views are organized into sections based on their functionality:
+    - Main Page Views
+    - User Account Management
+    - Authentication Views
+    - Chirp Management
+    - Reply Management
+    - Search Functionality
+    - User Content Views
+    - User Following System
+"""
+
+
+
 from django.shortcuts import (
     render,
     HttpResponseRedirect,
