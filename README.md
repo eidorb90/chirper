@@ -7,7 +7,7 @@
 ## What everyone did
 
 Marcus: frontend
-Brodie:
+Brodie: backend 
 Abe: 
 
 
