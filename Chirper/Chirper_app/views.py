@@ -1,7 +1,11 @@
 """
 Brodie Rogers
-views.py
+Marcus Sweet
 <brodie.rogers@cune.students.edu>
+
+views.py
+Last Edited : 3/20/25
+
 
 Description:
     This file contains all the view functions for our app

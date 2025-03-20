@@ -1,7 +1,10 @@
 """
 Brodie Rogers
-models.py
+Marcus Sweet
 <brodie.rogers@cune.students.edu>
+
+models.py
+Last Edited : 3/20/25
 
 Description:
     This is the file in which we create the different models for our database

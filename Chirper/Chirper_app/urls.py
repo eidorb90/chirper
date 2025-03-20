@@ -1,7 +1,10 @@
 """
 Brodie Rogers
-urls.py
+Marcus Sweet
 <brodie.rogers@cune.students.edu>
+
+urls.py
+Last Edited : 3/20/25
 
 Description:
     Here we register the different urls/paths for our app

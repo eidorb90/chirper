@@ -1,7 +1,10 @@
 """
 Brodie Rogers
-admin.py
+Marcus Sweet
 <brodie.rogers@cune.students.edu>
+
+admin.py
+Last Edited : 3/20/25
 
 Description:
     In this file we create the specify the differnt
