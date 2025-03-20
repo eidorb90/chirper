@@ -102,7 +102,6 @@ def delete_account(request):
         account.delete()
         return redirect("register")
 
-
 @login_required
 def change_username(request):
     """
@@ -151,7 +150,6 @@ def change_username(request):
         )
     return render(request, "username_display.html", {"username": request.user.username})
 
-
 @login_required
 def change_pfp(request):
     """
@@ -169,7 +167,6 @@ def change_pfp(request):
             request.user.save()
 
     return render(request, "pfp_container.html", {"user": request.user})
-
 
 @login_required
 def change_privacy(request):
@@ -215,7 +212,6 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, "register.html", {"form": form})
 
-
 def login_view(request):
     """
     Handles user login using email authentication.
@@ -229,7 +225,8 @@ def login_view(request):
     if request.method == "POST":
         form = EmailAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get("username")  # Form uses 'username' field for email
+            # Form uses 'username' field for email
+            email = form.cleaned_data.get("username")  
             password = form.cleaned_data.get("password")
             user = authenticate(
                 request,
@@ -242,7 +239,6 @@ def login_view(request):
     else:
         form = EmailAuthenticationForm()
     return render(request, "login.html", {"form": form})
-
 
 @login_required
 def logout(request):
@@ -257,7 +253,6 @@ def logout(request):
     """
     auth_logout(request)
     return redirect("login_view")
-
 
 # ------------------
 # Chirp Management
@@ -283,7 +278,6 @@ def create_chirp(request):
         return render(request, "chirp_list.html", {"chirps": chirps})
     return HttpResponseRedirect("/")
 
-
 @login_required
 def delete_chirp(request, chirp_id):
     """
@@ -299,7 +293,6 @@ def delete_chirp(request, chirp_id):
     chirp = get_object_or_404(Chirp, id=chirp_id)
     chirp.delete()
     return HttpResponse("")
-
 
 @login_required
 def like_chirp(request, chirp_id):
@@ -324,7 +317,6 @@ def like_chirp(request, chirp_id):
 
     chirp.save()
     return HttpResponse(chirp.like_count)
-
 
 # ------------------
 # Reply Management
@@ -353,7 +345,6 @@ def create_chirp_reply(request, chirp_id):
         )
         return render(request, "reply_list.html", {"chirp": chirp})
     return HttpResponseRedirect("/")
-
 
 @login_required
 def create_reply_reply(request, reply_id):
@@ -387,7 +378,6 @@ def create_reply_reply(request, reply_id):
             request, "nested_reply.html", {"nested_replies": all_nested_replies}
         )
     return HttpResponseRedirect("/")
-
 
 @login_required
 def like_reply(request, reply_id):
@@ -485,7 +475,6 @@ def search(request):
         },
     )
 
-
 # ------------------
 # User Content Views
 # ------------------
@@ -503,7 +492,6 @@ def user_chirps(request):
     """
     return render(request, "user_chirps.html", {"chirps": request.user.chirps.all()})
 
-
 @login_required
 def user_replies(request):
     """
@@ -516,7 +504,6 @@ def user_replies(request):
         Rendered user replies page
     """
     return render(request, "user_replies.html", {"replies": request.user.replies.all()})
-
 
 @login_required
 def view_other_account(request, username):
@@ -544,7 +531,6 @@ def view_other_account(request, username):
     except User.DoesNotExist:
         return redirect("home")
 
-
 @login_required
 def other_chirps(request, username):
     """
@@ -564,7 +550,6 @@ def other_chirps(request, username):
     except User.DoesNotExist:
         return redirect("home")
 
-
 @login_required
 def other_replies(request, username):
     """
@@ -583,7 +568,6 @@ def other_replies(request, username):
         return render(request, "user_replies.html", {"replies": replies, "user": user})
     except User.DoesNotExist:
         return redirect("home")
-
 
 # ------------------
 # User Following System
