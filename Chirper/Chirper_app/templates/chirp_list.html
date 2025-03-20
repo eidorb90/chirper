@@ -1,36 +1,3 @@
-{% comment %}
-This template renders a list of chirps (posts) with their details and interactions. 
-It includes the following sections:
-
-1. Chirp List:
-    - Checks if there are any chirps to display.
-    - Iterates through each chirp and displays its details.
-
-2. Chirp Details:
-    - Displays the author's profile image, username, and the time since the chirp was created.
-    - If the author has a profile image, it is displayed with a link to their account.
-    - If the author does not have a profile image, a default SVG icon is shown.
-    - Displays the chirp's title and content.
-
-3. Chirp Actions:
-    - Provides buttons to like the chirp and reply to it.
-    - The like button uses HTMX to update the like count without reloading the page.
-    - The reply button toggles the visibility of the reply form.
-
-4. Reply Form:
-    - A hidden form that appears when the reply button is clicked.
-    - Uses HTMX to submit the reply and update the list of replies without reloading the page.
-
-5. Replies:
-    - Displays a list of replies to the chirp.
-    - Includes a separate template 'reply_list.html' to render the replies.
-
-6. No Chirps Message:
-    - Displays a message if there are no chirps to show.
-
-7. JavaScript:
-    - Adds an event listener to clear the trix-editor content after form submission.
-{% endcomment %}
 <div space-y-4>
 {% if chirps %}
 {% for chirp in chirps %}
