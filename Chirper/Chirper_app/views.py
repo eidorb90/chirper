@@ -21,8 +21,6 @@ Description:
     - User Following System
 """
 
-
-
 from django.shortcuts import (
     render,
     HttpResponseRedirect,
@@ -41,14 +39,15 @@ from .forms import CustomUserCreationForm, EmailAuthenticationForm
 # Main Page Views
 # ------------------
 
+
 def home(request):
     """
     Renders the home page with all chirps if the user is authenticated.
     Otherwise redirects to the login page.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered home page or redirect to login
     """
@@ -63,40 +62,43 @@ def home(request):
 # User Account Management
 # ------------------
 
+
 @login_required
 def account(request):
     """
     Renders the account page for the currently logged-in user.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered account page
     """
     return render(request, "account.html", {"user": request.user})
 
+
 @login_required
 def settings(request):
     """
     Renders the user settings page.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered settings page
     """
     return render(request, "settings.html", {"user": request.user})
 
+
 @login_required
 def delete_account(request):
     """
     Deletes the currently logged-in user's account and redirects to registration.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Redirect to registration page
     """
@@ -106,15 +108,16 @@ def delete_account(request):
         account.delete()
         return redirect("register")
 
+
 @login_required
 def change_username(request):
     """
     Handles username change requests from the user.
     Performs validation to ensure the username is not taken or empty.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered username display with appropriate status message
     """
@@ -154,14 +157,15 @@ def change_username(request):
         )
     return render(request, "username_display.html", {"username": request.user.username})
 
+
 @login_required
 def change_pfp(request):
     """
     Handles profile picture (avatar) updates.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered profile picture container partial
     """
@@ -172,14 +176,15 @@ def change_pfp(request):
 
     return render(request, "pfp_container.html", {"user": request.user})
 
+
 @login_required
 def change_privacy(request):
     """
     Toggles the privacy setting for the current user's account.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered privacy button partial or HTTP 400 if not a POST request
     """
@@ -197,13 +202,14 @@ def change_privacy(request):
 # Authentication Views
 # ------------------
 
+
 def register(request):
     """
     Handles user registration form submission and account creation.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Redirect to login page on successful registration or rendered registration form
     """
@@ -216,13 +222,14 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, "register.html", {"form": form})
 
+
 def login_view(request):
     """
     Handles user login using email authentication.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Redirect to home page on successful login or rendered login form
     """
@@ -230,7 +237,7 @@ def login_view(request):
         form = EmailAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             # Form uses 'username' field for email
-            email = form.cleaned_data.get("username")  
+            email = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(
                 request,
@@ -244,32 +251,35 @@ def login_view(request):
         form = EmailAuthenticationForm()
     return render(request, "login.html", {"form": form})
 
+
 @login_required
 def logout(request):
     """
     Logs out the current user and redirects to the login page.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Redirect to login page
     """
     auth_logout(request)
     return redirect("login_view")
 
+
 # ------------------
 # Chirp Management
 # ------------------
+
 
 @login_required
 def create_chirp(request):
     """
     Creates a new chirp post and returns updated chirp list.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered chirp list partial or redirect to home
     """
@@ -282,15 +292,16 @@ def create_chirp(request):
         return render(request, "chirp_list.html", {"chirps": chirps})
     return HttpResponseRedirect("/")
 
+
 @login_required
 def delete_chirp(request, chirp_id):
     """
     Deletes a specific chirp by ID.
-    
+
     Args:
         request: The HTTP request object
         chirp_id: ID of the chirp to delete
-        
+
     Returns:
         Empty HTTP response (for HTMX usage)
     """
@@ -298,15 +309,16 @@ def delete_chirp(request, chirp_id):
     chirp.delete()
     return HttpResponse("")
 
+
 @login_required
 def like_chirp(request, chirp_id):
     """
     Toggles like status on a chirp and updates the like count.
-    
+
     Args:
         request: The HTTP request object
         chirp_id: ID of the chirp to like/unlike
-        
+
     Returns:
         HTTP response containing updated like count
     """
@@ -322,19 +334,21 @@ def like_chirp(request, chirp_id):
     chirp.save()
     return HttpResponse(chirp.like_count)
 
+
 # ------------------
 # Reply Management
 # ------------------
+
 
 @login_required
 def create_chirp_reply(request, chirp_id):
     """
     Creates a reply to a chirp.
-    
+
     Args:
         request: The HTTP request object
         chirp_id: ID of the chirp to reply to
-        
+
     Returns:
         Rendered reply list partial or redirect to home
     """
@@ -350,15 +364,16 @@ def create_chirp_reply(request, chirp_id):
         return render(request, "reply_list.html", {"chirp": chirp})
     return HttpResponseRedirect("/")
 
+
 @login_required
 def create_reply_reply(request, reply_id):
     """
     Creates a nested reply to another reply.
-    
+
     Args:
         request: The HTTP request object
         reply_id: ID of the reply to respond to
-        
+
     Returns:
         Rendered nested reply partial or redirect to home
     """
@@ -383,15 +398,16 @@ def create_reply_reply(request, reply_id):
         )
     return HttpResponseRedirect("/")
 
+
 @login_required
 def like_reply(request, reply_id):
     """
     Toggles like status on a reply and updates the like count.
-    
+
     Args:
         request: The HTTP request object
         reply_id: ID of the reply to like/unlike
-        
+
     Returns:
         HTTP response containing updated like count
     """
@@ -412,15 +428,16 @@ def like_reply(request, reply_id):
 # Search Functionality
 # ------------------
 
+
 @login_required
 def search(request):
     """
     Searches for chirps, replies, and users matching the query string.
     Handles both full page and HTMX partial requests.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered search results page or partial
     """
@@ -479,46 +496,50 @@ def search(request):
         },
     )
 
+
 # ------------------
 # User Content Views
 # ------------------
+
 
 @login_required
 def user_chirps(request):
     """
     Renders the current user's chirps.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered user chirps page
     """
     return render(request, "user_chirps.html", {"chirps": request.user.chirps.all()})
 
+
 @login_required
 def user_replies(request):
     """
     Renders the current user's replies.
-    
+
     Args:
         request: The HTTP request object
-        
+
     Returns:
         Rendered user replies page
     """
     return render(request, "user_replies.html", {"replies": request.user.replies.all()})
+
 
 @login_required
 def view_other_account(request, username):
     """
     Renders another user's profile page.
     Includes following status in the context.
-    
+
     Args:
         request: The HTTP request object
         username: Username of the account to view
-        
+
     Returns:
         Rendered account page or redirect to home if user not found
     """
@@ -535,15 +556,16 @@ def view_other_account(request, username):
     except User.DoesNotExist:
         return redirect("home")
 
+
 @login_required
 def other_chirps(request, username):
     """
     Renders another user's chirps.
-    
+
     Args:
         request: The HTTP request object
         username: Username of the account whose chirps to view
-        
+
     Returns:
         Rendered user chirps page or redirect to home if user not found
     """
@@ -554,15 +576,16 @@ def other_chirps(request, username):
     except User.DoesNotExist:
         return redirect("home")
 
+
 @login_required
 def other_replies(request, username):
     """
     Renders another user's replies.
-    
+
     Args:
         request: The HTTP request object
         username: Username of the account whose replies to view
-        
+
     Returns:
         Rendered user replies page or redirect to home if user not found
     """
@@ -573,19 +596,21 @@ def other_replies(request, username):
     except User.DoesNotExist:
         return redirect("home")
 
+
 # ------------------
 # User Following System
 # ------------------
+
 
 @login_required
 def follow_user(request, username):
     """
     Toggles follow status for a user and returns updated profile stats.
-    
+
     Args:
         request: The HTTP request object
         username: Username of the account to follow/unfollow
-        
+
     Returns:
         Rendered profile stats partial or HTTP 404 if user not found
     """
