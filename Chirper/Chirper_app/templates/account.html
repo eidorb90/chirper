@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 {% comment %}
     Template: account.html
     Description: This template extends 'base.html' and is used to display the user's profile page on Chirper. It includes functionality for changing the profile picture and username, and displays user information such as profile picture, username, join date, followers, and following count. It also includes navigation tabs for viewing the user's chirps and replies.
@@ -16,7 +17,7 @@
     - htmx: Used for handling AJAX requests to update the profile picture and username without reloading the page.
     - toggleDropdown: JavaScript function to toggle the visibility of dropdown menus for changing profile picture and username.
 {% endcomment %}
-{% extends 'base.html' %}
+
 {% load static %}
 <script src="https://unpkg.com/htmx.org@1.6.1"></script>
 
