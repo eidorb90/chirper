@@ -1,16 +1,128 @@
 {% extends 'base.html' %}
+{% comment %}
+    Template: account.html
+    Description: This template extends 'base.html' and is used to display the user's profile page on Chirper. It includes functionality for changing the profile picture and username, and displays user information such as profile picture, username, join date, followers, and following count. It also includes navigation tabs for viewing the user's chirps and replies.
+
+    Blocks:
+    - title: Sets the title of the page to the user's username followed by "Profile - Chirper".
+    - content: Contains the main content of the profile page.
+
+    Sections:
+    - Profile Header Section: Displays the user's profile picture, username, join date, followers, and following count.
+    - Settings Sections: Contains buttons for changing the profile picture and username.
+    - Tabs Navigation: Provides navigation buttons to switch between viewing the user's chirps and replies.
+    - Content Area: Displays the user's chirps by default and can be updated to show replies.
+
+    Scripts:
+    - htmx: Used for handling AJAX requests to update the profile picture and username without reloading the page.
+    - toggleDropdown: JavaScript function to toggle the visibility of dropdown menus for changing profile picture and username.
+{% endcomment %}
+
 {% load static %}
+<script src="https://unpkg.com/htmx.org@1.6.1"></script>
 
 {% block title %}{{ user.username }}'s Profile - Chirper{% endblock %}
 
 {% block content %}
 <body class="dark:bg-gray-900 antialiased">
-<div class='max-w-4xl mx-auto px-4 py-8'>
-    <!-- Profile Header Section -->
-    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+    
+    
+        
+<div class='max-w-4xl mx-auto px-4 py-8' style = "background-color: #101827;">
+    <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+        <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+          </svg>
+          
+        </button>
+        
+        <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600" style = "width: 25rem;">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="multiLevelDropdownButton">              
+                
+                <li>
+                    <button type="button" class="block px-4 py-2 text-sm text-gray-500 dark:text-gray-200" style="font-weight: bold;" onclick="toggleDropdown('pictureDropdown')">Profile Picture Change</button>
+                    <div id="pictureDropdown" class="hidden py-1">
+                        <form hx-post="{% url 'change_pfp' %}" hx-target="#pfp_container" hx-encoding="multipart/form-data" class="w-full">
+                            {% csrf_token %}
+                            <div class="flex flex-col gap-6">
+                                <div class="w-full">
+                                    <input type="file" name="profile_image" accept="image/*" class="block w-full text-sm text-gray-500
+                                            file:mr-4 file:py-2 file:px-4
+                                            file:rounded-full file:border-0
+                                            file:text-sm file:font-semibold
+                                            file:bg-blue-50 file:text-blue-700
+                                            hover:file:bg-blue-100
+                                            cursor-pointer" style="margin-left:10px;">
+                                </div>
+                                <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
+                                        hover:bg-blue-600 transition duration-200 shadow-md
+                                        font-semibold">
+                                    Update Profile Picture
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                
+              <li>
+                <button type="button" class="block px-4 py-2 text-sm text-gray-500 dark:text-gray-200" style="font-weight: bold;" onclick="toggleDropdown('namedropdown')">Username Change</button>
+                <div id="namedropdown" class="hidden py-1">
+                    <form hx-post="{% url 'change_username' %}" hx-target="#username" hx-swap="outerHTML" class="w-full">
+                        {% csrf_token %}
+                        <div class="flex flex-col gap-4">
+                            <input type="text" name="new_username" class="text-white bg-gray-600 border border-gray-600 w-full p-2 border rounded"
+                                placeholder="Enter New Username">
+                            <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
+                                        hover:bg-blue-600 transition duration-200 shadow-md
+                                        font-semibold">
+                                Update Username
+                            </button>
+                        </div>
+                    </form>
+                    <script>
+                        document.addEventListener('htmx:afterSwap', function(event) {
+                            if (event.detail.target.id === 'username') {
+                                event.detail.target.classList.add('text-white');
+                            }
+                        });
+                    </script>
+                </div>
+                <script>
+                    function toggleDropdown(id) {
+                        var element = document.getElementById(id);
+                        if (element.classList.contains('hidden')) {
+                            element.classList.remove('hidden');
+                        } else {
+                            element.classList.add('hidden');
+                        }
+                    }
+                </script>
+              </li>
+        </div>
+    
+    <!-- Profile Header Section --> 
+    <div class="  shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" 
+        style=" 
+        
+        width: 400px;
+
+        height: 400px;
+
+        border: 2px solid blue;
+        
+        display: flex; 
+        
+        justify-content: center; 
+        
+        align-items: center;
+        
+        border-radius: 50%; 
+
+        background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+
         <div class="flex flex-col items-center">
             <!-- Profile Picture Display -->
-            <div id="pfp_container" class="w-32 h-32 relative">
+            <div id="pfp_container" class="w-32 h-32 relative" style = "width: 9rem; height: 9rem;">
                 {% if user.profile_image %}
                 <img src="{{ user.profile_image.url }}" alt="Profile picture"
                     class="w-full h-full rounded-full object-cover shadow-lg">
@@ -28,6 +140,7 @@
                 <h1 id="username" class="text-3xl font-bold text-white">{{ user.username }}</h1>
                 <p class="text-gray-500 mb-8" style = "margin-bottom: 1rem;"> Member since {{ user.date_joined|date:"F Y" }}</p>
                 <div class="w-full border-b border-gray-200 my-8" style = "margin-bottom: 1rem;  margin-top: 0rem;"></div>
+                
                 <div class="flex space-x-4 justify-center">
                     <div class="text-center">
                         <span class="font-bold">{{ user.follower_relationships.count }}</span>
@@ -39,84 +152,11 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <h1 class="text-2xl font-bold text-white mb-8 text-center">Settings</h1>
+            
 
             <!-- Settings Sections -->
             <div class="space-y-8 max-w-2xl mx-auto w-full">
-                <!-- Profile Picture Update Section -->
-                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
-                    <form hx-post="{% url 'change_pfp' %}" hx-target="#pfp_container" hx-encoding="multipart/form-data"
-                        class="w-full">
-                        {% csrf_token %}
-                        <div class="flex flex-col gap-6">
-                            <div class="w-full">
-                                <input type="file" name="profile_image" accept="image/*" class="block w-full text-sm text-gray-500
-                                        file:mr-4 file:py-2 file:px-4
-                                        file:rounded-full file:border-0
-                                        file:text-sm file:font-semibold
-                                        file:bg-blue-50 file:text-blue-700
-                                        hover:file:bg-blue-100
-                                        cursor-pointer">
-                            </div>
-                            <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
-                                     hover:bg-blue-600 transition duration-200 shadow-md
-                                     font-semibold">
-                                Update Profile Picture
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Username Section -->
-                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
-                    <h2 class="text-lg font-semibold text-white mb-4">Username</h2>
-                    <form hx-post="{% url 'change_username' %}" hx-target="#username-section" class="w-full">
-                        {% csrf_token %}
-                        <div class="flex flex-col gap-4">
-                            <input type="text" name="new_username" class="bg-gray-600 border border-gray-600 w-full p-2 border rounded"
-                                placeholder="Enter New Username">
-                            <button type="submit" class="w-full max-w-xs mx-auto bg-blue-500 text-white px-6 py-3 rounded-lg
-                                           hover:bg-blue-600 transition duration-200 shadow-md
-                                           font-semibold">
-                                Update Username
-                            </button>
-                        </div>
-                    </form>
-                </div>
                 
-                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
-                    <h2 class="text-lg font-semibold text-white mb-4">Public/Private</h2>
-                    {% include 'privacy_button.html' %}
-                </div>
-                <!-- Account Section -->
-                <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
-                    <h2 class="text-lg font-semibold text-white mb-4">Account</h2>
-                    
-                
-                    <form method="post" action="{% url 'logout' %}" class="w-full">
-                        {% csrf_token %}
-                        <button type="submit" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
-                        hover:bg-red-700 transition duration-200
-                        font-semibold">
-                            Logout
-                        </button>
-                    </form>
-                    </div>
-
-                    <div class="shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
-                        <h2 class="text-lg font-semibold text-white mb-4">Delete Account</h2>
-                    
-                    <form method="post" action="{% url 'delete_account' %}" class="w-full"
-                        onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-                        {% csrf_token %}
-                        <button type="submit" class="w-full bg-red-600 border border-red-900 text-white px-6 py-3 rounded-lg
-                        hover:bg-red-700 transition duration-200
-                        font-semibold">
-                            Delete Account
-                        </button>
-                    </form>
-                </div>
             </div>
         </div>
     </div>

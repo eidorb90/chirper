@@ -1,3 +1,26 @@
+{% comment %}
+    This template renders the search results for accounts, chirps, and replies based on the user's query.
+
+    Account Section:
+    - Displays a list of accounts matching the search query.
+    - Each account card includes profile image, username, account creation time, follow button, and a link to view the profile.
+    - If no accounts are found, a message is displayed indicating no results.
+
+    Chirps Section:
+    - Displays a list of chirps matching the search query.
+    - Each chirp card includes profile image, username, chirp creation time, title, content, like button, reply button, and a reply form.
+    - If no chirps are found, a message is displayed indicating no results.
+
+    Replies Section:
+    - Displays a list of replies matching the search query.
+    - Each reply card includes the reply content, the author, and the time since the reply was created.
+    - If no replies are found, a message is displayed indicating no results.
+
+    Additional Notes:
+    - The template uses Tailwind CSS for styling.
+    - The template includes HTMX attributes for handling like and reply actions dynamically.
+    - The template includes CSRF tokens for form submissions.
+{% endcomment %}
 <!-- Account Section -->
 {% if account_results or request.GET.q %}
 <div class="mt-8">
@@ -13,7 +36,7 @@
         {% for account in account_results %}
         {% if account.private == False %}
         
-        <div class="shadow-md hover:shadow-lg transition-all duration-200 rounded-xl p-6 mb-4" style = "background-color: #374151">
+        <div class="shadow-md mx-auto mb-8 border rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <!-- Profile Image -->
@@ -60,7 +83,7 @@
             </div>
         </div>
         {% else %}
-        <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+        <div class="text-center py-10 rounded-xl shadow-md" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
             <svg class="mx-auto h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -72,7 +95,7 @@
         {% endfor %}
     </div>
     {% else %}
-    <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+    <div class="text-center py-10 rounded-xl shadow-md" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
         <svg class="mx-auto h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -98,7 +121,7 @@
     {% if chirp_results %}
     {% for chirp in chirp_results %}
     <div
-        class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4"style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+        class="bg-white shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 rounded-xl p-6 mb-4" style='background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;'>
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <!-- Profile Image -->
@@ -133,7 +156,7 @@
 
             <!-- Content -->
             <div class="text-white mb-4">
-                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                     {% autoescape off %}
                     {{ chirp.content }}
                     {% endautoescape %}
@@ -172,7 +195,7 @@
                         hx-swap="innerHTML"
                         class="space-y-4">
                         <textarea name="content"
-                            style = "background-color: #374151"
+                            style ="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;"
                                 class="w-full p-2 border rounded"
                                 placeholder="Write a reply..."></textarea>
                         <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
@@ -190,12 +213,12 @@
     {% endfor %}
     {% else %}
     {% if request.GET.q %}
-    <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+    <div class="text-center py-10 rounded-xl shadow-md" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
         <p class="text-white text-lg">No Chirps found for "{{ request.GET.q }}" 🔍</p>
         <p class="text-white mt-2">Try different keywords or check your spelling</p>
     </div>
     {% else %}
-    <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+    <div class="text-center py-10 rounded-xl shadow-md" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
         <p class="text-white text-lg">Start searching to see results!</p>
     </div>
     {% endif %}
@@ -215,7 +238,7 @@
     {% if reply_results %}
     {% for reply in reply_results %}
     
-    <div class="bg-gray p-3 mb-2 rounded-lg flex items-start space-x-3" style = "background-color: #374151;">
+    <div class="bg-gray p-3 mb-2 rounded-lg flex items-start space-x-3" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
         <div class="flex justify-between items-start">
             <div class="flex-1">
                 {% if reply.chirp.title %}
@@ -231,7 +254,7 @@
     </div>
     {% endfor %}
     {% else %}
-    <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+    <div class="text-center py-10 rounded-xl shadow-md" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
         <p class="text-white text-lg">No Replies found for "{{ request.GET.q }}" 🔍</p>
         <p class="text-white mt-2">Try different keywords or check your spelling</p>
     </div>

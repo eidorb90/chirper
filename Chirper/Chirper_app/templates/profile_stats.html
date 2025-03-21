@@ -1,3 +1,19 @@
+{% comment %}
+    This template displays the profile statistics for a user, including the number of followers and following relationships.
+    
+    Elements:
+    - A container div with id "profile-stats-container" that holds the entire profile stats section.
+    - A flexbox div that centers its children horizontally and adds spacing between them.
+    - Two child divs that display the count of followers and following relationships:
+        - The first child div shows the number of followers using the `user.follower_relationships.count` variable.
+        - The second child div shows the number of following relationships using the `user.following_relationships.count` variable.
+    - A conditional block that checks if the logged-in user (`request.user`) is not the profile owner (`user`):
+        - If true, a button is displayed to allow the logged-in user to follow or unfollow the profile owner.
+        - The button uses the `hx-post` attribute to send a request to the "follow_user" URL with the profile owner's username.
+        - The button's appearance and text change based on the `following_status` variable:
+            - If `following_status` is true, the button indicates "Following" with a gray background.
+            - If `following_status` is false, the button indicates "Follow" with a blue background.
+{% endcomment %}
 <div id="profile-stats-container">
     <div class="flex space-x-4 justify-center">
         <div class="text-center">

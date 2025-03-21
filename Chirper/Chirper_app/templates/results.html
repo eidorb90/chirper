@@ -1,4 +1,33 @@
 {% extends 'base.html' %}
+{% comment %}
+    Template: results.html
+    Description: This template displays the search results for the Chirper application. It extends the base.html template and includes a search form, account results, and chirp results.
+    
+    Blocks:
+    - title: Sets the title of the page to "Search Results - Chirper".
+    - content: Contains the main content of the page, including the search form and results.
+
+    Sections:
+    - Search Form: A form that allows users to search for chirps. It uses HTMX for live search results.
+    - Results Container: Displays the search results, including accounts and chirps.
+        - Account Section: Shows a list of accounts matching the search query.
+            - If no accounts are found, a message is displayed.
+        - Chirp Results: Shows a list of chirps matching the search query.
+            - Each chirp includes the author's profile image, title, content, timestamp, and actions (like and reply).
+            - Replies: Displays replies to each chirp and includes a form to add new replies.
+        - No Results: If no results are found, a message is displayed.
+
+    HTMX Attributes:
+    - hxget: Used in the search input to fetch search results.
+    - hxtrigger: Specifies the events that trigger the search.
+    - hxtarget: Specifies the target element for the search results.
+    - hxpush-url: Updates the URL with the search query.
+    - hxpost: Used in the like and reply forms to send data to the server.
+
+    JavaScript:
+    - clearReplyForm: A function to clear the reply form after submission.
+{% endcomment %}
+
 {% load static %}
 
 {% block title %}Search Results - Chirper{% endblock %}
@@ -11,7 +40,7 @@
     <!-- Search Form -->
     <form class="mb-8">
         <div class="flex gap-2">
-            <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded text-white" style = "background-color: #4b5563;"
+            <input type="text" name="q" value="{{ request.GET.q }}" class="flex-1 p-2 border rounded text-white" style = "border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;"
                 placeholder="Search chirps..." hx-get="{% url 'search' %}"
                 hx-trigger="keyup changed delay:250ms, keyup[key=='Enter'], load" , hx-target="#search-results"
                 hx-push-url="true">
@@ -48,7 +77,7 @@
             </div>
             {% endfor %}
             {% else %}
-            <div class="text-center py-10 rounded-xl shadow-md" style="background-color: #374151; border-color: #4b5563; color: #FFFFFF;">
+            <div class="text-center py-10 rounded-xl shadow-md"  style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
                 <p class="text-white text-lg">No Accounts found for "{{ request.GET.q }}" 🔍</p>
                 <p class="text-white mt-2">Try different keywords or check your spelling</p>
             </div>

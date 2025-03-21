@@ -1,4 +1,25 @@
 {% extends 'base.html' %}
+{% comment %}
+    File: home.html
+    Template: home.html
+
+    Description:
+    This template extends 'base.html' and is used to render the home page of the Chirper application. 
+    It includes the following sections:
+    
+    - Title Block: Sets the title of the page to "Home - Chirper".
+    
+    - Content Block: 
+        - A welcome message and a form for creating a new chirp.
+        - The form uses HTMX for asynchronous submission to the 'create_chirp' URL and targets the element with id "chirp-list" for updates.
+        - The form includes CSRF protection, a title input, a hidden content input, and a Trix editor for rich text input.
+        - A submit button styled with Tailwind CSS classes.
+        - A feed section that includes the 'chirp_list.html' template to display the list of chirps.
+    
+    - JavaScript:
+        - An event listener that clears the Trix editor content after form submission.
+{% endcomment %}
+
 {% load static %}
 
 {% block title %}Home - Chirper{% endblock %}
@@ -6,22 +27,22 @@
 {% block content %}
 <div class="max-w-3xl mx-auto px-4">
     <br>
-    <h1 class="text-white text-2xl text-center mb-8">Welcome to Chirper.</h1>
+    <h1 class="text-white text-2xl text-center mb-8">Welcome to Chirper</h1>
 
     <h3 class="text-white text-xl text-center mb-2">New Chirp</h3>
     <section
         class="bg-gray-100 shadow-md mx-auto mb-8 border border-gray-100 rounded-lg p-6 hover:shadow-lg transition-shadow"
-        style="background-color: rgb(55 65 81); border-color: #4b5563;">
+        style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
         <form hx-post="{% url 'create_chirp' %}" hx-target="#chirp-list" method="POST">
             {% csrf_token %}
             <div class="space-y-4">
                 <input type="text" name="title"
-                    class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    style="border-color: #4b5563;" placeholder="Title" required>
+                    class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" style = "background-color: #242d41"
+                    style="border: 2px solid grey; border-color: #1f2937;" placeholder="Title" required>
                 <input id="content" type="hidden" class="text-white" name="content" required>
                 <trix-editor input="content"
-                    class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    style="border-color: #4b5563;" placeholder="Whats Happening?"required>
+                    class="bg-gray-600 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" style = "background-color: #242d41"
+                    style="border: 2px solid grey; border-color: #1f2937;" placeholder="Whats Happening?"required>
                 </trix-editor>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Chirp</button>
             </div>

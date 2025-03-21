@@ -1,3 +1,12 @@
+{% comment %}
+This template renders a button that allows users to toggle their account privacy settings.
+- The button uses the `hx-post` attribute from the htmx library to send a POST request to the URL named 'change_privacy'.
+- The `hx-target` attribute is set to "this", meaning the response will replace the button itself.
+- The button's appearance is styled with Tailwind CSS classes for width, background color, text color, padding, rounded corners, hover effect, shadow, and font weight.
+- The button text changes based on the user's privacy setting:
+    - If the user's account is private (`user.private` is True), the button displays "Private Account".
+    - If the user's account is public (`user.private` is False), the button displays "Public Account".
+{% endcomment %}
 {% load static %}
 <button hx-post="{% url 'change_privacy' %}" hx-target="this"
 class="w-full bg-blue-500 text-white px-6 py-3 rounded-lg

@@ -1,3 +1,20 @@
+{% comment %}
+    This is the base template for the Chirper application. It includes the following:
+
+    - Loads the static files and CSRF token.
+    - Sets up the HTML document with a dark background and antialiased text.
+    - Includes meta tags and scripts for CSRF protection and various libraries:
+        - htmx for handling AJAX requests.
+        - Tailwind CSS for styling.
+        - Flowbite for additional UI components.
+        - Trix for rich text editing.
+    - Custom styles for the Trix editor and toolbar to match the dark theme.
+    - The body tag includes a CSRF token header for htmx requests.
+    - A navigation bar that changes based on user authentication status:
+        - If the user is authenticated, links to Home, Profile, Settings, and Search are shown.
+        - If the user is not authenticated, links to Register and Login are shown.
+    - A content block where other templates can insert their content.
+{% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html class="bg-gray-900 antialiased">
@@ -15,12 +32,56 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <style>
+        trix-editor {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-color: #4b5563;
+            padding: 10px;
+            
+        }
+
+        trix-toolbar [data-trix-button-group="block-tools"] {
+            background-color:  #242d41;
+            border: 1px solid grey; 
+            border-color: #4b5563;
+            
+            
+        }
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            background-color:  #242d41;
+            border: 1px solid grey;
+            border-color: #4b5563;
+            
+
+        }
+        trix-toolbar [data-trix-button-group="text-tools"] {
+            background-color:  #242d41;
+            border: 1px solid grey;
+            border-color: #4b5563;
+           
+
+        }
+        trix-toolbar [data-trix-button-group="history-tools"] {
+            background-color:  #242d41;
+            border: 1px solid grey;
+            border-color: #4b5563;
+
+        }
+        trix-toolbar .trix-button {
+            color: white;
+            box-sizing: content-box;
+            border: 1px solid grey;
+            border-color: #4b5563;
+        }
+    </style>
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
     <title>Chirper</title>
 </head>
 
+
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <nav class="bg-gray-800 p-4 shadow-lg">
+    <nav class="p-4 shadow-lg" style="background-color: #1f2937;">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <a href="{% url 'home' %}" class="text-white text-2xl font-bold hover:text-gray-300">Chirper</a>
 
@@ -31,6 +92,8 @@
                     class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Home</a>
                 <a href="{% url 'account' %}"
                     class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Profile</a>
+                <a href="{% url 'settings_view' %}"
+                    class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Settings</a>
                 <a href="{% url 'search' %}"
                     class="text-white hover:text-white px-3 py-2 rounded-md hover:bg-gray-600">Search</a>
                 {% else %}

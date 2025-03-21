@@ -1,9 +1,38 @@
+{% comment %}
+This template renders a list of replies for a given chirp. The main components of this template are:
+
+1. Replies Container:
+    - A div with a class `replies-chirp.id ` that contains all replies for a specific chirp.
+
+2. First Reply:
+    - The first reply is displayed prominently with profile picture, username, creation time, content, and like button.
+    - If the reply author has a profile image, it is displayed; otherwise, a default SVG icon is shown.
+    - The username is displayed and linked to the author's profile. If the author is the current user, it links to their own account.
+    - The reply content is displayed with HTML autoescaping turned off.
+    - A like button is provided to like the reply, with the like count dynamically updated.
+
+3. Nested Replies:
+    - If the first reply has nested replies, they are displayed in a nested container.
+    - Each nested reply includes the author's profile picture, username, creation time, content, and a like button.
+
+4. Show More Replies:
+    - If there are more than one reply, a "Show more replies" button is displayed.
+    - Clicking this button reveals the remaining replies, each styled similarly to the first reply.
+
+5. Reply Form:
+    - A hidden form is provided for replying to the first reply or any other reply.
+    - The form uses Trix editor for rich text input and submits via HTMX for dynamic updates.
+
+6. JavaScript:
+    - A script function `clearReplyForm` is included to clear the Trix editor content after submitting a reply.
+
+{% endcomment %}
 <div class="replies-{{ chirp.id }} space-y-3">
     {% with replies=chirp.replies.all|dictsort:"created_at" %}
     {% if replies %}
     <!-- Show first reply -->
-    <div class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
-        style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+    <div class="shadow-md mx-auto mb-8 border rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+
         <div class="flex items-center space-x-3">
             <!-- Profile Picture -->
             <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
@@ -44,7 +73,7 @@
         </div>
         <br>
         <div class="text-white mb-4">
-            <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+            <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                 {% autoescape off %}
                 {{ replies.0.content }}
                 {% endautoescape %}
@@ -100,7 +129,7 @@
                     </div>
 
                     <div class="text-white mb-4">
-                        <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                        <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                             {% autoescape off %}
                             {{ nested_reply.content }}
                             {% endautoescape %}
@@ -159,7 +188,7 @@
             </div>
             <br>
             <div class="text-white mb-4">
-                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                     {% autoescape off %}
                     {{ reply.content }}
                     {% endautoescape %}

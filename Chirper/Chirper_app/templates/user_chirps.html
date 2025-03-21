@@ -1,3 +1,38 @@
+{% comment %}
+This template renders a list of chirps (posts) for a specific user. It includes the following features:
+
+1. JavaScript:
+    - Adds event listeners to all forms to clear the trix-editor content upon form submission.
+
+2. Chirps Display:
+    - Checks if the user has any chirps.
+    - Iterates over each chirp and displays it in a styled container.
+    - Each chirp includes:
+      - Author's profile image or a default icon.
+      - Author's username and the time since the chirp was created.
+      - Chirp title and content.
+      - Buttons for liking, replying, and deleting the chirp.
+
+3. Chirp Actions:
+    - Like button: Sends a POST request to like the chirp and updates the like count.
+    - Reply button: Toggles the visibility of the reply form.
+    - Delete button: Sends a POST request to delete the chirp with a confirmation prompt.
+
+4. Reply Form:
+    - Hidden by default and toggled by the reply button.
+    - Uses trix-editor for input.
+    - Sends a POST request to create a reply and updates the replies section.
+
+5. Replies Display:
+    - Includes a separate template to render the list of replies for each chirp.
+
+6. No Chirps Message:
+    - Displays a message and an icon if the user has no chirps.
+
+7. Additional JavaScript:
+    - Adds event listeners to all forms to clear the trix-editor content upon form submission (repeated for redundancy).
+
+{% endcomment %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll("form").forEach(function (form) {
@@ -14,8 +49,8 @@
 <div class="space-y-6">
     {% for chirp in user.chirps.all %}
     <div id="chirp-container"
-    class='shadow-md mx-auto mb-8 border border-gray-300 rounded-lg p-6 hover:shadow-lg transition-shadow'
-    style='background-color: #374151; border-color: #4b5563; color: #FFFFFF;'>
+    class="shadow-md mx-auto mb-8 border rounded-lg p-6 hover:shadow-lg transition-shadow" style="border: 2px solid grey; background-color: #161e2f; border-color: #1f2937; color: #FFFFFF;">
+
         <div class="flex flex-col">
             <!-- Author -->
             <div class="flex items-center gap-3 mb-4">
@@ -43,7 +78,7 @@
 
             <!-- Content -->
             <div class="text-white mb-4">
-                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded">
+                <div class="trix-content prose prose-invert bg-gray-600 border border-gray-600 w-full p-2 border rounded" style = "background-color: #242d41">
                     {% autoescape off %}
                     {{ chirp.content }}
                     {% endautoescape %}
@@ -89,7 +124,7 @@
                 <form hx-post="{% url 'create_chirp_reply' chirp.id %}" hx-target=".replies-{{ chirp.id }}"
                     hx-swap="innerHTML" class="space-y-4">
                     {% csrf_token %}
-                    <trix-editor input="reply_content_{{chirp.id}}" class="w-full p-2 border rounded"
+                    <trix-editor input="reply_content_{{chirp.id}}" class="w-full p-2 border rounded" style = "background-color: #242d41"
                         placeholder="Write a reply..."></trix-editor>
                     <input id="reply_content_{{chirp.id}}" type="hidden" name="content">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">

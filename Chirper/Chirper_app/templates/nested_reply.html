@@ -1,3 +1,15 @@
+{% comment %}
+Author: Marcus Sweet
+This template renders nested replies for a comment in a social media application.
+
+- If there are nested replies, it displays the first nested reply with its content, creation time, and a like button.
+- The like button uses htmx to send a POST request to the 'like_reply' URL with the reply ID and updates the like count dynamically.
+- If there are more than one nested replies, it shows a "Show more replies" button.
+- Clicking the "Show more replies" button toggles the visibility of additional nested replies.
+- Additional nested replies are displayed in a hidden container that becomes visible when the button is clicked.
+- Each additional nested reply is displayed with its content, creation time, and a like button similar to the first reply.
+- A script is included to clear the value of any Trix editor in forms upon form submission.
+{% endcomment %}
 {% if nested_replies.0 %}
 <!-- Show first nested reply -->
 <div class="bg-gray-100 p-3 rounded-lg mb-2">
